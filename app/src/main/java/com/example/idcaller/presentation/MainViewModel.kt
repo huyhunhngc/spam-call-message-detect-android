@@ -1,4 +1,7 @@
 package com.example.idcaller.presentation
 
-class MainViewModel {
+import com.example.idcaller.core.base.BaseViewModel
+
+class MainViewModel: BaseViewModel() {
+
 }
