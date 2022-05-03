@@ -1,4 +1,4 @@
-package com.example.idcaller.presentation.main.callTab
+package com.example.idcaller.presentation.main.calltab
 
 import com.example.idcaller.core.base.BaseViewModel
 

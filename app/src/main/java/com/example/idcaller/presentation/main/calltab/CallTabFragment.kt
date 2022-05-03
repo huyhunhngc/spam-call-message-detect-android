@@ -1,4 +1,4 @@
-package com.example.idcaller.presentation.main.callTab
+package com.example.idcaller.presentation.main.calltab
 
 import android.os.Bundle
 import android.view.View
