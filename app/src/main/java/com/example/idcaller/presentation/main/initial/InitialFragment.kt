@@ -3,6 +3,7 @@ package com.example.idcaller.presentation.main.initial
 import android.animation.Animator
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.example.idcaller.R
 import com.example.idcaller.core.base.BaseFragment
@@ -28,6 +29,7 @@ class InitialFragment: BaseFragment<InitialViewModel, FragmentInitialBinding>(R.
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {
+                    navigate()
                 }
 
                 override fun onAnimationCancel(animation: Animator?) {
@@ -37,5 +39,16 @@ class InitialFragment: BaseFragment<InitialViewModel, FragmentInitialBinding>(R.
                 }
             })
         }
+    }
+
+    private fun navigate() {
+        viewModel.navigateToDest(
+            firstAction = {
+                findNavController().navigate(InitialFragmentDirections.openInitialToSpHome())
+            },
+            normalAction = {
+                //findNavController().navigate(InitialFragmentDirections.actionNavInitialFragmentToAccountTopDest())
+            }
+        )
     }
 }

@@ -54,7 +54,7 @@ class Loading : LoadingInterface, StateFlow<Boolean> {
         get() = impl.value
 
     @InternalCoroutinesApi
-    override suspend fun collect(collector: FlowCollector<Boolean>) {
+    override suspend fun collect(collector: FlowCollector<Boolean>): Nothing {
         impl.collect(collector)
     }
 

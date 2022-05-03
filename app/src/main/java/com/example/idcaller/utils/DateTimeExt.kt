@@ -5,10 +5,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @SuppressLint("SimpleDateFormat")
-fun covertTimestampToHours(timestamp: Long): String? {
+fun Long.convertTimestampToHours(): String {
     val calendarMess = Calendar.getInstance()
     val calendarNow = Calendar.getInstance()
-    calendarMess.timeInMillis = timestamp
+    calendarMess.timeInMillis = this
     calendarNow.timeInMillis = System.currentTimeMillis()
     var dateFormat = SimpleDateFormat("hh:mm")
     val anteOrPost = if (calendarMess.get(Calendar.AM_PM) == Calendar.AM) {
