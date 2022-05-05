@@ -1,7 +1,13 @@
 package com.example.idcaller.presentation
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.idcaller.core.base.viewBindings
 import com.example.idcaller.databinding.ActivityMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
