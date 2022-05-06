@@ -4,17 +4,22 @@ import android.annotation.SuppressLint
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
 import com.example.idcaller.R
 import com.example.idcaller.core.base.BaseFragment
 import com.example.idcaller.core.base.viewBindings
 import com.example.idcaller.data.model.Contact
 import com.example.idcaller.databinding.FragmentMainFlowBinding
+import com.example.idcaller.databinding.LayoutHeaderDrawerBinding
 import com.example.idcaller.presentation.MainActivity
+import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFlowFragment :
-    BaseFragment<MainFlowViewModel, FragmentMainFlowBinding>(R.layout.fragment_main_flow) {
+    BaseFragment<MainFlowViewModel, FragmentMainFlowBinding>(R.layout.fragment_main_flow),
+    NavigationView.OnNavigationItemSelectedListener {
     override val viewModel: MainFlowViewModel by viewModel()
     override val binding: FragmentMainFlowBinding by viewBindings {
         FragmentMainFlowBinding.bind(it)
@@ -28,15 +33,48 @@ class MainFlowFragment :
     }
 
     private fun initViews() {
+        setHasOptionsMenu(true)
         with(binding) {
             viewModel = this@MainFlowFragment.viewModel
 
+            mainActivity()?.apply {
+                setSupportActionBar(toolbar)
+                supportActionBar?.apply {
+                    setDisplayHomeAsUpEnabled(true)
+                    setHomeButtonEnabled(true)
+                }
+            }
+            setupDrawer()
         }
     }
 
     override fun onStart() {
         super.onStart()
         retrieveContact()
+    }
+
+    private fun FragmentMainFlowBinding.setupDrawer() {
+        val headerView = navigationDrawer.getHeaderView(0)
+        val headerBinding = LayoutHeaderDrawerBinding.bind(headerView)
+        headerBinding.lifecycleOwner = this@MainFlowFragment
+        headerBinding.viewModel = this@MainFlowFragment.viewModel
+        toolbar.setNavigationOnClickListener {
+            drawer.open()
+        }
+        ActionBarDrawerToggle(
+            requireActivity(),
+            drawer,
+            R.string.drawer_open,
+            R.string.drawer_close
+        ).apply {
+            isDrawerIndicatorEnabled = true
+            drawer.addDrawerListener(this)
+            syncState()
+        }
+        navigationDrawer.apply {
+            setNavigationItemSelectedListener(this@MainFlowFragment)
+            bringToFront()
+        }
     }
 
     @SuppressLint("Range")
@@ -62,5 +100,10 @@ class MainFlowFragment :
         }
         viewModel.setContactMemory(contactList)
         cursorPhone?.close()
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        //TODO
+        return true
     }
 }

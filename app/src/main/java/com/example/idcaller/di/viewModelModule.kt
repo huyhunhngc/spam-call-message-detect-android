@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel { CallTabViewModel() }
-    viewModel { MainFlowViewModel() }
+    viewModel { MainFlowViewModel(get()) }
     viewModel { MainViewModel() }
     viewModel { InitialViewModel() }
 }
