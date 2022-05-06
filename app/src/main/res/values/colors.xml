@@ -58,6 +58,7 @@
     <color name="colorProgress">#B8B8B8</color>
     <color name="colorProgressBackground">#80000000</color>
     <color name="colorDeviceTypes">#E5E5E5</color>
+    <color name="blue40alpha20">#146DBEF7</color>
     <color name="blue40">#6DBEF7</color>
     <color name="blue100">#3E95F7</color>
     <color name="blue100_2">#1A3E95F7</color>

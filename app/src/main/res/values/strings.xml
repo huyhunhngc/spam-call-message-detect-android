@@ -3,4 +3,9 @@
     <string name="home">Home</string>
     <string name="call">Call</string>
     <string name="message">Message</string>
+    <string name="setting">Setting</string>
+    <string name="notification">Notification</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="search_any_things">Search any things</string>
 </resources>
