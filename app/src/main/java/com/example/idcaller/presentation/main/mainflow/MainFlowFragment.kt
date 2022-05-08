@@ -7,6 +7,7 @@ import android.provider.ContactsContract
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.fragment.app.Fragment
 import com.example.idcaller.R
 import com.example.idcaller.core.base.BaseFragment
 import com.example.idcaller.core.base.viewBindings
@@ -74,6 +75,32 @@ class MainFlowFragment :
         navigationDrawer.apply {
             setNavigationItemSelectedListener(this@MainFlowFragment)
             bringToFront()
+        }
+    }
+
+    private fun checkFragmentContains(fragment: Fragment): Boolean {
+        return when {
+            fragment == mainActivity()?.activeFragment -> {
+                false
+            }
+            childFragmentManager.findFragmentByTag(fragment.javaClass.simpleName) != null -> {
+                childFragmentManager.beginTransaction().apply {
+                    show(fragment)
+                    mainActivity()?.activeFragment?.let { hide(it) }
+                    commit()
+                }
+                mainActivity()?.activeFragment = fragment
+                true
+            }
+            else -> {
+                childFragmentManager.beginTransaction().apply {
+                    add(R.id.home_container, fragment, fragment.javaClass.simpleName)
+                    mainActivity()?.activeFragment?.let { hide(it) }
+                    commit()
+                }
+                mainActivity()?.activeFragment = fragment
+                true
+            }
         }
     }
 
