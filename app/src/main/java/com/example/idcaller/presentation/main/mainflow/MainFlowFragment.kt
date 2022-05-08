@@ -15,6 +15,7 @@ import com.example.idcaller.data.model.Contact
 import com.example.idcaller.databinding.FragmentMainFlowBinding
 import com.example.idcaller.databinding.LayoutHeaderDrawerBinding
 import com.example.idcaller.presentation.MainActivity
+import com.example.idcaller.utils.retrieveContact
 import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -51,7 +52,7 @@ class MainFlowFragment :
 
     override fun onStart() {
         super.onStart()
-        retrieveContact()
+        retrieveContact().let(viewModel::setContactMemory)
     }
 
     private fun FragmentMainFlowBinding.setupDrawer() {
@@ -102,31 +103,6 @@ class MainFlowFragment :
                 true
             }
         }
-    }
-
-    @SuppressLint("Range")
-    private fun retrieveContact() {
-        val cursorPhone: Cursor? = activity?.contentResolver?.query(
-            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-            null,
-            null,
-            null,
-            null
-        )
-        cursorPhone?.moveToFirst()
-        val contactList = mutableListOf<Contact>()
-        while (cursorPhone?.isAfterLast == false) {
-            val number = cursorPhone.getString(
-                cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
-            )
-            val contactId = cursorPhone.getString(
-                cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
-            )
-            contactList.add(Contact(phoneNumber = number, callerName = contactId))
-            cursorPhone.moveToNext()
-        }
-        viewModel.setContactMemory(contactList)
-        cursorPhone?.close()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
