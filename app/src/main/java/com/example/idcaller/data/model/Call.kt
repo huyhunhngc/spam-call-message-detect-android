@@ -6,6 +6,7 @@ import java.util.*
 data class Call(
     val callerId: String = "",
     val callerName: String = "",
-    val iat: Date,
+    val callerNumber: String = "",
+    val iat: Date = Date(),
     val isBlock: Boolean = false
 ): Serializable

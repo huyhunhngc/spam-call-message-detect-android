@@ -2,7 +2,9 @@ package com.example.idcaller.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.database.Cursor
 import android.graphics.drawable.Drawable
+import android.provider.ContactsContract
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -12,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.idcaller.data.model.Call
+import com.example.idcaller.data.model.Contact
 import com.example.idcaller.widget.dialog.LoadingDialogFragment
 
 fun Fragment.showLoadingDialog() {
@@ -109,4 +113,54 @@ fun Fragment.setupHideKeyboard(view: View) {
             false
         }
     }
+}
+
+@SuppressLint("Range")
+fun Fragment.retrieveContact(): List<Contact> {
+    val cursorPhone: Cursor? = activity?.contentResolver?.query(
+        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+        null,
+        null,
+        null,
+        null
+    )
+    cursorPhone?.moveToFirst()
+    val contactList = mutableListOf<Contact>()
+    while (cursorPhone?.isAfterLast == false) {
+        val number = cursorPhone.getString(
+            cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+        )
+        val contactId = cursorPhone.getString(
+            cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+        )
+        contactList.add(Contact(phoneNumber = number, callerName = contactId))
+        cursorPhone.moveToNext()
+    }
+    cursorPhone?.close()
+    return contactList
+}
+
+@SuppressLint("Range")
+fun Fragment.retrieveCallLog(): List<Call> {
+    val cursorPhone: Cursor? = activity?.contentResolver?.query(
+        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+        null,
+        null,
+        null,
+        null
+    )
+    cursorPhone?.moveToFirst()
+    val contactList = mutableListOf<Call>()
+    while (cursorPhone?.isAfterLast == false) {
+        val number = cursorPhone.getString(
+            cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+        )
+        val contactId = cursorPhone.getString(
+            cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+        )
+        contactList.add(Call(callerNumber = number, callerName = contactId))
+        cursorPhone.moveToNext()
+    }
+    cursorPhone?.close()
+    return contactList
 }

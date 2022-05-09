@@ -7,6 +7,7 @@ import android.provider.ContactsContract
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.fragment.app.Fragment
 import com.example.idcaller.R
 import com.example.idcaller.core.base.BaseFragment
 import com.example.idcaller.core.base.viewBindings
@@ -14,6 +15,7 @@ import com.example.idcaller.data.model.Contact
 import com.example.idcaller.databinding.FragmentMainFlowBinding
 import com.example.idcaller.databinding.LayoutHeaderDrawerBinding
 import com.example.idcaller.presentation.MainActivity
+import com.example.idcaller.utils.retrieveContact
 import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -49,15 +51,14 @@ class MainFlowFragment :
 
     override fun onStart() {
         super.onStart()
-        retrieveContact()
+        retrieveContact().let(viewModel::setContactMemory)
     }
 
     private fun FragmentMainFlowBinding.setupDrawer() {
         val headerView = navigationDrawer.getHeaderView(0)
-        LayoutHeaderDrawerBinding.bind(headerView).apply {
-            lifecycleOwner = this@MainFlowFragment
-            viewModel = this@MainFlowFragment.viewModel
-        }
+        val headerBinding = LayoutHeaderDrawerBinding.bind(headerView)
+        headerBinding.lifecycleOwner = this@MainFlowFragment
+        headerBinding.viewModel = this@MainFlowFragment.viewModel
         toolbar.setNavigationOnClickListener {
             drawer.open()
         }
@@ -77,29 +78,30 @@ class MainFlowFragment :
         }
     }
 
-    @SuppressLint("Range")
-    private fun retrieveContact() {
-        val cursorPhone: Cursor? = activity?.contentResolver?.query(
-            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-            null,
-            null,
-            null,
-            null
-        )
-        cursorPhone?.moveToFirst()
-        val contactList = mutableListOf<Contact>()
-        while (cursorPhone?.isAfterLast == false) {
-            val number = cursorPhone.getString(
-                cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
-            )
-            val contactId = cursorPhone.getString(
-                cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
-            )
-            contactList.add(Contact(phoneNumber = number, callerName = contactId))
-            cursorPhone.moveToNext()
+    private fun checkFragmentContains(fragment: Fragment): Boolean {
+        return when {
+            fragment == mainActivity()?.activeFragment -> {
+                false
+            }
+            childFragmentManager.findFragmentByTag(fragment.javaClass.simpleName) != null -> {
+                childFragmentManager.beginTransaction().apply {
+                    show(fragment)
+                    mainActivity()?.activeFragment?.let { hide(it) }
+                    commit()
+                }
+                mainActivity()?.activeFragment = fragment
+                true
+            }
+            else -> {
+                childFragmentManager.beginTransaction().apply {
+                    add(R.id.home_container, fragment, fragment.javaClass.simpleName)
+                    mainActivity()?.activeFragment?.let { hide(it) }
+                    commit()
+                }
+                mainActivity()?.activeFragment = fragment
+                true
+            }
         }
-        viewModel.setContactMemory(contactList)
-        cursorPhone?.close()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

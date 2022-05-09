@@ -6,6 +6,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.example.idcaller.presentation.MainActivity
 import com.example.idcaller.utils.hideLoadingDialog
 import com.example.idcaller.utils.showLoadingDialog
 import kotlinx.coroutines.flow.launchIn
