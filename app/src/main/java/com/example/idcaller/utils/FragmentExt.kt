@@ -1,7 +1,9 @@
 package com.example.idcaller.utils
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.drawable.Drawable
 import android.provider.ContactsContract
@@ -11,6 +13,7 @@ import android.widget.EditText
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -163,4 +166,16 @@ fun Fragment.retrieveCallLog(): List<Call> {
     }
     cursorPhone?.close()
     return contactList
+}
+
+fun Fragment.isAllowReadContacts(): Boolean {
+    return (ContextCompat.checkSelfPermission(
+        requireActivity(), Manifest.permission.READ_CONTACTS
+    ) == PackageManager.PERMISSION_GRANTED)
+}
+
+fun Fragment.isAllowLocation(): Boolean {
+    return (ContextCompat.checkSelfPermission(
+        requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED)
 }
