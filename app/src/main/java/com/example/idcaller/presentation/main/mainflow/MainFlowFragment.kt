@@ -1,9 +1,6 @@
 package com.example.idcaller.presentation.main.mainflow
 
-import android.annotation.SuppressLint
-import android.database.Cursor
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -11,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.example.idcaller.R
 import com.example.idcaller.core.base.BaseFragment
 import com.example.idcaller.core.base.viewBindings
-import com.example.idcaller.data.model.Contact
 import com.example.idcaller.databinding.FragmentMainFlowBinding
 import com.example.idcaller.databinding.LayoutHeaderDrawerBinding
 import com.example.idcaller.presentation.MainActivity
@@ -78,7 +74,7 @@ class MainFlowFragment :
         }
     }
 
-    private fun checkFragmentContains(fragment: Fragment): Boolean {
+    private fun loadFragment(fragment: Fragment): Boolean {
         return when {
             fragment == mainActivity()?.activeFragment -> {
                 false
