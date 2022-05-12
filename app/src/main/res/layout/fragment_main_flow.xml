@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.idcaller.presentation.main.mainflow.MainFlowViewModel" />
+            type="com.dotsdev.idcaller.presentation.main.mainflow.MainFlowViewModel" />
 
     </data>
 

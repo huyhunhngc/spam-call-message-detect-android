@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.idcaller.presentation.main.calltab.CallTabViewModel" />
+            type="com.dotsdev.idcaller.presentation.main.calltab.CallTabViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

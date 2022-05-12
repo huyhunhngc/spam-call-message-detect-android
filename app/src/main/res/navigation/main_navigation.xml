@@ -6,7 +6,7 @@
     app:startDestination="@id/nav_initial_fragment">
     <fragment
         android:id="@+id/nav_initial_fragment"
-        android:name="com.example.idcaller.presentation.main.initial.InitialFragment"
+        android:name="com.dotsdev.idcaller.presentation.main.initial.InitialFragment"
         tools:layout="@layout/fragment_initial">
         <action
             android:id="@+id/open_initial_to_sp_home"
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/mainFlowFragment"
-        android:name="com.example.idcaller.presentation.main.mainflow.MainFlowFragment"
+        android:name="com.dotsdev.idcaller.presentation.main.mainflow.MainFlowFragment"
         android:label="MainFlowFragment"
         tools:layout="@layout/fragment_main_flow" />
 
