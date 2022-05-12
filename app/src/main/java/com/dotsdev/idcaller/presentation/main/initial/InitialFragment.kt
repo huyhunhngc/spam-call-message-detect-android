@@ -16,7 +16,7 @@ import com.dotsdev.idcaller.utils.isAllowReadContacts
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class InitialFragment :
-    com.dotsdev.idcaller.core.base.BaseFragment<InitialViewModel, FragmentInitialBinding>(R.layout.fragment_initial) {
+    BaseFragment<InitialViewModel, FragmentInitialBinding>(R.layout.fragment_initial) {
     override val viewModel: InitialViewModel by viewModel()
     override val binding: FragmentInitialBinding by viewBindings {
         FragmentInitialBinding.bind(it)

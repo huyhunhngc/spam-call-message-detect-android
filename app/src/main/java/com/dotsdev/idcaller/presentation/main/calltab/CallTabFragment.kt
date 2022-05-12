@@ -8,7 +8,7 @@ import com.dotsdev.idcaller.core.base.viewBindings
 import com.dotsdev.idcaller.databinding.FragmentCallTabBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CallTabFragment: com.dotsdev.idcaller.core.base.BaseFragment<CallTabViewModel, FragmentCallTabBinding>(R.layout.fragment_call_tab) {
+class CallTabFragment: BaseFragment<CallTabViewModel, FragmentCallTabBinding>(R.layout.fragment_call_tab) {
     override val viewModel by viewModel<CallTabViewModel>()
     override val binding by viewBindings(FragmentCallTabBinding::bind)
 

@@ -16,7 +16,7 @@ import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFlowFragment :
-    com.dotsdev.idcaller.core.base.BaseFragment<MainFlowViewModel, FragmentMainFlowBinding>(R.layout.fragment_main_flow),
+    BaseFragment<MainFlowViewModel, FragmentMainFlowBinding>(R.layout.fragment_main_flow),
     NavigationView.OnNavigationItemSelectedListener {
     override val viewModel: MainFlowViewModel by viewModel()
     override val binding: FragmentMainFlowBinding by viewBindings {
