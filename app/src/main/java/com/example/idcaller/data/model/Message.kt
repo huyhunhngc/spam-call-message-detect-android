@@ -4,7 +4,6 @@ import java.util.*
 
 data class Message(
     val from: Contact,
-    val to: Contact,
     val type: MessageType = MessageType.SMS,
     val content: String,
     val iat: Date
