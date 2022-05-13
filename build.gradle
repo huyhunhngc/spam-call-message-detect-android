@@ -16,8 +16,13 @@ buildscript {
 allprojects {
     repositories {
         maven { url "https://jitpack.io" }
+        maven {
+            name 'ossrh-snapshot'
+            url 'https://oss.sonatype.org/content/repositories/snapshots'
+        }
         google()
         mavenCentral()
+        mavenLocal()
     }
 }
 
