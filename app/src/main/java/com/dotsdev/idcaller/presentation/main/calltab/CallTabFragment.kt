@@ -27,6 +27,8 @@ class CallTabFragment: BaseFragment<CallTabViewModel, FragmentCallTabBinding>(R.
     }
 
     companion object {
-
+        fun newInstance(): CallTabFragment {
+            return CallTabFragment()
+        }
     }
 }

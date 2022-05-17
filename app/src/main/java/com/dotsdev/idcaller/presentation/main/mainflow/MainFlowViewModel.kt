@@ -7,6 +7,7 @@ import com.dotsdev.idcaller.data.model.Contact
 import com.dotsdev.idcaller.data.model.User
 
 class MainFlowViewModel(private val contactMemory: ContactMemory) : BaseViewModel() {
+    val currentTab = MutableLiveData<PageTabType>()
     val user = MutableLiveData<User>()
     override fun onStart() {
         user.postValue(User(phoneNumber = "0326708983", name = "Huy hn"))

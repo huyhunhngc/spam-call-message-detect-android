@@ -35,7 +35,6 @@ class InitialFragment :
 
                 override fun onAnimationEnd(animation: Animator?) {
                     onGrantPermissionNeeded()
-                    navigate()
                 }
 
                 override fun onAnimationCancel(animation: Animator?) {
@@ -68,6 +67,8 @@ class InitialFragment :
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                 )
             )
+        } else {
+            navigate()
         }
     }
 

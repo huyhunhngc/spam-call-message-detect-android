@@ -11,8 +11,9 @@ import com.dotsdev.idcaller.core.base.viewBindings
 import com.dotsdev.idcaller.databinding.FragmentMainFlowBinding
 import com.dotsdev.idcaller.databinding.LayoutHeaderDrawerBinding
 import com.dotsdev.idcaller.presentation.MainActivity
+import com.dotsdev.idcaller.presentation.main.calltab.CallTabFragment
 import com.dotsdev.idcaller.presentation.main.contacttab.ContactTabFragment
-import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabFragment.Companion.newInstance
+import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabFragment
 import com.dotsdev.idcaller.utils.retrieveContact
 import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,7 +26,9 @@ class MainFlowFragment :
         FragmentMainFlowBinding.bind(it)
     }
 
-    //private val contactTab = ContactTabFragment.newInstance()
+    private val contactTab = ContactTabFragment.newInstance()
+    private val messageTab = MessageTabFragment.newInstance()
+    private val callTab = CallTabFragment.newInstance()
 
     private fun mainActivity(): MainActivity? = activity as? MainActivity
 
@@ -49,14 +52,16 @@ class MainFlowFragment :
             navView.setOnItemSelectedListener { item ->
                 return@setOnItemSelectedListener onCheckFragmentContain(item.itemId)
             }
+
+            navView.selectedItemId
         }
     }
 
     private fun onCheckFragmentContain(menu: Int): Boolean {
         return when (menu) {
-//            R.id.nav_call -> loadFragment(navHomeFragment)
-//            R.id.nav_contact -> loadFragment(reservationsFragment)
-//            R.id.nav_message -> loadFragment(equipmentFragment)
+            PageTabType.NAV_CALL.menuId -> loadFragment(callTab)
+            PageTabType.NAV_CONTACT.menuId -> loadFragment(contactTab)
+            PageTabType.NAV_MESSAGE.menuId -> loadFragment(messageTab)
             else -> false
         }
     }

@@ -12,4 +12,10 @@ class ContactTabFragment :
     override val binding: FragmentContactTabBinding by viewBindings {
         FragmentContactTabBinding.bind(it)
     }
+
+    companion object {
+        fun newInstance(): ContactTabFragment {
+            return ContactTabFragment()
+        }
+    }
 }
