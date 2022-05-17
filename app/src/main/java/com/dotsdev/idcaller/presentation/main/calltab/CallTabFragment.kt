@@ -25,4 +25,8 @@ class CallTabFragment: BaseFragment<CallTabViewModel, FragmentCallTabBinding>(R.
     private fun initObservers() {
 
     }
+
+    companion object {
+
+    }
 }

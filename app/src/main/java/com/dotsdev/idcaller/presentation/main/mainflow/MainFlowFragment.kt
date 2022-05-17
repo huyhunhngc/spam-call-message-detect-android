@@ -11,6 +11,8 @@ import com.dotsdev.idcaller.core.base.viewBindings
 import com.dotsdev.idcaller.databinding.FragmentMainFlowBinding
 import com.dotsdev.idcaller.databinding.LayoutHeaderDrawerBinding
 import com.dotsdev.idcaller.presentation.MainActivity
+import com.dotsdev.idcaller.presentation.main.contacttab.ContactTabFragment
+import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabFragment.Companion.newInstance
 import com.dotsdev.idcaller.utils.retrieveContact
 import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,6 +24,8 @@ class MainFlowFragment :
     override val binding: FragmentMainFlowBinding by viewBindings {
         FragmentMainFlowBinding.bind(it)
     }
+
+    //private val contactTab = ContactTabFragment.newInstance()
 
     private fun mainActivity(): MainActivity? = activity as? MainActivity
 
@@ -42,6 +46,18 @@ class MainFlowFragment :
                 }
             }
             setupDrawer()
+            navView.setOnItemSelectedListener { item ->
+                return@setOnItemSelectedListener onCheckFragmentContain(item.itemId)
+            }
+        }
+    }
+
+    private fun onCheckFragmentContain(menu: Int): Boolean {
+        return when (menu) {
+//            R.id.nav_call -> loadFragment(navHomeFragment)
+//            R.id.nav_contact -> loadFragment(reservationsFragment)
+//            R.id.nav_message -> loadFragment(equipmentFragment)
+            else -> false
         }
     }
 
