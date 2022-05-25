@@ -25,6 +25,7 @@ class InitialFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAnimation()
+        observer()
     }
 
     private fun initAnimation() {
@@ -43,6 +44,14 @@ class InitialFragment :
                 override fun onAnimationStart(animation: Animator?) {
                 }
             })
+        }
+    }
+
+    private fun observer() {
+        with(viewModel) {
+            onGrantPermissionCompleted.observe(viewLifecycleOwner) {
+                navigate()
+            }
         }
     }
 
@@ -67,8 +76,6 @@ class InitialFragment :
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                 )
             )
-        } else {
-            navigate()
         }
     }
 
@@ -78,6 +85,9 @@ class InitialFragment :
         ) { result ->
             if (result.values.any { it == false }) {
                 Toast.makeText(activity, "Permission request failed", Toast.LENGTH_LONG).show()
+                viewModel.setHasGrantedPermission(false)
+            } else {
+                viewModel.setHasGrantedPermission(true)
             }
         }
 }

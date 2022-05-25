@@ -35,6 +35,7 @@ class MainFlowFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        observer()
     }
 
     private fun initViews() {
@@ -54,6 +55,15 @@ class MainFlowFragment :
             }
 
             navView.selectedItemId
+        }
+    }
+
+    private fun observer() {
+        with(viewModel) {
+            currentTab.observe(viewLifecycleOwner) {
+                binding.navView.selectedItemId = it.menuId
+                onCheckFragmentContain(it.menuId)
+            }
         }
     }
 

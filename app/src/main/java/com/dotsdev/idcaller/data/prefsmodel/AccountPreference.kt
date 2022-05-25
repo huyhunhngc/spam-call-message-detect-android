@@ -12,3 +12,9 @@ object AccountPreference: KotprefModel() {
     var passwordResetSessionId by nullableStringPref(null)
     var passwordResetCode by nullableStringPref(null)
 }
+
+object CachePreference: KotprefModel() {
+    var isFirstOpenApp by booleanPref(true)
+    var isHasGrantPermission by booleanPref(false)
+    var isCompleteInfo by booleanPref(false)
+}

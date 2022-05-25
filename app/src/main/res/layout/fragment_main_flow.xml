@@ -55,8 +55,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 app:elevation="10dp"
-                app:itemIconTint="@color/colorPrimary"
-                app:itemTextColor="@color/colorPrimary"
+                app:itemIconTint="@drawable/selector_bottom_navigation_view"
+                app:itemTextColor="@drawable/selector_bottom_navigation_view"
                 app:labelVisibilityMode="labeled"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:menu="@menu/menu_main_bottom" />
