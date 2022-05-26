@@ -10,9 +10,23 @@
         <entry key="..\:/Users/huyhu/AndroidStudioProjects/IDCaller/app/src/main/res/layout/dialog_loading.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/huyhu/AndroidStudioProjects/IDCaller/app/src/main/res/layout/fragment_call_tab.xml" value="0.3541666666666667" />
         <entry key="..\:/Users/huyhu/AndroidStudioProjects/IDCaller/app/src/main/res/menu/menu_main_bottom.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1675" />
+        <entry key="app/src/main/res/drawable/bg_blue_rounded_10.xml" value="0.1675" />
+        <entry key="app/src/main/res/drawable/ic_form.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_form_2.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_form_icon.xml" value="0.1675" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1675" />
+        <entry key="app/src/main/res/drawable/shape_ripple_oval.xml" value="0.1675" />
+        <entry key="app/src/main/res/layout/activity_common.xml" value="0.13179347826086957" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/fragment_account_top.xml" value="0.14175724637681159" />
+        <entry key="app/src/main/res/layout/fragment_create_account.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/fragment_initial.xml" value="0.125" />
         <entry key="app/src/main/res/layout/fragment_main_flow.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/layout_header_drawer.xml" value="0.14175724637681159" />
+        <entry key="app/src/main/res/layout/view_app_text_create_user.xml" value="0.14175724637681159" />
+        <entry key="app/src/main/res/layout/view_app_text_edit.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/view_app_text_switch.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/menu/menu_main_bottom.xml" value="0.22447916666666667" />
       </map>
     </option>

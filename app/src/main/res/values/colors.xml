@@ -82,4 +82,5 @@
     <color name="label_input_text">#7D7D7D</color>
     <color name="gray60">#7D7D7D</color>
     <color name="gray40alpha">#66171715</color>
+    <color name="blue_main_color">#259FE9</color>
 </resources>

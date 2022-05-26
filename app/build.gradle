@@ -139,4 +139,5 @@ dependencies {
     implementation "org.tensorflow:tensorflow-lite:$tflite_version"
     implementation "org.tensorflow:tensorflow-lite-gpu:$tflite_version"
     implementation "org.tensorflow:tensorflow-lite-support:$tflite_version"
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }
