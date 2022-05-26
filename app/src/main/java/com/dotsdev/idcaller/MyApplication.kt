@@ -5,6 +5,7 @@ import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.gsonpref.gson
 import com.dotsdev.idcaller.di.domainModule
 import com.dotsdev.idcaller.di.repositoryModule
+import com.dotsdev.idcaller.di.usecaseModule
 import com.dotsdev.idcaller.di.viewModelModule
 import com.google.gson.Gson
 import org.koin.android.ext.koin.androidContext
@@ -23,6 +24,7 @@ class MyApplication : Application() {
             viewModelModule,
             domainModule,
             repositoryModule,
+            usecaseModule
         )
     }
 }

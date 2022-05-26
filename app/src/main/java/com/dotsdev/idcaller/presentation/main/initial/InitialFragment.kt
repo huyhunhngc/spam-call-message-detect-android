@@ -68,6 +68,7 @@ class InitialFragment :
 
     private fun onGrantPermissionNeeded() {
         if (!isAllowReadContacts() || !isAllowLocation()) {
+            viewModel.setHasGrantedPermission(false)
             requestPermissionLauncher.launch(
                 arrayOf(
                     Manifest.permission.READ_CONTACTS,
@@ -76,6 +77,8 @@ class InitialFragment :
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                 )
             )
+        } else {
+            viewModel.setHasGrantedPermission(true)
         }
     }
 
