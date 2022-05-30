@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.signature.ObjectKey
 import com.dotsdev.idcaller.R
@@ -35,9 +36,7 @@ fun ImageView.loadImage(
     }
 
     val requestOptions = RequestOptions().apply {
-
         diskCacheStrategy(diskCacheStrategy ?: DiskCacheStrategy.AUTOMATIC)
-
         placeholder(
             ContextCompat.getDrawable(
                 context,
@@ -62,7 +61,7 @@ fun ImageView.loadImage(
     }
 
     Glide.with(context).load(imageUrl).apply {
-//        transition(DrawableTransitionOptions.withCrossFade())
+        transition(DrawableTransitionOptions.withCrossFade())
         apply(requestOptions)
     }.into(this)
 }
