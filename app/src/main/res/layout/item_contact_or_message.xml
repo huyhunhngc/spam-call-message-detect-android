@@ -6,7 +6,7 @@
 
         <variable
             name="info"
-            type="com.dotsdev.idcaller.widget.recycler.ContactOrMessageInfo" />
+            type="com.dotsdev.idcaller.widget.recycler.ContactMessageInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

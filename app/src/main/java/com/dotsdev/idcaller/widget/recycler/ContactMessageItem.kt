@@ -5,11 +5,11 @@ import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.databinding.ItemContactOrMessageBinding
 import com.xwray.groupie.viewbinding.BindableItem
 
-class ContactOrMessageItem(private val info: ContactOrMessageInfo) :
+class ContactMessageItem(private val info: ContactMessageInfo) :
     BindableItem<ItemContactOrMessageBinding>() {
     override fun bind(viewBinding: ItemContactOrMessageBinding, position: Int) {
         viewBinding.apply {
-            info = this@ContactOrMessageItem.info
+            info = this@ContactMessageItem.info
         }
     }
 
