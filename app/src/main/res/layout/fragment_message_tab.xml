@@ -23,7 +23,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabGravity="fill"
-            app:tabMode="fixed" />
+            app:tabMode="fixed"
+            app:tabInlineLabel="true"
+            app:tabTextColor="@color/teal_700"
+            app:tabIndicatorColor="@color/teal_700"
+            app:tabSelectedTextColor="@color/teal_700"
+            app:tabTextAppearance="@style/TextAppearance.AppCompat.Small" />
 
         <View
             android:id="@+id/divider"
