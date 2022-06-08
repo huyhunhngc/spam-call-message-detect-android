@@ -15,7 +15,7 @@ val viewModelModule = module {
     viewModel { MainFlowViewModel(get(), get()) }
     viewModel { MainViewModel() }
     viewModel { MessageTabViewModel() }
-    viewModel { ContactTabViewModel() }
+    viewModel { ContactTabViewModel(get()) }
     viewModel { InitialViewModel(get()) }
     viewModel { MessageDetailViewModel(get()) }
 }

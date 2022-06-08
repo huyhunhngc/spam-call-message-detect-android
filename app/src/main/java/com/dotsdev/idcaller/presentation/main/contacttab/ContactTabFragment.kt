@@ -1,5 +1,7 @@
 package com.dotsdev.idcaller.presentation.main.contacttab
 
+import android.os.Bundle
+import android.view.View
 import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.core.base.BaseFragment
 import com.dotsdev.idcaller.core.base.viewBindings
@@ -11,6 +13,11 @@ class ContactTabFragment :
     override val viewModel: ContactTabViewModel by viewModel()
     override val binding: FragmentContactTabBinding by viewBindings {
         FragmentContactTabBinding.bind(it)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = viewModel
     }
 
     companion object {

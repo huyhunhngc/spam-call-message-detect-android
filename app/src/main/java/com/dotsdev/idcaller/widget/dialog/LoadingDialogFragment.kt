@@ -13,6 +13,7 @@ class LoadingDialogFragment: DialogFragment() {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
             setContentView(R.layout.dialog_loading)
             window?.apply {
+                setBackgroundDrawableResource(R.drawable.transparent)
                 setLayout(
                     WindowManager.LayoutParams.MATCH_PARENT,
                     WindowManager.LayoutParams.MATCH_PARENT

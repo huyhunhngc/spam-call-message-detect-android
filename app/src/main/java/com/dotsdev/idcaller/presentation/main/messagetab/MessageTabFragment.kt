@@ -12,7 +12,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MessageTabFragment :
     BaseFragment<MessageTabViewModel, FragmentMessageTabBinding>(R.layout.fragment_message_tab) {
-
     var tabTitle = arrayOf("Inbox", "Important", "Spam")
 
     override val viewModel: MessageTabViewModel by viewModel()
