@@ -18,6 +18,18 @@ class ContactTabFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
+        observers()
+    }
+
+    private fun observers() {
+        with(viewModel) {
+            callClick.observe(viewLifecycleOwner) {
+
+            }
+            detailClick.observe(viewLifecycleOwner) {
+
+            }
+        }
     }
 
     companion object {

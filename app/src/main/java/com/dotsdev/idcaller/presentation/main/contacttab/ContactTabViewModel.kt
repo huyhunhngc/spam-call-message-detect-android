@@ -1,6 +1,7 @@
 package com.dotsdev.idcaller.presentation.main.contacttab
 
 import androidx.lifecycle.MutableLiveData
+import com.dotsdev.idcaller.core.SingleLiveEvent
 import com.dotsdev.idcaller.core.base.BaseViewModel
 import com.dotsdev.idcaller.data.memory.contact.ContactMemory
 import com.dotsdev.idcaller.widget.recycler.ContactMessageInfo
@@ -9,6 +10,8 @@ import kotlinx.coroutines.flow.collectLatest
 
 class ContactTabViewModel(private val contactMemory: ContactMemory) : BaseViewModel() {
     val listContact = MutableLiveData<List<ContactMessageInfo>>()
+    val callClick = SingleLiveEvent<ContactMessageInfo>()
+    val detailClick = SingleLiveEvent<ContactMessageInfo>()
     override fun onStart() {
         super.onStart()
         viewModelScope.launch {
@@ -18,7 +21,12 @@ class ContactTabViewModel(private val contactMemory: ContactMemory) : BaseViewMo
         }
     }
 
-    val onItemClick: ((info: ContactMessageInfo, position: Int) -> Unit) = { info, position ->
-        // TODO
+    val onItemClick: ((info: ContactMessageInfo, position: Int) -> Unit) = { info, _ ->
+        callClick.postValue(info)
+    }
+
+
+    val onToDetailClick: ((info: ContactMessageInfo, position: Int) -> Unit) = { info, _ ->
+        detailClick.postValue(info)
     }
 }
