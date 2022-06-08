@@ -23,11 +23,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabGravity="fill"
-            app:tabMode="fixed"
+            app:tabMode="auto"
             app:tabInlineLabel="true"
-            app:tabTextColor="@color/teal_700"
-            app:tabIndicatorColor="@color/teal_700"
-            app:tabSelectedTextColor="@color/teal_700"
+            app:tabIconTint="@drawable/selector_bottom_navigation_view"
+            app:tabIndicatorColor="@drawable/selector_bottom_navigation_view"
             app:tabTextAppearance="@style/TextAppearance.AppCompat.Small" />
 
         <View

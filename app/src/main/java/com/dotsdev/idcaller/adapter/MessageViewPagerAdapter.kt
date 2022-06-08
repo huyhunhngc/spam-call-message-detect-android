@@ -16,11 +16,6 @@ class MessageViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifec
         ImportantMessageFragment(),
         SpamMessageFragment()
     )
-    private val icons = listOf(
-        R.drawable.ic_baseline_inbox_24,
-        R.drawable.ic_baseline_star_24,
-        R.drawable.ic_baseline_app_blocking_24
-    )
     override fun getItemCount(): Int {
         return fragments.size
     }

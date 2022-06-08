@@ -1,4 +1,4 @@
-package com.dotsdev.idcaller.presentation.main.messagetab
+package com.dotsdev.idcaller.presentation.main.messagetab.detail
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map

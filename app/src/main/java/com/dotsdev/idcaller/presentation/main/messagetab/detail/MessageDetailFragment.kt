@@ -1,4 +1,4 @@
-package com.dotsdev.idcaller.presentation.main.messagetab
+package com.dotsdev.idcaller.presentation.main.messagetab.detail
 
 import android.os.Bundle
 import android.view.View

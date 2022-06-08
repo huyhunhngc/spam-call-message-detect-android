@@ -5,8 +5,11 @@ import com.dotsdev.idcaller.presentation.main.calltab.CallTabViewModel
 import com.dotsdev.idcaller.presentation.main.contacttab.ContactTabViewModel
 import com.dotsdev.idcaller.presentation.main.initial.InitialViewModel
 import com.dotsdev.idcaller.presentation.main.mainflow.MainFlowViewModel
-import com.dotsdev.idcaller.presentation.main.messagetab.MessageDetailViewModel
+import com.dotsdev.idcaller.presentation.main.messagetab.detail.MessageDetailViewModel
 import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabViewModel
+import com.dotsdev.idcaller.presentation.main.messagetab.tablayout.ImportantMessageViewModel
+import com.dotsdev.idcaller.presentation.main.messagetab.tablayout.InboxMessageViewModel
+import com.dotsdev.idcaller.presentation.main.messagetab.tablayout.SpamMessageViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -18,4 +21,7 @@ val viewModelModule = module {
     viewModel { ContactTabViewModel(get()) }
     viewModel { InitialViewModel(get()) }
     viewModel { MessageDetailViewModel(get()) }
+    viewModel { SpamMessageViewModel() }
+    viewModel { InboxMessageViewModel() }
+    viewModel { ImportantMessageViewModel() }
 }

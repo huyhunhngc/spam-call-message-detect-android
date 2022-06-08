@@ -1,5 +1,6 @@
 package com.dotsdev.idcaller.presentation.main.messagetab
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import com.dotsdev.idcaller.R
@@ -12,12 +13,17 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MessageTabFragment :
     BaseFragment<MessageTabViewModel, FragmentMessageTabBinding>(R.layout.fragment_message_tab) {
-    var tabTitle = arrayOf("Inbox", "Important", "Spam")
 
     override val viewModel: MessageTabViewModel by viewModel()
     override val binding: FragmentMessageTabBinding by viewBindings {
         FragmentMessageTabBinding.bind(it)
     }
+    private val tabTitle = listOf(
+        Pair("Inbox",R.drawable.ic_baseline_inbox_24),
+        Pair("Important",R.drawable.ic_baseline_star_24),
+        Pair("Spam", R.drawable.ic_baseline_app_blocking_24)
+    )
+    private var mediator: TabLayoutMediator? = null
 
     companion object {
         fun newInstance(): MessageTabFragment {
@@ -30,13 +36,21 @@ class MessageTabFragment :
         initViews()
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun initViews() {
         with(binding) {
             viewPager.adapter =
                 activity?.let { MessageViewPagerAdapter(it.supportFragmentManager, lifecycle) }
-            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                tab.text = tabTitle[position]
-            }.attach()
+            mediator = TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                tab.text = tabTitle[position].first
+                tab.icon = context?.getDrawable(tabTitle[position].second)
+            }
+            mediator?.attach()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediator?.detach()
     }
 }
