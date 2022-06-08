@@ -56,7 +56,7 @@
     <color name="colorGray60Alpha60">#99262626</color>
     <color name="colorGray60Alpha20">#33262626</color>
     <color name="colorProgress">#B8B8B8</color>
-    <color name="colorProgressBackground">#33000000</color>
+    <color name="colorProgressBackground">#80000000</color>
     <color name="colorDeviceTypes">#E5E5E5</color>
     <color name="blue40alpha20">#146DBEF7</color>
     <color name="blue40">#6DBEF7</color>

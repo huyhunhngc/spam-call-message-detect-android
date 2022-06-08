@@ -2,6 +2,8 @@ package com.dotsdev.idcaller.widget.dialog
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
@@ -12,16 +14,16 @@ class LoadingDialogFragment: DialogFragment() {
         return super.onCreateDialog(savedInstanceState).apply {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
             setContentView(R.layout.dialog_loading)
+            val displayMetrics = DisplayMetrics()
+            requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+            val width = displayMetrics.widthPixels
             window?.apply {
                 setBackgroundDrawableResource(R.drawable.transparent)
                 setLayout(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.MATCH_PARENT
+                    width - 250,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
                 )
-
-                val layoutParam = attributes
-                layoutParam.dimAmount = 0.0f
-                attributes = layoutParam
             }
             isCancelable = false
         }
