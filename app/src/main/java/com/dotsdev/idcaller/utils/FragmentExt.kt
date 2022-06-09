@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.drawable.Drawable
+import android.provider.CallLog
 import android.provider.ContactsContract
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -19,7 +20,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.dotsdev.idcaller.data.model.Call
 import com.dotsdev.idcaller.data.model.Contact
+import com.dotsdev.idcaller.data.model.toCallType
 import com.dotsdev.idcaller.widget.dialog.LoadingDialogFragment
+import java.util.*
 
 fun Fragment.showLoadingDialog() {
     val dialog = childFragmentManager.findFragmentByTag("progress")
@@ -136,7 +139,8 @@ fun Fragment.retrieveContact(): List<Contact> {
         val contactId = cursorPhone.getString(
             cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
         )
-        contactList.add(Contact(phoneNumber = number, callerName = contactId))
+        val numberStr = number.filterNot { it.isWhitespace() }.phoneNumberWithoutCountryCode()
+        contactList.add(Contact(phoneNumber = numberStr, callerName = contactId))
         cursorPhone.moveToNext()
     }
     cursorPhone?.close()
@@ -145,27 +149,40 @@ fun Fragment.retrieveContact(): List<Contact> {
 
 @SuppressLint("Range")
 fun Fragment.retrieveCallLog(): List<Call> {
-    val cursorPhone: Cursor? = activity?.contentResolver?.query(
-        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+    val cursorPhone = activity?.contentResolver?.query(
+        CallLog.Calls.CONTENT_URI,
         null,
         null,
         null,
         null
-    )
-    cursorPhone?.moveToFirst()
-    val contactList = mutableListOf<Call>()
-    while (cursorPhone?.isAfterLast == false) {
+    ) ?: return emptyList()
+    cursorPhone.moveToFirst()
+    val callList = mutableListOf<Call>()
+    while (!cursorPhone.isAfterLast) {
         val number = cursorPhone.getString(
-            cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+            cursorPhone.getColumnIndex(CallLog.Calls.NUMBER)
         )
-        val contactId = cursorPhone.getString(
-            cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+        val type = cursorPhone.getString(
+            cursorPhone.getColumnIndex(CallLog.Calls.TYPE)
         )
-        contactList.add(Call(callerNumber = number, callerName = contactId))
+        val date = cursorPhone.getString(
+            cursorPhone.getColumnIndex(CallLog.Calls.DATE)
+        )
+        val duration = cursorPhone.getString(
+            cursorPhone.getColumnIndex(CallLog.Calls.DURATION)
+        )
+        callList.add(
+            Call(
+                callerNumber = number,
+                duration = duration,
+                callType = type.toInt().toCallType(),
+                iat = Date(date.toLong())
+            )
+        )
         cursorPhone.moveToNext()
     }
-    cursorPhone?.close()
-    return contactList
+    cursorPhone.close()
+    return callList
 }
 
 fun Fragment.isAllowReadContacts(): Boolean {

@@ -14,6 +14,7 @@ import com.dotsdev.idcaller.presentation.MainActivity
 import com.dotsdev.idcaller.presentation.main.calltab.CallTabFragment
 import com.dotsdev.idcaller.presentation.main.contacttab.ContactTabFragment
 import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabFragment
+import com.dotsdev.idcaller.utils.retrieveCallLog
 import com.dotsdev.idcaller.utils.retrieveContact
 import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -79,6 +80,7 @@ class MainFlowFragment :
     override fun onStart() {
         super.onStart()
         retrieveContact().let(viewModel::setContactMemory)
+        retrieveCallLog().let(viewModel::setCallLogMemory)
     }
 
     private fun FragmentMainFlowBinding.setupDrawer() {
