@@ -17,8 +17,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/organization_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:background="@drawable/ic_camera_input"
             app:centerCrop="@{true}"
             app:imageUrl="@{info.peerPhotoUrl}"
@@ -28,25 +28,40 @@
             app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CircleImageView" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/avatar_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:maxLines="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/organization_image"
+            app:layout_constraintEnd_toEndOf="@+id/organization_image"
+            app:layout_constraintBottom_toBottomOf="@+id/organization_image"
+            app:layout_constraintTop_toTopOf="@+id/organization_image"
+            tools:text="A"/>
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/organization_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@{info.peerName}"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:maxLines="1"
             app:layout_constraintStart_toEndOf="@+id/organization_image"
             app:layout_constraintEnd_toStartOf="@+id/ic_arrow"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="21236"/>
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/organization_sub_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@{info.subLine}"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:maxLines="1"
             android:ellipsize="end"
             app:layout_constraintTop_toBottomOf="@+id/organization_text"
