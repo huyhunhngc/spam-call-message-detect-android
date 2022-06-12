@@ -4,6 +4,7 @@ import com.dotsdev.idcaller.data.memory.contact.CallMemory
 import com.dotsdev.idcaller.data.memory.contact.ContactMemory
 import com.dotsdev.idcaller.data.memory.message.MessageMemory
 import com.dotsdev.idcaller.domain.classifier.ClassifierMessage
+import com.dotsdev.idcaller.domain.contact.query.GetCallLog
 import org.koin.dsl.module
 
 val domainModule = module {
@@ -11,4 +12,5 @@ val domainModule = module {
     single { MessageMemory() }
     single { CallMemory() }
     single { ClassifierMessage.newInstance() }
+    factory { GetCallLog(get(), get()) }
 }
