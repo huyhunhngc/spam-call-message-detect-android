@@ -140,7 +140,7 @@ fun Fragment.retrieveContact(): List<Contact> {
         val contactId = cursorPhone.getString(
             cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
         )
-        val numberStr = number.filterNot { it.isWhitespace() }.phoneNumberWithoutCountryCode()
+        val numberStr = number.phoneNumberWithoutCountryCode()
         contactList.add(Contact(phoneNumber = numberStr, callerName = contactId))
         cursorPhone.moveToNext()
     }

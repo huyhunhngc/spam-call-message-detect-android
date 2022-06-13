@@ -9,25 +9,32 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.map
 
 class MessageMemory {
-    private val stateFlow = MutableStateFlow(listOf<Conversation>())
+    private val stateFlow = MutableStateFlow(listOf<Message>())
+    val memoryMessage = mutableListOf<Message>()
 
-    fun observe(): Flow<List<Conversation>> {
+    fun observe(): Flow<List<Message>> {
         return stateFlow.asSharedFlow()
     }
 
-    fun set(info: List<Conversation>) {
+    fun set(info: List<Message>) {
+        memoryMessage.addAll(info)
         stateFlow.tryEmit(info)
     }
 
-    fun get(): List<Conversation> {
+    fun add(info: Message) {
+        memoryMessage.add(info)
+        stateFlow.tryEmit(memoryMessage)
+    }
+
+    fun get(): List<Message> {
         return stateFlow.value
     }
 
     fun observe(contact: Contact): Flow<List<Message>> {
-        return stateFlow.asSharedFlow().map {
-            it.find { peer ->
-                peer.from == contact
-            }?.messages ?: listOf()
+        return stateFlow.asSharedFlow().map{
+            it.filter { peer ->
+                peer.from.phoneNumber == contact.phoneNumber
+            }
         }
     }
 }

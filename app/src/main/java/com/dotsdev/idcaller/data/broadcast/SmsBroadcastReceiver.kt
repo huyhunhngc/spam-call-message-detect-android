@@ -10,6 +10,7 @@ import com.dotsdev.idcaller.data.memory.message.MessageMemory
 import com.dotsdev.idcaller.data.model.Contact
 import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.data.model.toListConversation
+import com.dotsdev.idcaller.utils.phoneNumberWithoutCountryCode
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -37,10 +38,10 @@ class SmsReceiveRepository : KoinComponent {
                     SmsMessage.createFromPdu(sms[it] as ByteArray)
                 }
                 val smsBody = smsMessage.messageBody.toString()
-                val address = smsMessage.originatingAddress.toString()
+                val address = smsMessage.originatingAddress.toString().phoneNumberWithoutCountryCode()
                 val time = smsMessage.timestampMillis
                 Message(Contact(phoneNumber = address), content = smsBody, iat = Date(time))
-            }?.toListConversation()?.let(messageMemory::set)
+            }?.let(messageMemory::set)
         }
     }
 
