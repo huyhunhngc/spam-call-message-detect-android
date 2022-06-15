@@ -16,7 +16,7 @@ class ContactTabViewModel(private val contactMemory: ContactMemory) : BaseViewMo
         super.onStart()
         viewModelScope.launch {
             contactMemory.observe().collectLatest {
-                listContact.postValue(it.map { it.toInfoData() })
+                listContact.postValue(it.sortedBy { it.callerName }.map { it.toInfoData() })
             }
         }
     }

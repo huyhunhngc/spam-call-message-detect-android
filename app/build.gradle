@@ -93,7 +93,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
 
     // Room database
-    def room_version = "2.3.0"
+    def room_version = "2.4.0-alpha03"
     //noinspection GradleDependency
     implementation "androidx.room:room-runtime:$room_version"
     kapt("androidx.room:room-compiler:$room_version")
@@ -135,8 +135,4 @@ dependencies {
     implementation "com.chibatching.kotpref:gson-support:$kotpref_version"
     implementation "com.chibatching.kotpref:livedata-support:$kotpref_version"
 
-    def tflite_version = '0.0.0-nightly-SNAPSHOT'
-    implementation "org.tensorflow:tensorflow-lite:$tflite_version"
-    implementation "org.tensorflow:tensorflow-lite-gpu:$tflite_version"
-    implementation "org.tensorflow:tensorflow-lite-support:$tflite_version"
 }

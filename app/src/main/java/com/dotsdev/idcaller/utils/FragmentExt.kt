@@ -140,7 +140,7 @@ fun Fragment.retrieveContact(): List<Contact> {
         val contactId = cursorPhone.getString(
             cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
         )
-        val numberStr = number.filterNot { it.isWhitespace() }.phoneNumberWithoutCountryCode()
+        val numberStr = number.phoneNumberWithoutCountryCode()
         contactList.add(Contact(phoneNumber = numberStr, callerName = contactId))
         cursorPhone.moveToNext()
     }
@@ -172,12 +172,24 @@ fun Fragment.retrieveCallLog(): List<Call> {
         val duration = cursorPhone.getString(
             cursorPhone.getColumnIndex(CallLog.Calls.DURATION)
         )
+
+        val cal = Calendar.getInstance()
+
+        val dateFromIatMils = Date(date.toLong())
+        cal.time = dateFromIatMils
+
+        val callId =
+            number.phoneNumberWithoutCountryCode() +
+                    "-${type}-" +
+                    "${cal.get(Calendar.DAY_OF_YEAR)}" +
+                    "${cal.get(Calendar.YEAR)}"
         callList.add(
             Call(
+                callId = callId,
                 callerNumber = number,
                 duration = duration,
                 callType = type.toInt().toCallType(),
-                iat = Date(date.toLong())
+                iat = dateFromIatMils
             )
         )
         cursorPhone.moveToNext()

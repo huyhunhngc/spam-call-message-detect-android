@@ -13,4 +13,5 @@
     <string name="important">Important</string>
     <string name="spam">Spam</string>
     <string name="inbox">Inbox</string>
+    <string name="ok">ok</string>
 </resources>

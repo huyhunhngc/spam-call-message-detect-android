@@ -2,7 +2,7 @@ package com.dotsdev.idcaller.presentation.main.calltab
 
 import androidx.lifecycle.MutableLiveData
 import com.dotsdev.idcaller.core.base.BaseViewModel
-import com.dotsdev.idcaller.data.model.Call
+import com.dotsdev.idcaller.data.model.toCallGroup
 import com.dotsdev.idcaller.domain.contact.query.GetCallLog
 import com.dotsdev.idcaller.widget.recycler.ContactMessageInfo
 import com.dotsdev.idcaller.widget.recycler.toInfoData
@@ -16,7 +16,7 @@ class CallTabViewModel(
         super.onStart()
         viewModelScope.launch {
             getCallLog.observeCall().collectLatest { calls ->
-                callLog.postValue(calls.map { it.toInfoData() })
+                callLog.postValue(calls.toCallGroup().map { it.toInfoData() })
             }
         }
     }

@@ -7,7 +7,7 @@ import java.io.Serializable
 import java.util.*
 
 data class Call(
-    val callerId: String = "",
+    val callId: String = "",
     val callerName: String = "",
     val callerNumber: String = "",
     val iat: Date = Date(),
@@ -24,6 +24,11 @@ enum class CallType(val value: String, @DrawableRes val icon: Int) {
     UNKNOWN("Unknown", R.drawable.ic_baseline_app_blocking_24),
 }
 
+data class CallGroup(
+    val callId: String = "",
+    val calls: MutableList<Call> = mutableListOf()
+)
+
 fun Int.toCallType(): CallType {
     return when (this) {
         CallLog.Calls.OUTGOING_TYPE -> CallType.OUTGOING
@@ -31,4 +36,21 @@ fun Int.toCallType(): CallType {
         CallLog.Calls.MISSED_TYPE -> CallType.MISSED
         else -> CallType.UNKNOWN
     }
+}
+
+fun List<Call>.toCallGroup(): List<CallGroup> {
+    val callGroups = mutableListOf<CallGroup>()
+    this.forEach { call ->
+        if (callGroups.map { it.callId }.contains(call.callId)) {
+            callGroups.find { it.callId == call.callId }?.calls?.add(call)
+        } else {
+            callGroups.add(
+                CallGroup(
+                    callId = call.callId,
+                    calls = mutableListOf(call)
+                )
+            )
+        }
+    }
+    return callGroups
 }
