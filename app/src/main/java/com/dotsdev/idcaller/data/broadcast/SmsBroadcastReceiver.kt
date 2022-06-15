@@ -48,7 +48,7 @@ class SmsReceiveRepository : KoinComponent {
                     iat = Date(time),
                     type = MessageType.SMS
                 )
-            }?.let(messageMemory::set)
+            }?.let(messageMemory::add)
         }
     }
 

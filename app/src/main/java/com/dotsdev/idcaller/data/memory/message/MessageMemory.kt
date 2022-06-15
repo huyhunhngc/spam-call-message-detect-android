@@ -24,8 +24,10 @@ class MessageMemory {
         stateFlow.tryEmit(info)
     }
 
-    fun add(info: Message) {
-        memoryMessage.add(info.copy(uniqueId = "${info.iat.time}-${info.from.phoneNumber.phoneNumberWithoutCountryCode()}"))
+    fun add(infos: List<Message>) {
+        infos.map { info ->
+            info.copy(uniqueId = "${info.iat.time}-${info.from.phoneNumber.phoneNumberWithoutCountryCode()}")
+        }.let(memoryMessage::addAll)
         stateFlow.tryEmit(memoryMessage)
     }
 
