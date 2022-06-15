@@ -21,7 +21,7 @@ enum class CallType(val value: String, @DrawableRes val icon: Int) {
     OUTGOING("Outgoing", R.drawable.ic_outgoing_call),
     INCOMING("Incoming", R.drawable.ic_incomming_call),
     MISSED("Missed", R.drawable.ic_missed_call),
-    UNKNOWN("Unknown", R.drawable.ic_baseline_app_blocking_24),
+    UNKNOWN("Unknown", R.drawable.ic_help_question_mark),
 }
 
 data class CallGroup(

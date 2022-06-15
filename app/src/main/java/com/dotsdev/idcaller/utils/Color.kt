@@ -12,7 +12,7 @@ enum class Colors(@ColorInt val color: Int, @ColorInt val bgColor: Int) {
     LAVENDER(0xb487de, 0xf0e0ff),
     DUNE(0x5c5b5b, 0xbab8b8),
     GREY(0x838584, 0xeeeeee),
-    TEAL(0xb6f0e1,0x38baab),
+    TEAL(0x38baab,0xb6f0e1),
     SEASHELL(0x999999, 0xe6e3e3);
 
     companion object {
