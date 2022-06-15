@@ -20,7 +20,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.dotsdev.idcaller.data.model.Call
 import com.dotsdev.idcaller.data.model.Contact
-import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.data.model.toCallType
 import com.dotsdev.idcaller.widget.dialog.LoadingDialogFragment
 import java.util.*
@@ -172,12 +171,24 @@ fun Fragment.retrieveCallLog(): List<Call> {
         val duration = cursorPhone.getString(
             cursorPhone.getColumnIndex(CallLog.Calls.DURATION)
         )
+
+        val cal = Calendar.getInstance()
+
+        val dateFromIatMils = Date(date.toLong())
+        cal.time = dateFromIatMils
+
+        val callId =
+            number.phoneNumberWithoutCountryCode() +
+                    "-${type}-" +
+                    "${cal.get(Calendar.DAY_OF_YEAR)}" +
+                    "${cal.get(Calendar.YEAR)}"
         callList.add(
             Call(
+                callId = callId,
                 callerNumber = number,
                 duration = duration,
                 callType = type.toInt().toCallType(),
-                iat = Date(date.toLong())
+                iat = dateFromIatMils
             )
         )
         cursorPhone.moveToNext()

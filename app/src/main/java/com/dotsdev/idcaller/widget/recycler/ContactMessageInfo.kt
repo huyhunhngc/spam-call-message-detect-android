@@ -1,6 +1,6 @@
 package com.dotsdev.idcaller.widget.recycler
 
-import com.dotsdev.idcaller.data.model.Call
+import com.dotsdev.idcaller.data.model.CallGroup
 import com.dotsdev.idcaller.data.model.Contact
 
 data class ContactMessageInfo(
@@ -25,11 +25,17 @@ fun Contact.toInfoData(): ContactMessageInfo {
     )
 }
 
-fun Call.toInfoData(): ContactMessageInfo {
+fun CallGroup.toInfoData(): ContactMessageInfo {
+    val call = this.calls.firstOrNull() ?: return ContactMessageInfo()
+    val primaryLine = if (this.calls.size > 1) {
+        "${call.contact.callerName} (${this.calls.size})"
+    } else {
+        call.contact.callerName
+    }
     return ContactMessageInfo(
-        peerName = this.contact.callerName,
-        subLine = this.callType.value,
+        peerName = primaryLine,
+        subLine = call.callType.value,
         type = ItemType.CALL,
-        unknownNumber = this.callerNumber == this.contact.callerName
+        unknownNumber = call.callerNumber == call.contact.callerName
     )
 }
