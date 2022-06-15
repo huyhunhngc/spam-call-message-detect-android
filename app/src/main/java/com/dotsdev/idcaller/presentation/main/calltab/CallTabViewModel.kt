@@ -15,8 +15,8 @@ class CallTabViewModel(
 ) : BaseViewModel() {
     val callLog = MutableLiveData<List<ContactMessageInfo>>()
     val recentContact = MutableLiveData<List<ContactMessageInfo>>()
-    override fun onStart() {
-        super.onStart()
+    override fun onCreate() {
+        super.onCreate()
         viewModelScope.launch {
             getCallLog.observeCall().collectLatest { calls ->
                 callLog.postValue(calls.toCallGroup().map { it.toInfoData() })

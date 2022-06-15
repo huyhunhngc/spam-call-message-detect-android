@@ -19,6 +19,16 @@
         android:id="@+id/mainFlowFragment"
         android:name="com.dotsdev.idcaller.presentation.main.mainflow.MainFlowFragment"
         android:label="MainFlowFragment"
-        tools:layout="@layout/fragment_main_flow" />
+        tools:layout="@layout/fragment_main_flow">
+        <action
+            android:id="@+id/open_dialpad"
+            app:destination="@id/dial_numpad" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dial_numpad"
+        android:name="com.dotsdev.idcaller.presentation.main.calltab.dial.DialNumpadDialog"
+        android:label="DialNumpad"
+        tools:layout="@layout/dialog_dialpad" />
 
 </navigation>
