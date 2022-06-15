@@ -28,6 +28,10 @@ class ContactMessageItem(private val info: ContactMessageInfo) :
                         isVisible = this@ContactMessageItem.info.peerPhotoUrl.isBlank()
                     }
                 }
+                this@ContactMessageItem.info.subLineStartIcon?.let {
+                    organizationSubText.setCompoundDrawablesWithIntrinsicBounds(
+                        it, 0, 0, 0)
+                }
             }
         }
     }

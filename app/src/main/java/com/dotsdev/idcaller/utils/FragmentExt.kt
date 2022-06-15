@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.dotsdev.idcaller.data.model.Call
 import com.dotsdev.idcaller.data.model.Contact
+import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.data.model.toCallType
 import com.dotsdev.idcaller.widget.dialog.LoadingDialogFragment
 import java.util.*
@@ -183,6 +184,44 @@ fun Fragment.retrieveCallLog(): List<Call> {
     }
     cursorPhone.close()
     return callList
+}
+
+@SuppressLint("Range")
+fun Fragment.retrieveMessage(): List<Message> {
+    val cursorPhone = activity?.contentResolver?.query(
+        CallLog.Calls.CONTENT_URI,
+        null,
+        null,
+        null,
+        null
+    ) ?: return emptyList()
+    cursorPhone.moveToFirst()
+    val messageList = mutableListOf<Message>()
+    while (!cursorPhone.isAfterLast) {
+        val number = cursorPhone.getString(
+            cursorPhone.getColumnIndex(CallLog.Calls.NUMBER)
+        )
+        val type = cursorPhone.getString(
+            cursorPhone.getColumnIndex(CallLog.Calls.TYPE)
+        )
+        val date = cursorPhone.getString(
+            cursorPhone.getColumnIndex(CallLog.Calls.DATE)
+        )
+        val duration = cursorPhone.getString(
+            cursorPhone.getColumnIndex(CallLog.Calls.DURATION)
+        )
+//        callList.add(
+//            Call(
+//                callerNumber = number,
+//                duration = duration,
+//                callType = type.toInt().toCallType(),
+//                iat = Date(date.toLong())
+//            )
+//        )
+        cursorPhone.moveToNext()
+    }
+    cursorPhone.close()
+    return messageList
 }
 
 fun Fragment.isAllowReadContacts(): Boolean {
