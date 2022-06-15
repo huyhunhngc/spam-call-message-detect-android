@@ -1,10 +1,8 @@
 package com.dotsdev.idcaller.widget.recycler
 
 import androidx.annotation.DrawableRes
-import com.dotsdev.idcaller.data.model.Call
 import com.dotsdev.idcaller.data.model.CallGroup
 import com.dotsdev.idcaller.data.model.Contact
-import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.utils.convertTimestampToHours
 
 data class ContactMessageInfo(
@@ -38,10 +36,9 @@ fun CallGroup.toInfoData(): ContactMessageInfo {
         call.contact.callerName
     }
     return ContactMessageInfo(
-        peerName = this.contact.callerName,
-        subLine = "${this.callType.value} • ${this.iat.time.convertTimestampToHours()}",
-        subLineStartIcon = this.callType.icon,
         peerName = primaryLine,
+        subLine = "${call.callType.value} • ${call.iat.time.convertTimestampToHours()}",
+        subLineStartIcon = call.callType.icon,
         type = ItemType.CALL,
         unknownNumber = call.callerNumber == call.contact.callerName
     )
