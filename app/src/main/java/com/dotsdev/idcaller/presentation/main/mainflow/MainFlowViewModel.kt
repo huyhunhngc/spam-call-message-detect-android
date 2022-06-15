@@ -16,7 +16,7 @@ class MainFlowViewModel(
     private val callMemory: CallMemory,
     private val userUsecase: UserUsecase
 ) : BaseViewModel() {
-    val currentTab = MutableLiveData(PageTabType.NAV_CONTACT)
+    val currentTab = MutableLiveData(PageTabType.NAV_CALL)
     val user = MutableLiveData<User>()
     override fun onStart() {
         viewModelScope.launch {

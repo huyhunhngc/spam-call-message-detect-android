@@ -54,3 +54,20 @@ fun List<Call>.toCallGroup(): List<CallGroup> {
     }
     return callGroups
 }
+
+fun List<Call>.toCallRecentData(): List<CallGroup> {
+    val callGroups = mutableListOf<CallGroup>()
+    this.forEach { call ->
+        if (callGroups.map { it.callId }.contains(call.callerNumber)) {
+            callGroups.find { it.callId == call.callerNumber }?.calls?.add(call)
+        } else {
+            callGroups.add(
+                CallGroup(
+                    callId = call.callerNumber,
+                    calls = mutableListOf(call)
+                )
+            )
+        }
+    }
+    return callGroups
+}
