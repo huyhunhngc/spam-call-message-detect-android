@@ -8,6 +8,7 @@ import com.dotsdev.idcaller.utils.convertTimestampToHours
 data class ContactMessageInfo(
     val peerPhotoUrl: String = "",
     val peerName: String = "",
+    val primaryLine: String = "",
     val subLine: String = "",
     val type: ItemType = ItemType.CONTACT,
     val unknownNumber: Boolean = false,
@@ -22,7 +23,7 @@ enum class ItemType {
 
 fun Contact.toInfoData(): ContactMessageInfo {
     return ContactMessageInfo(
-        peerName = this.callerName,
+        primaryLine = this.callerName,
         subLine = this.phoneNumber,
         type = ItemType.CONTACT
     )
@@ -36,7 +37,8 @@ fun CallGroup.toInfoData(): ContactMessageInfo {
         call.contact.callerName
     }
     return ContactMessageInfo(
-        peerName = primaryLine,
+        peerName = this.calls.first().callerName,
+        primaryLine = primaryLine,
         subLine = "${call.callType.value} • ${call.iat.time.convertTimestampToHours()}",
         subLineStartIcon = call.callType.icon,
         type = ItemType.CALL,
