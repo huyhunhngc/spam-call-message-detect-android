@@ -35,6 +35,7 @@ fun MessageGroup.toInfoData(): ContactMessageInfo {
     val message = this.messages.last()
     return ContactMessageInfo(
         peerName = message.contact.callerName,
+        primaryLine = message.contact.callerName,
         subLine = message.content,
         type = ItemType.MESSAGE
     )

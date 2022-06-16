@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/drawable/message_peer_background.xml" value="0.153" />
         <entry key="app/src/main/res/layout/activity_common.xml" value="0.11865942028985507" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/dialog_dialpad.xml" value="0.12537993920972645" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_call_tab.xml" value="0.11865942028985507" />
         <entry key="app/src/main/res/layout/fragment_contact_tab.xml" value="0.1015625" />
