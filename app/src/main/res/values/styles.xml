@@ -22,6 +22,6 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
     <style name="ModalBottomSheetDialog" parent="Widget.Design.BottomSheet.Modal">
-        <item name="behavior_peekHeight">400dp</item>
+
     </style>
 </resources>

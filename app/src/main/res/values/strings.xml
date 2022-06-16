@@ -8,10 +8,23 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="search_any_things">Search any things</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="important">Important</string>
     <string name="spam">Spam</string>
     <string name="inbox">Inbox</string>
     <string name="ok">ok</string>
+    <string-array name="number_pad">
+        <item><font size="20">0</font>\n<font size="10">+</font></item>
+        <item><font size="20">1</font>\n<font size="10">+</font></item>
+        <item><font size="20">2</font>\n<font size="10">ABC</font></item>
+        <item><font size="20">3</font>\n<font size="10">DEF</font></item>
+        <item><font size="20">4</font>\n<font size="10">GHI</font></item>
+        <item><font size="20">5</font>\n<font size="10">JKL</font></item>
+        <item><font size="20">6</font>\n<font size="10">+</font></item>
+        <item><font size="20">7</font>\n<font size="10">+</font></item>
+        <item><font size="20">8</font>\n<font size="10">+</font></item>
+        <item><font size="20">9</font>\n<font size="10">+</font></item>
+        <item><font size="20">*</font>\n<font size="10">+</font></item>
+        <item><font size="20">#</font>\n<font size="10">+</font></item>
+    </string-array>
+
 </resources>

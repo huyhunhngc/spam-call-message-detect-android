@@ -195,7 +195,7 @@ fun Fragment.retrieveCallLog(): List<Call> {
         cursorPhone.moveToNext()
     }
     cursorPhone.close()
-    return callList
+    return callList.sortedByDescending { it.iat }
 }
 
 @SuppressLint("Range")

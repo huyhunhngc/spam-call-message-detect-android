@@ -23,6 +23,7 @@ enum class ItemType {
 
 fun Contact.toInfoData(): ContactMessageInfo {
     return ContactMessageInfo(
+        peerName = this.callerName,
         primaryLine = this.callerName,
         subLine = this.phoneNumber,
         type = ItemType.CONTACT
@@ -37,7 +38,7 @@ fun CallGroup.toInfoData(): ContactMessageInfo {
         call.contact.callerName
     }
     return ContactMessageInfo(
-        peerName = this.calls.first().callerName,
+        peerName = call.contact.callerName,
         primaryLine = primaryLine,
         subLine = "${call.callType.value} • ${call.iat.time.convertTimestampToHours()}",
         subLineStartIcon = call.callType.icon,

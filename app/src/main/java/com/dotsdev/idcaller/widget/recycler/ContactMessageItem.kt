@@ -22,7 +22,7 @@ class ContactMessageItem(private val info: ContactMessageInfo) :
                         hash.getBackgroundColor()
                     )
                     avatarText.apply {
-                        text = this@ContactMessageItem.info.primaryLine.substring(0, 1)
+                        text = this@ContactMessageItem.info.peerName.substring(0, 1)
                             .uppercase(Locale.getDefault())
                         setTextColor(hash.getPrimaryColor())
                         isVisible = this@ContactMessageItem.info.peerPhotoUrl.isBlank()
