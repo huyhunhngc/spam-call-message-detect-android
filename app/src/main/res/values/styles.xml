@@ -19,6 +19,7 @@
     </style>
     <style name="BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
     <style name="ModalBottomSheetDialog" parent="Widget.Design.BottomSheet.Modal">
         <item name="behavior_peekHeight">400dp</item>

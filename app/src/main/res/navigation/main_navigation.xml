@@ -25,7 +25,7 @@
             app:destination="@id/dial_numpad" />
     </fragment>
 
-    <fragment
+    <dialog
         android:id="@+id/dial_numpad"
         android:name="com.dotsdev.idcaller.presentation.main.calltab.dial.DialNumpadDialog"
         android:label="DialNumpad"

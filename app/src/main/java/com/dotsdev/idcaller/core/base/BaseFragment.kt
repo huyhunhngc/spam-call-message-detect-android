@@ -1,7 +1,9 @@
 package com.dotsdev.idcaller.core.base
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -19,8 +21,7 @@ abstract class BaseFragment<VM : BaseViewModel, VDB : ViewDataBinding>(@LayoutRe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycle.addObserver(viewModel.observer)
-        binding.lifecycleOwner = viewLifecycleOwner
-
+        binding.lifecycleOwner = this
         viewModel.error.onEach { throwable ->
             throwable?.let { onError(it) }
         }.launchIn(viewLifecycleOwner.lifecycleScope)

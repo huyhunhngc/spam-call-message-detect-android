@@ -17,16 +17,10 @@ class DialNumpadDialog: BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View = DialogDialpadBinding.inflate(inflater, container, false).let {
         binding = it
-        it.root.apply {
-            viewTreeObserver.addOnGlobalLayoutListener(object :
-                ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-                    viewTreeObserver.removeOnGlobalLayoutListener(this)
-                }
-            })
-        }
+        it.root
     }
+
+    override fun getTheme(): Int = R.style.BottomSheetDialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
