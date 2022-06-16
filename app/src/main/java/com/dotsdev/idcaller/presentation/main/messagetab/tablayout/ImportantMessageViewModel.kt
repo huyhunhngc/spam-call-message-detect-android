@@ -1,6 +1,6 @@
 package com.dotsdev.idcaller.presentation.main.messagetab.tablayout
 
-import com.dotsdev.idcaller.core.base.BaseViewModel
+import com.dotsdev.idcaller.domain.message.query.GetMessageLog
+import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabViewModel
 
-class ImportantMessageViewModel: BaseViewModel() {
-}
+class ImportantMessageViewModel(getMessageLog: GetMessageLog) : MessageTabViewModel(getMessageLog)

@@ -15,15 +15,15 @@ interface SpamMessageDao {
     @Query("DELETE FROM Message")
     fun deleteAll()
 
-    @Query("DELETE FROM Message WHERE Message.uniqueId = :id")
+    @Query("DELETE FROM Message WHERE Message.messageId = :id")
     fun deleteMessage(id: Int)
 
-    @get:Query("SELECT * FROM Message ORDER BY uniqueId ASC")
+    @get:Query("SELECT * FROM Message ORDER BY messageId ASC")
     val messages: LiveData<List<Message?>?>?
 
     @Update
     suspend fun update(vararg Message: Message?)
 
-    @Query("SELECT * FROM Message WHERE Message.uniqueId = :id LIMIT 1")
+    @Query("SELECT * FROM Message WHERE Message.messageId = :id LIMIT 1")
     suspend fun getMessageByIdNote(id: Int): Message?
 }

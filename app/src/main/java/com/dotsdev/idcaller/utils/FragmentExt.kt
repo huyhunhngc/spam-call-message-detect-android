@@ -6,8 +6,10 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.provider.CallLog
 import android.provider.ContactsContract
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -18,10 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.dotsdev.idcaller.data.model.Call
-import com.dotsdev.idcaller.data.model.Contact
-import com.dotsdev.idcaller.data.model.Message
-import com.dotsdev.idcaller.data.model.toCallType
+import com.dotsdev.idcaller.data.model.*
 import com.dotsdev.idcaller.widget.dialog.LoadingDialogFragment
 import java.util.*
 
@@ -199,40 +198,34 @@ fun Fragment.retrieveCallLog(): List<Call> {
 }
 
 @SuppressLint("Range")
-fun Fragment.retrieveMessage(): List<Message> {
-    val cursorPhone = activity?.contentResolver?.query(
-        CallLog.Calls.CONTENT_URI,
+fun Fragment.retrieveInboxMessage(): List<Message> {
+    val cursor = activity?.contentResolver?.query(
+        Uri.parse("content://sms/inbox"),
         null,
         null,
         null,
         null
     ) ?: return emptyList()
-    cursorPhone.moveToFirst()
+    cursor.moveToFirst()
     val messageList = mutableListOf<Message>()
-    while (!cursorPhone.isAfterLast) {
-        val number = cursorPhone.getString(
-            cursorPhone.getColumnIndex(CallLog.Calls.NUMBER)
+    while (!cursor.isAfterLast) {
+        val address = cursor.getString(2)
+        val date = cursor.getString(4)
+        val dateSent = cursor.getString(5)
+        val body = cursor.getString(12)
+        messageList.add(
+            Message(
+                iat = Date(date.toLong()),
+                from = Contact(address),
+                type = MessageType.SMS,
+                content = body,
+                messageName = address,
+                messageNumber = address
+            )
         )
-        val type = cursorPhone.getString(
-            cursorPhone.getColumnIndex(CallLog.Calls.TYPE)
-        )
-        val date = cursorPhone.getString(
-            cursorPhone.getColumnIndex(CallLog.Calls.DATE)
-        )
-        val duration = cursorPhone.getString(
-            cursorPhone.getColumnIndex(CallLog.Calls.DURATION)
-        )
-//        callList.add(
-//            Call(
-//                callerNumber = number,
-//                duration = duration,
-//                callType = type.toInt().toCallType(),
-//                iat = Date(date.toLong())
-//            )
-//        )
-        cursorPhone.moveToNext()
+        cursor.moveToNext()
     }
-    cursorPhone.close()
+    cursor.close()
     return messageList
 }
 

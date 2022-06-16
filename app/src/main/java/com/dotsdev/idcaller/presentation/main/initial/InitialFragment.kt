@@ -75,7 +75,8 @@ class InitialFragment :
                     Manifest.permission.READ_PHONE_STATE,
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.READ_CALL_LOG
+                    Manifest.permission.READ_CALL_LOG,
+                    Manifest.permission.READ_SMS
                 )
             )
         } else {

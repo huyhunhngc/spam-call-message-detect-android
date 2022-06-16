@@ -17,16 +17,17 @@ class MessageMemory {
     }
 
     fun set(info: List<Message>) {
+        memoryMessage.clear()
         memoryMessage.addAll(
             info.map {
-                it.copy(uniqueId = "${it.iat.time}-${it.from.phoneNumber.phoneNumberWithoutCountryCode()}")
+                it.copy(messageId = "${it.iat.time}-${it.from.phoneNumber.phoneNumberWithoutCountryCode()}")
             })
         stateFlow.tryEmit(info)
     }
 
     fun add(infos: List<Message>) {
         infos.map { info ->
-            info.copy(uniqueId = "${info.iat.time}-${info.from.phoneNumber.phoneNumberWithoutCountryCode()}")
+            info.copy(messageId = "${info.iat.time}-${info.from.phoneNumber.phoneNumberWithoutCountryCode()}")
         }.let(memoryMessage::addAll)
         stateFlow.tryEmit(memoryMessage)
     }

@@ -6,14 +6,17 @@ import com.dotsdev.idcaller.core.base.BaseViewModel
 import com.dotsdev.idcaller.data.local.PreferencesDataSource
 import com.dotsdev.idcaller.data.memory.contact.CallMemory
 import com.dotsdev.idcaller.data.memory.contact.ContactMemory
+import com.dotsdev.idcaller.data.memory.message.MessageMemory
 import com.dotsdev.idcaller.data.model.Call
 import com.dotsdev.idcaller.data.model.Contact
+import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.data.model.User
 import com.dotsdev.idcaller.usecase.UserUsecase
 
 class MainFlowViewModel(
     private val contactMemory: ContactMemory,
     private val callMemory: CallMemory,
+    private val messageMemory: MessageMemory,
     private val userUsecase: UserUsecase
 ) : BaseViewModel() {
     val currentTab = MutableLiveData(PageTabType.NAV_CALL)
@@ -32,5 +35,8 @@ class MainFlowViewModel(
 
     fun setCallLogMemory(calls: List<Call>) {
         callMemory.set(calls)
+    }
+    fun setMessageMemory(messages: List<Message>){
+        messageMemory.set(messages)
     }
 }

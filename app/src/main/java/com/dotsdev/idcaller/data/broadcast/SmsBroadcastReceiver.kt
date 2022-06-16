@@ -42,11 +42,13 @@ class SmsReceiveRepository : KoinComponent {
                     smsMessage.originatingAddress.toString().phoneNumberWithoutCountryCode()
                 val time = smsMessage.timestampMillis
                 Message(
-                    uniqueId = "$address$time",
+                    messageId = "$address$time",
                     from = Contact(phoneNumber = address),
                     content = smsBody,
                     iat = Date(time),
-                    type = MessageType.SMS
+                    type = MessageType.SMS,
+                    messageName = "",
+                    messageNumber = ""
                 )
             }?.let(messageMemory::add)
         }

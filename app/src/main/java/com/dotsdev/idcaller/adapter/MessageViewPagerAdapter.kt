@@ -5,16 +5,24 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.dotsdev.idcaller.R
+import com.dotsdev.idcaller.presentation.main.calltab.CallTabFragment
+import com.dotsdev.idcaller.presentation.main.contacttab.ContactTabFragment
+import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabFragment
 import com.dotsdev.idcaller.presentation.main.messagetab.tablayout.ImportantMessageFragment
 import com.dotsdev.idcaller.presentation.main.messagetab.tablayout.InboxMessageFragment
 import com.dotsdev.idcaller.presentation.main.messagetab.tablayout.SpamMessageFragment
 
 class MessageViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
+
+    private val inboxTab = InboxMessageFragment.newInstance()
+    private val importantTab = ImportantMessageFragment.newInstance()
+    private val spamTab = SpamMessageFragment.newInstance()
+
     private val fragments = listOf(
-        InboxMessageFragment(),
-        ImportantMessageFragment(),
-        SpamMessageFragment()
+        inboxTab,
+        importantTab,
+        spamTab
     )
     override fun getItemCount(): Int {
         return fragments.size

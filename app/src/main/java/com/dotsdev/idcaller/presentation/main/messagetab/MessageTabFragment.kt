@@ -3,6 +3,7 @@ package com.dotsdev.idcaller.presentation.main.messagetab
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.adapter.MessageViewPagerAdapter
 import com.dotsdev.idcaller.core.base.BaseFragment
@@ -40,7 +41,7 @@ class MessageTabFragment :
     private fun initViews() {
         with(binding) {
             viewPager.adapter =
-                activity?.let { MessageViewPagerAdapter(it.supportFragmentManager, lifecycle) }
+               MessageViewPagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
             mediator = TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = tabTitle[position].first
                 tab.icon = context?.getDrawable(tabTitle[position].second)
@@ -50,7 +51,7 @@ class MessageTabFragment :
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         mediator?.detach()
+        super.onDestroy()
     }
 }
