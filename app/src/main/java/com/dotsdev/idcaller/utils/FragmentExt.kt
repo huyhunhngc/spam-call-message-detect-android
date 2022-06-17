@@ -197,10 +197,18 @@ fun Fragment.retrieveCallLog(): List<Call> {
     return callList.sortedByDescending { it.iat }
 }
 
+fun Fragment.retrieveInBox(): List<Message> {
+    return this.retrieveMessage(Uri.parse("content://sms/inbox"), true)
+}
+
+fun Fragment.retrieveSent(): List<Message> {
+    return this.retrieveMessage(Uri.parse("content://sms/sent"), false)
+}
+
 @SuppressLint("Range")
-fun Fragment.retrieveInboxMessage(): List<Message> {
+fun Fragment.retrieveMessage(uri: Uri, isInBox: Boolean): List<Message> {
     val cursor = activity?.contentResolver?.query(
-        Uri.parse("content://sms/inbox"),
+        uri,
         null,
         null,
         null,
@@ -220,7 +228,8 @@ fun Fragment.retrieveInboxMessage(): List<Message> {
                 type = MessageType.SMS,
                 content = body,
                 messageName = address,
-                messageNumber = address
+                messageNumber = address,
+                sentByMe = isInBox
             )
         )
         cursor.moveToNext()
