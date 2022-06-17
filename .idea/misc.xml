@@ -15,12 +15,15 @@
         <entry key="app/src/main/res/drawable/ic_baseline_app_blocking_24.xml" value="0.153" />
         <entry key="app/src/main/res/drawable/ic_baseline_phone_callback_24.xml" value="0.153" />
         <entry key="app/src/main/res/drawable/ic_message_add.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_outline_call_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/message_owner_background.xml" value="0.153" />
         <entry key="app/src/main/res/drawable/message_peer_background.xml" value="0.153" />
+        <entry key="app/src/main/res/drawable/rounded_corner.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_common.xml" value="0.11865942028985507" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
-        <entry key="app/src/main/res/layout/dialog_dialpad.xml" value="0.12537993920972645" />
+        <entry key="app/src/main/res/layout/dialog_dialpad.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/dialpad.xml" value="0.13632246376811594" />
         <entry key="app/src/main/res/layout/fragment_call_tab.xml" value="0.11865942028985507" />
         <entry key="app/src/main/res/layout/fragment_contact_tab.xml" value="0.1015625" />
         <entry key="app/src/main/res/layout/fragment_important_message.xml" value="0.1" />
