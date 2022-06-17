@@ -58,3 +58,4 @@ fun CallGroup.toInfoData(): ContactMessageInfo {
         unknownNumber = call.callerNumber == call.contact.callerName
     )
 }
+
