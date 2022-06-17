@@ -4,195 +4,285 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="540dp">
+
 
         <EditText
-            android:id="@+id/tvCode"
+            android:id="@+id/tvNumberField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_30sdp"
             android:layout_marginEnd="@dimen/_30sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        </EditText>
-        
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            app:layout_constraintTop_toTopOf="parent"></EditText>
+        <ImageView
+            android:id="@+id/btnErase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_outline_backspace_24"
+            app:layout_constraintTop_toTopOf="@id/tvNumberField"
+            app:layout_constraintBottom_toBottomOf="@id/tvNumberField"
+            app:layout_constraintStart_toEndOf="@id/tvNumberField"/>
+        <ImageView
+            android:id="@+id/btnAddContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_outline_person_add_24"
+            app:layout_constraintTop_toTopOf="@id/tvNumberField"
+            app:layout_constraintBottom_toBottomOf="@id/tvNumberField"
+            app:layout_constraintEnd_toStartOf="@id/tvNumberField"/>
+        <TextView
+
             android:id="@+id/btnOne"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_corner"
+            android:foreground="?attr/selectableItemBackground"
             android:tag="1"
-            android:text="1"
+            android:text="@string/numpad_1"
+            android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             app:cornerRadius="@dimen/_50sdp"
             app:layout_constraintEnd_toStartOf="@+id/btnTwo"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCode"
+            app:layout_constraintTop_toBottomOf="@+id/tvNumberField"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <TextView
             android:id="@+id/btnTwo"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:background="@drawable/rounded_corner"
+            android:foreground="?attr/selectableItemBackground"
             android:tag="2"
-            android:text="2"
+            android:text="@string/numpad_2"
+            android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             app:cornerRadius="@dimen/_50sdp"
             app:layout_constraintBottom_toBottomOf="@+id/btnOne"
             app:layout_constraintEnd_toStartOf="@+id/btnThree"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/btnOne"
             app:layout_constraintTop_toTopOf="@+id/btnOne"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <TextView
             android:id="@+id/btnThree"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:background="@drawable/rounded_corner"
+            android:foreground="?attr/selectableItemBackground"
             android:tag="3"
-            android:text="3"
+            android:text="@string/numpad_3"
+            android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             app:cornerRadius="@dimen/_50sdp"
             app:layout_constraintBottom_toBottomOf="@+id/btnOne"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/btnTwo"
             app:layout_constraintTop_toTopOf="@+id/btnOne"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <TextView
             android:id="@+id/btnFour"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:background="@drawable/rounded_corner"
+            android:foreground="?attr/selectableItemBackground"
             android:layout_marginTop="@dimen/_16sdp"
             android:tag="4"
-            android:text="4"
+            android:text="@string/numpad_4"
+            android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             app:cornerRadius="@dimen/_50sdp"
             app:layout_constraintEnd_toStartOf="@+id/btnFive"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnOne"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <TextView
             android:id="@+id/btnFive"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:tag="5"
-            android:text="5"
+            android:background="@drawable/rounded_corner"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="@string/numpad_5"
+            android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             app:cornerRadius="@dimen/_50sdp"
             app:layout_constraintBottom_toBottomOf="@+id/btnFour"
             app:layout_constraintEnd_toStartOf="@+id/btnSix"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/btnOne"
             app:layout_constraintTop_toTopOf="@+id/btnFour"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <TextView
             android:id="@+id/btnSix"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:tag="6"
-            android:text="6"
+            android:text="@string/numpad_6"
+            android:gravity="center"
+            android:background="@drawable/rounded_corner"
+            android:foreground="?attr/selectableItemBackground"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             app:cornerRadius="@dimen/_50sdp"
             app:layout_constraintBottom_toBottomOf="@+id/btnFour"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/btnFive"
             app:layout_constraintTop_toTopOf="@+id/btnFour"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        <TextView
             android:id="@+id/btnSeven"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginTop="@dimen/_16sdp"
-            android:tag="7"
-            android:text="7"
+            android:text="@string/numpad_7"
+            android:gravity="center"
+            android:background="@drawable/rounded_corner"
+            android:foreground="?attr/selectableItemBackground"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             app:cornerRadius="@dimen/_50sdp"
             app:layout_constraintEnd_toStartOf="@+id/btnEight"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnFour"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <TextView
             android:id="@+id/btnEight"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:tag="8"
-            android:text="8"
+            android:text="@string/numpad_8"
+            android:gravity="center"
+            android:background="@drawable/rounded_corner"
+            android:foreground="?attr/selectableItemBackground"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             app:cornerRadius="@dimen/_50sdp"
             app:layout_constraintBottom_toBottomOf="@+id/btnSeven"
             app:layout_constraintEnd_toStartOf="@+id/btnNine"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/btnFour"
             app:layout_constraintTop_toTopOf="@+id/btnSeven"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <TextView
             android:id="@+id/btnNine"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:tag="9"
-            android:text="9"
+            android:text="@string/numpad_9"
+            android:gravity="center"
+            android:background="@drawable/rounded_corner"
+            android:foreground="?attr/selectableItemBackground"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             app:cornerRadius="@dimen/_50sdp"
             app:layout_constraintBottom_toBottomOf="@+id/btnSeven"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/btnEight"
             app:layout_constraintTop_toTopOf="@+id/btnSeven"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <TextView
             android:id="@+id/btnZero"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginTop="@dimen/_16sdp"
             android:tag="0"
-            android:text="0"
+            android:text="@string/numpad_0"
+            android:gravity="center"
+            android:background="@drawable/rounded_corner"
+            android:foreground="?attr/selectableItemBackground"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             app:cornerRadius="@dimen/_50sdp"
             app:layout_constraintEnd_toEndOf="@+id/btnEight"
             app:layout_constraintStart_toStartOf="@+id/btnEight"
             app:layout_constraintTop_toBottomOf="@+id/btnEight"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
+
+        <TextView
+            android:id="@+id/btnStar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:tag="*"
+            android:text="@string/numpad_star"
+            android:gravity="center"
+            android:background="@drawable/rounded_corner"
+            android:foreground="?attr/selectableItemBackground"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:cornerRadius="@dimen/_50sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnZero"
+            app:layout_constraintEnd_toStartOf="@+id/btnZero"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnZero" />
+        <TextView
+            android:id="@+id/btnHash"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:tag="#"
+            android:text="@string/numpad_hashtag"
+            android:gravity="center"
+            android:background="@drawable/rounded_corner"
+            android:foreground="?attr/selectableItemBackground"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#000000"
+            app:cornerRadius="@dimen/_50sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnStar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/btnZero"
+            app:layout_constraintTop_toTopOf="@+id/btnStar"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+            />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnCall"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:src="@drawable/ic_outline_call_24"
+            app:fabCustomSize="70dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#000000"
+            app:cornerRadius="@dimen/_50sdp"
+            app:layout_constraintEnd_toEndOf="@+id/btnZero"
+            app:layout_constraintStart_toStartOf="@+id/btnZero"
+            app:layout_constraintTop_toBottomOf="@+id/btnZero"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
