@@ -22,9 +22,6 @@ private Integer getVersionCode() {
 }
 
 private String getVersionName() {
-    if (ext.buildNumber) {
-        return "${ext.majorVersion}.${ext.minorVersion}.${ext.patchVersion}.${ext.buildNumber}"
-    }
     return "${ext.majorVersion}.${ext.minorVersion}.${ext.patchVersion}"
 }
 
