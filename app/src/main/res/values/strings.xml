@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IDCaller</string>
+    <string name="app_name">Caller</string>
     <string name="contact">Contact</string>
     <string name="call">Call</string>
     <string name="message">Message</string>

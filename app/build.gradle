@@ -7,6 +7,18 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
+private Integer getVersionCode() {
+    int major = majorVersion as Integer
+    int minor = minorVersion as Integer
+    int patch = patchVersion as Integer
+
+    return major * 10000 + minor * 100 + patch
+}
+
+private String getVersionName() {
+    return "${majorVersion}.${ext.minorVersion}.${patchVersion}"
+}
+
 android {
     compileSdk 31
 
@@ -14,6 +26,8 @@ android {
         applicationId "com.dotsdev.idcaller"
         minSdk 21
         targetSdk 31
+        versionCode getVersionCode()
+        versionName getVersionName()
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -131,5 +145,4 @@ dependencies {
     implementation "com.chibatching.kotpref:initializer:$kotpref_version"
     implementation "com.chibatching.kotpref:gson-support:$kotpref_version"
     implementation "com.chibatching.kotpref:livedata-support:$kotpref_version"
-
 }

@@ -25,11 +25,10 @@ jobs:
         uses: android-actions/setup-android@v2.0.2
 
       - name: Bump version
-        uses: chkfung/android-version-actions@v1.1
-        with:
-          gradlePath: app/build.gradle
-          versionCode: ${{github.run_number}}
-          versionName: 0.${{github.run_number}}.${{github.run_id}}
+        id: bump_version
+        uses: oflynned/Android-Semantic-Release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     name: Build And Deploy APK
