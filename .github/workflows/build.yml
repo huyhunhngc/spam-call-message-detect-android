@@ -33,6 +33,8 @@ jobs:
         uses: oflynned/Android-Semantic-Release@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          build_number: ${{ github.run_number }}
 
       - uses: actions/checkout@v2
 
