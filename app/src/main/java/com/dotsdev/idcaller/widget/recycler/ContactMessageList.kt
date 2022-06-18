@@ -42,6 +42,21 @@ class ContactMessageList @JvmOverloads constructor(
         this.isArrowVisible = isArrowVisible
     }
 
+    fun setRecentList(
+        contacts: List<ContactMessageInfo>?
+    ) {
+        val data = contacts ?: return
+        groupAdapter.add(0,
+            Section().apply {
+                setFooter(
+                    RecentContactListItem(
+                        info = ListContactMessageInfo(data)
+                    )
+                )
+            }
+        )
+    }
+
     fun setInfoList(
         contacts: List<ContactMessageInfo>?
     ) {
