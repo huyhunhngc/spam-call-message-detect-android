@@ -28,7 +28,7 @@ enum class MessageType(val value: String) {
 data class MessageGroup(
     val groupId: String = "",
     val messages: MutableList<Message> = mutableListOf()
-)
+) : Serializable
 
 fun List<Message>.toMessageGroup(): List<MessageGroup> {
     val messageGroups = mutableListOf<MessageGroup>()

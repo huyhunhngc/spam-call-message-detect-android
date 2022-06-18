@@ -1,6 +1,9 @@
 package com.dotsdev.idcaller.data.model
 
-data class Conversation(val from: Contact, val messages: MutableList<Message> = mutableListOf())
+import java.io.Serializable
+
+data class Conversation(val from: Contact, val messages: MutableList<Message> = mutableListOf()) :
+    Serializable
 
 fun List<Message>.toListConversation(): List<Conversation> {
     val conversations = mutableListOf<Conversation>()

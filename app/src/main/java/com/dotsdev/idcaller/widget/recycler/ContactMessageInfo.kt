@@ -16,11 +16,11 @@ data class ContactMessageInfo(
     val type: ItemType = ItemType.CONTACT,
     val unknownNumber: Boolean = false,
     @DrawableRes val subLineStartIcon: Int? = null
-)
+) : Serializable
 
 data class ListContactMessageInfo(
     val contactMessageInfos: List<ContactMessageInfo> = listOf()
-)
+) : Serializable
 
 enum class ItemType {
     CONTACT,

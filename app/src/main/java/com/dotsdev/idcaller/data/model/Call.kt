@@ -27,7 +27,7 @@ enum class CallType(val value: String, @DrawableRes val icon: Int) {
 data class CallGroup(
     val callId: String = "",
     val calls: MutableList<Call> = mutableListOf()
-)
+) : Serializable
 
 fun Int.toCallType(): CallType {
     return when (this) {
