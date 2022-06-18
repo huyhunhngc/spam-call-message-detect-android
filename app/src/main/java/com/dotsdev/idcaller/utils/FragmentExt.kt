@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.CallLog
 import android.provider.ContactsContract
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -20,9 +19,14 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.dotsdev.idcaller.data.model.*
+import com.dotsdev.idcaller.data.model.Call
+import com.dotsdev.idcaller.data.model.Contact
+import com.dotsdev.idcaller.data.model.Message
+import com.dotsdev.idcaller.data.model.MessageType
+import com.dotsdev.idcaller.data.model.toCallType
 import com.dotsdev.idcaller.widget.dialog.LoadingDialogFragment
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 fun Fragment.showLoadingDialog() {
     val dialog = childFragmentManager.findFragmentByTag("progress")
@@ -90,7 +94,6 @@ fun Fragment.setActionBarSubTitle(title: String) {
     try {
         (requireActivity() as AppCompatActivity).supportActionBar?.subtitle = title
     } catch (e: Exception) {
-
     }
 }
 
@@ -179,7 +182,7 @@ fun Fragment.retrieveCallLog(): List<Call> {
 
         val callId =
             number.phoneNumberWithoutCountryCode() +
-                    "-${type}-" +
+                    "-$type-" +
                     "${cal.get(Calendar.DAY_OF_YEAR)}" +
                     "${cal.get(Calendar.YEAR)}"
         callList.add(
@@ -239,13 +242,17 @@ fun Fragment.retrieveMessage(uri: Uri, isInBox: Boolean): List<Message> {
 }
 
 fun Fragment.isAllowReadContacts(): Boolean {
-    return (ContextCompat.checkSelfPermission(
-        requireActivity(), Manifest.permission.READ_CONTACTS
-    ) == PackageManager.PERMISSION_GRANTED)
+    return (
+            ContextCompat.checkSelfPermission(
+                requireActivity(), Manifest.permission.READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+            )
 }
 
 fun Fragment.isAllowLocation(): Boolean {
-    return (ContextCompat.checkSelfPermission(
-        requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
-    ) == PackageManager.PERMISSION_GRANTED)
+    return (
+            ContextCompat.checkSelfPermission(
+                requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+            )
 }

@@ -14,7 +14,7 @@ import com.dotsdev.idcaller.utils.phoneNumberWithoutCountryCode
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.util.*
+import java.util.Date
 
 class SmsBroadcastReceiver : BroadcastReceiver() {
     private val smsReceiveRepository: SmsReceiveRepository by lazy { SmsReceiveRepository() }

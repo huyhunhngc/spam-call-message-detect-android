@@ -19,7 +19,6 @@ class TfidfVectorizer(
         return doubleArrayOf()
     }
 
-
     companion object {
         fun newInstance(): TfidfVectorizer {
             // TODO import dict word

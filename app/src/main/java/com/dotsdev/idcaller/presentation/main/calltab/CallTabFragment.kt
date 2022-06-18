@@ -10,7 +10,8 @@ import com.dotsdev.idcaller.databinding.FragmentCallTabBinding
 import com.dotsdev.idcaller.presentation.main.mainflow.MainFlowFragmentDirections
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CallTabFragment: BaseFragment<CallTabViewModel, FragmentCallTabBinding>(R.layout.fragment_call_tab) {
+class CallTabFragment :
+    BaseFragment<CallTabViewModel, FragmentCallTabBinding>(R.layout.fragment_call_tab) {
     override val viewModel by viewModel<CallTabViewModel>()
     override val binding by viewBindings(FragmentCallTabBinding::bind)
 
@@ -30,7 +31,6 @@ class CallTabFragment: BaseFragment<CallTabViewModel, FragmentCallTabBinding>(R.
     }
 
     private fun initObservers() {
-
     }
 
     companion object {

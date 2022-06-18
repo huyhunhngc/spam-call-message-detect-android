@@ -1,6 +1,5 @@
 package com.dotsdev.idcaller.domain.message.query
 
-import android.util.Log
 import com.dotsdev.idcaller.data.memory.contact.ContactMemory
 import com.dotsdev.idcaller.data.memory.message.MessageMemory
 import com.dotsdev.idcaller.data.model.Contact
@@ -13,7 +12,7 @@ class GetMessageLog(
     private val messageMemory: MessageMemory,
     private val contactMemory: ContactMemory
 ) {
-    fun observeMessage(): Flow<List<Message>>{
+    fun observeMessage(): Flow<List<Message>> {
         val contacts = contactMemory.get()
         return messageMemory.observe().map { messages ->
             messages.map { message ->
@@ -36,5 +35,4 @@ class GetMessageLog(
             }
         }
     }
-
 }

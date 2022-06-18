@@ -4,7 +4,7 @@ import android.provider.CallLog
 import androidx.annotation.DrawableRes
 import com.dotsdev.idcaller.R
 import java.io.Serializable
-import java.util.*
+import java.util.Date
 
 data class Call(
     val callId: String = "",

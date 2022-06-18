@@ -8,7 +8,7 @@ fun List<Message>.toListConversation(): List<Conversation> {
     this.forEach { message ->
         val contact = message.from
         if (conversations.map { it.from }.contains(contact)) {
-            conversations.find { it.from ==  contact}?.messages?.add(message)
+            conversations.find { it.from == contact }?.messages?.add(message)
         } else {
             conversations.add(Conversation(contact, mutableListOf(message)))
         }

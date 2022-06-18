@@ -1,7 +1,6 @@
 package com.dotsdev.idcaller.presentation.main.messagetab.tablayout
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.core.base.BaseFragment

@@ -4,7 +4,7 @@ import com.chibatching.kotpref.KotprefModel
 import com.chibatching.kotpref.gsonpref.gsonNullablePref
 import com.dotsdev.idcaller.data.model.User
 
-object AccountPreference: KotprefModel() {
+object AccountPreference : KotprefModel() {
     var userInfo by gsonNullablePref<User>(null)
     var firebaseToken by stringPref()
     var verificationAuthValue by nullableStringPref(null)
@@ -13,7 +13,7 @@ object AccountPreference: KotprefModel() {
     var passwordResetCode by nullableStringPref(null)
 }
 
-object CachePreference: KotprefModel() {
+object CachePreference : KotprefModel() {
     var isFirstOpenApp by booleanPref(true)
     var isHasGrantPermission by booleanPref(false)
     var isCompleteInfo by booleanPref(false)

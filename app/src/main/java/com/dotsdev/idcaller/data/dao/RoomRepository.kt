@@ -6,11 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.dotsdev.idcaller.data.converter.ContactConverter
-import com.dotsdev.idcaller.data.converter.DateConverters
+import com.dotsdev.idcaller.data.converter.DateConverter
 import com.dotsdev.idcaller.data.model.Message
 
 @Database(entities = [Message::class], version = 1)
-@TypeConverters(DateConverters::class, ContactConverter::class)
+@TypeConverters(DateConverter::class, ContactConverter::class)
 abstract class RoomRepository : RoomDatabase() {
     abstract fun spamMessageDao(): SpamMessageDao
 

@@ -1,7 +1,7 @@
 package com.dotsdev.idcaller.presentation.template
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.dotsdev.idcaller.R
 
 class NormalAppbarActivity : AppCompatActivity() {

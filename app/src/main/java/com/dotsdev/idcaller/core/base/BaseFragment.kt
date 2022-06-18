@@ -1,9 +1,7 @@
 package com.dotsdev.idcaller.core.base
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -32,7 +30,6 @@ abstract class BaseFragment<VM : BaseViewModel, VDB : ViewDataBinding>(@LayoutRe
     }
 
     open fun onError(throwable: Throwable) {
-
     }
 
     companion object {
