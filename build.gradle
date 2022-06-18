@@ -1,11 +1,6 @@
-Properties props = new Properties()
-props.load(new FileInputStream("$project.rootDir/version.properties"))
-props.each { prop ->
-    project.ext.set(prop.key, prop.value)
-}
-
 buildscript {
     ext.kotlin_version = "1.6.10"
+    apply from: 'versions.gradle'
     repositories {
         google()
         mavenCentral()

@@ -1,0 +1,8 @@
+def props = new Properties()
+file("version.properties").withInputStream { props.load(it) }
+def major = props.getProperty("majorVersion") as Integer
+def minor = props.getProperty("minorVersion") as Integer
+def patch = props.getProperty("patchVersion") as Integer
+def buildNumber = props.getProperty("buildNumber") as Integer
+ext.appVersionCode = major * 10000 + minor * 100 + patch * 10 + buildNumber
+ext.appVersionName = "${major}.${minor}.${patch}.${buildNumber}"
