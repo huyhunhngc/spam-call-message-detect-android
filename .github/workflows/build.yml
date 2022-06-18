@@ -51,11 +51,11 @@ jobs:
       - uses: gradle/gradle-build-action@v2
 
       - name: Build with Gradle
-        run: ./gradlew assembleRelease
+        run: ./gradlew assemble${{ env.BUILD_FLAVOR }}
 
       - name: Deploy APK
         uses: jmatsu/dg-upload-app-action@v0.2
         with:
           app_owner_name: huyhuynh88097
           api_token: ${{ env.DEPLOYGATE_API_TOKEN }}
-          app_file_path: app/build/outputs/apk/release/app-release-unsigned.apk
+          app_file_path: app/build/outputs/apk/debug/app-debug.apk
