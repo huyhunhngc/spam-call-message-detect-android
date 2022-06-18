@@ -69,7 +69,7 @@ dependencies {
     implementation "androidx.savedstate:savedstate-ktx:1.1.0"
 
     // Navigation
-    def nav_version = "2.3.5"
+    def nav_version = "2.4.0-alpha02"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-runtime-ktx:$nav_version"
