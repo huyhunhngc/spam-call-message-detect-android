@@ -24,16 +24,18 @@ jobs:
       - name: Setup Android SDK Tools
         uses: android-actions/setup-android@v2.0.2
 
+  build:
+    name: Build And Deploy APK
+    runs-on: ubuntu-latest
+    steps:
       - name: Bump version
         id: bump_version
         uses: oflynned/Android-Semantic-Release@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          build_number: ${{ github.run_number }}
 
-  build:
-    name: Build And Deploy APK
-    runs-on: ubuntu-latest
-    steps:
       - uses: actions/checkout@v2
 
       - name: Set up JDK 11
