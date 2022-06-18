@@ -7,12 +7,6 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
-Properties props = new Properties()
-props.load(new FileInputStream("$project.rootDir/version.properties"))
-props.each { prop ->
-    project.ext.set(prop.key, prop.value)
-}
-
 private Integer getVersionCode() {
     int major = ext.majorVersion as Integer
     int minor = ext.minorVersion as Integer
