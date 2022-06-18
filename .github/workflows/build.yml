@@ -29,6 +29,7 @@ jobs:
         with:
           gradlePath: app/build.gradle
           versionCode: ${{github.run_number}}
+          versionName: 0.${{github.run_number}}.${{github.run_id}}
 
   build:
     name: Build And Deploy APK
