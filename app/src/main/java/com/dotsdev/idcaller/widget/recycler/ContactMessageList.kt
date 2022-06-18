@@ -29,7 +29,6 @@ class ContactMessageList @JvmOverloads constructor(
         initializeViews()
     }
 
-
     private fun initializeViews() {
         this.adapter = groupAdapter
         this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -53,24 +52,26 @@ class ContactMessageList @JvmOverloads constructor(
             val needSection = kotlin.runCatching {
                 contacts[index - 1].peerName[0] != info.peerName[0]
             }.getOrDefault(true)
-            groupAdapter.add(Section().apply {
-                if (needSection && info.type == ItemType.CONTACT) {
-                    setHeader(SectionAlphabetItem(info.peerName.substring(0, 1)))
+            groupAdapter.add(
+                Section().apply {
+                    if (needSection && info.type == ItemType.CONTACT) {
+                        setHeader(SectionAlphabetItem(info.peerName.substring(0, 1)))
+                    }
+                    setFooter(
+                        ContactMessageItem(
+                            info = info
+                        ).apply {
+                            setOnItemArrowClicked { info, position ->
+                                this@ContactMessageList.info = info
+                            }
+                            setOnItemClicked { info, position ->
+                                onItemClicked?.invoke(info, position)
+                            }
+                        }
+                    )
                 }
-                setFooter(
-                    ContactMessageItem(
-                        info = info
-                    ).apply {
-                        setOnItemArrowClicked { info, position ->
-                            this@ContactMessageList.info = info
-                        }
-                        setOnItemClicked { info, position ->
-                            onItemClicked?.invoke(info, position)
-                        }
-                    })
-            })
+            )
         }
-
     }
 
     fun setOnItemArrowClicked(onItemOptionClicked: ((info: ContactMessageInfo, position: Int) -> Unit)?) {

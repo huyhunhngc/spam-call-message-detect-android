@@ -9,7 +9,11 @@ import androidx.lifecycle.asFlow
 import com.chibatching.kotpref.livedata.asLiveData
 import com.dotsdev.idcaller.data.prefsmodel.KeychainData
 import kotlinx.coroutines.flow.Flow
-import java.io.*
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 import java.security.GeneralSecurityException
 import java.security.Key
 import java.security.KeyStore
@@ -122,7 +126,6 @@ internal object Keychain {
                 }
             }
         } catch (err: GeneralSecurityException) {
-
         }
     }
 
@@ -139,7 +142,6 @@ internal object Keychain {
         return decryptBytes(key, value)
     }
 
-
     private fun extractGeneratedKey(alias: String): Key {
         val keystore = getKeystore()
         if (!keystore.containsAlias(alias)) {
@@ -153,7 +155,6 @@ internal object Keychain {
             alias
         )
     }
-
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun getKeyGenSpecBuilder(alias: String): KeyGenParameterSpec.Builder {
@@ -190,7 +191,6 @@ internal object Keychain {
                     )
                     isStrongboxAvailable!!.set(true)
                 } catch (e: GeneralSecurityException) {
-
                 }
             }
             if (null == privateKey || !isStrongboxAvailable!!.get()) {
@@ -275,7 +275,8 @@ internal object Keychain {
         var count = 0
         while (input.read(buf).let {
                 count = it; it != -1
-            }) {
+            }
+        ) {
             output.write(buf, 0, count)
         }
     }

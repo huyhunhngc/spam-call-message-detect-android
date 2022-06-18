@@ -29,7 +29,6 @@ class RecentContactList @JvmOverloads constructor(
         initializeViews()
     }
 
-
     private fun initializeViews() {
         this.adapter = groupAdapter
         this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -50,21 +49,23 @@ class RecentContactList @JvmOverloads constructor(
         infos = contacts
         groupAdapter.clear()
         contacts.mapIndexed { index, info ->
-            groupAdapter.add(Section().apply {
-                setHeader(
-                    RecentContactItem(
-                        info = info
-                    ).apply {
-                        setOnItemArrowClicked { info, position ->
-                            this@RecentContactList.info = info
+            groupAdapter.add(
+                Section().apply {
+                    setHeader(
+                        RecentContactItem(
+                            info = info
+                        ).apply {
+                            setOnItemArrowClicked { info, position ->
+                                this@RecentContactList.info = info
+                            }
+                            setOnItemClicked { info, position ->
+                                onItemClicked?.invoke(info, position)
+                            }
                         }
-                        setOnItemClicked { info, position ->
-                            onItemClicked?.invoke(info, position)
-                        }
-                    })
-            })
+                    )
+                }
+            )
         }
-
     }
 
     fun setOnItemArrowClicked(onItemOptionClicked: ((info: ContactMessageInfo, position: Int) -> Unit)?) {

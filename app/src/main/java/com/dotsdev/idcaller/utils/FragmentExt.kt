@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.CallLog
 import android.provider.ContactsContract
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -90,7 +89,6 @@ fun Fragment.setActionBarSubTitle(title: String) {
     try {
         (requireActivity() as AppCompatActivity).supportActionBar?.subtitle = title
     } catch (e: Exception) {
-
     }
 }
 
@@ -179,7 +177,7 @@ fun Fragment.retrieveCallLog(): List<Call> {
 
         val callId =
             number.phoneNumberWithoutCountryCode() +
-                    "-${type}-" +
+                    "-$type-" +
                     "${cal.get(Calendar.DAY_OF_YEAR)}" +
                     "${cal.get(Calendar.YEAR)}"
         callList.add(
@@ -239,13 +237,17 @@ fun Fragment.retrieveMessage(uri: Uri, isInBox: Boolean): List<Message> {
 }
 
 fun Fragment.isAllowReadContacts(): Boolean {
-    return (ContextCompat.checkSelfPermission(
-        requireActivity(), Manifest.permission.READ_CONTACTS
-    ) == PackageManager.PERMISSION_GRANTED)
+    return (
+            ContextCompat.checkSelfPermission(
+                requireActivity(), Manifest.permission.READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+            )
 }
 
 fun Fragment.isAllowLocation(): Boolean {
-    return (ContextCompat.checkSelfPermission(
-        requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
-    ) == PackageManager.PERMISSION_GRANTED)
+    return (
+            ContextCompat.checkSelfPermission(
+                requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+            )
 }

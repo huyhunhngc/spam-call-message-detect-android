@@ -5,8 +5,8 @@ import com.dotsdev.idcaller.presentation.main.calltab.CallTabViewModel
 import com.dotsdev.idcaller.presentation.main.contacttab.ContactTabViewModel
 import com.dotsdev.idcaller.presentation.main.initial.InitialViewModel
 import com.dotsdev.idcaller.presentation.main.mainflow.MainFlowViewModel
-import com.dotsdev.idcaller.presentation.main.messagetab.detail.MessageDetailViewModel
 import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabViewModel
+import com.dotsdev.idcaller.presentation.main.messagetab.detail.MessageDetailViewModel
 import com.dotsdev.idcaller.presentation.main.messagetab.tablayout.ImportantMessageViewModel
 import com.dotsdev.idcaller.presentation.main.messagetab.tablayout.InboxMessageViewModel
 import com.dotsdev.idcaller.presentation.main.messagetab.tablayout.SpamMessageViewModel

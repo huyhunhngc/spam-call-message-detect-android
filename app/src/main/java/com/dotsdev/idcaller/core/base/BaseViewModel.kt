@@ -43,7 +43,6 @@ abstract class BaseViewModel :
                     _error.emit(throwable)
                 }
             }
-
         }
     }
 

@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.ViewGroup
 import android.view.Window
-import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.dotsdev.idcaller.R
 
-class LoadingDialogFragment: DialogFragment() {
+class LoadingDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return super.onCreateDialog(savedInstanceState).apply {
             requestWindowFeature(Window.FEATURE_NO_TITLE)

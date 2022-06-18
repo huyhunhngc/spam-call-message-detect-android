@@ -1,7 +1,7 @@
 package com.dotsdev.idcaller.data.converter
 
 import androidx.room.TypeConverter
-import java.util.*
+import java.util.Date
 
 class DateConverters {
     @TypeConverter

@@ -30,7 +30,8 @@ class ContactMessageItem(private val info: ContactMessageInfo) :
                 }
                 this@ContactMessageItem.info.subLineStartIcon?.let {
                     organizationSubText.setCompoundDrawablesWithIntrinsicBounds(
-                        it, 0, 0, 0)
+                        it, 0, 0, 0
+                    )
                 }
             }
         }

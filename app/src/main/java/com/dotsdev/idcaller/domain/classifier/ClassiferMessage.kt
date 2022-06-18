@@ -51,7 +51,6 @@ class ClassifierMessage(
                     try {
                         network[i + 1]?.set(j, network[i]!![l] * weights[i][l][j])
                     } catch (e: NullPointerException) {
-
                     }
                 }
             }

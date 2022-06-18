@@ -19,9 +19,11 @@ open class MessageTabViewModel(
         super.onStart()
         viewModelScope.launch {
             getMessageLog.observeMessage().collectLatest { messages ->
-                listMessage.postValue(messages.toMessageGroup().map {
-                    it.toInfoData()
-                })
+                listMessage.postValue(
+                    messages.toMessageGroup().map {
+                        it.toInfoData()
+                    }
+                )
             }
         }
     }

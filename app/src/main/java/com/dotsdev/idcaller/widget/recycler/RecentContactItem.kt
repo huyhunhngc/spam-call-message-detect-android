@@ -30,7 +30,8 @@ class RecentContactItem(private val info: ContactMessageInfo) :
                 }
                 this@RecentContactItem.info.subLineStartIcon?.let {
                     organizationSubText.setCompoundDrawablesWithIntrinsicBounds(
-                        it, 0, 0, 0)
+                        it, 0, 0, 0
+                    )
                 }
             }
         }

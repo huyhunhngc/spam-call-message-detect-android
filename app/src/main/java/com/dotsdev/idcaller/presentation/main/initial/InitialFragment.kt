@@ -61,7 +61,7 @@ class InitialFragment :
                 findNavController().navigate(InitialFragmentDirections.openInitialToSpHome())
             },
             normalAction = {
-                //findNavController().navigate(InitialFragmentDirections.actionNavInitialFragmentToAccountTopDest())
+                // findNavController().navigate(InitialFragmentDirections.actionNavInitialFragmentToAccountTopDest())
             }
         )
     }

@@ -8,13 +8,15 @@ import kotlinx.coroutines.flow.asSharedFlow
 class CallMemory {
     private val stateFlow = MutableStateFlow(listOf<Call>())
 
-    fun observe(): Flow<List<Call>>{
+    fun observe(): Flow<List<Call>> {
         return stateFlow.asSharedFlow()
     }
-    fun set(info: List<Call>){
+
+    fun set(info: List<Call>) {
         stateFlow.tryEmit(info)
     }
-    fun get(): List<Call>{
+
+    fun get(): List<Call> {
         return stateFlow.value
     }
 }

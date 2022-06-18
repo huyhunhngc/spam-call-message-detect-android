@@ -1,9 +1,7 @@
 package com.dotsdev.idcaller.presentation.main.mainflow
 
-import android.provider.CallLog
 import androidx.lifecycle.MutableLiveData
 import com.dotsdev.idcaller.core.base.BaseViewModel
-import com.dotsdev.idcaller.data.local.PreferencesDataSource
 import com.dotsdev.idcaller.data.memory.contact.CallMemory
 import com.dotsdev.idcaller.data.memory.contact.ContactMemory
 import com.dotsdev.idcaller.data.memory.message.MessageMemory
@@ -25,7 +23,7 @@ class MainFlowViewModel(
         viewModelScope.launch {
             userUsecase.getUser()?.let(user::postValue)
         }
-        //TODO: mock
+        // TODO: mock
         user.postValue(User(phoneNumber = "0326708983", name = "Huy hn"))
     }
 
@@ -36,7 +34,8 @@ class MainFlowViewModel(
     fun setCallLogMemory(calls: List<Call>) {
         callMemory.set(calls)
     }
-    fun setMessageMemory(messages: List<Message>){
+
+    fun setMessageMemory(messages: List<Message>) {
         messageMemory.set(messages)
     }
 }

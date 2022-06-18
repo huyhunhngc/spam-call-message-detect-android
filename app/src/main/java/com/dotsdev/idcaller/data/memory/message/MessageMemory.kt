@@ -21,7 +21,8 @@ class MessageMemory {
         memoryMessage.addAll(
             info.map {
                 it.copy(messageId = "${it.iat.time}-${it.from.phoneNumber.phoneNumberWithoutCountryCode()}")
-            })
+            }
+        )
         stateFlow.tryEmit(info)
     }
 

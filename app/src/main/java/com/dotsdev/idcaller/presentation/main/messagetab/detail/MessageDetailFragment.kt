@@ -13,7 +13,6 @@ class MessageDetailFragment :
     override val viewModel by viewModel<MessageDetailViewModel>()
     override val binding by viewBindings(FragmentMessageDetailBinding::bind)
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()

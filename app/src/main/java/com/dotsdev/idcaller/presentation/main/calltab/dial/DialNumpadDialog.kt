@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.databinding.DialogDialpadBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class DialNumpadDialog: BottomSheetDialogFragment() {
+class DialNumpadDialog : BottomSheetDialogFragment() {
     private lateinit var binding: DialogDialpadBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +34,5 @@ class DialNumpadDialog: BottomSheetDialogFragment() {
     }
 
     private fun initObservers() {
-
     }
 }
