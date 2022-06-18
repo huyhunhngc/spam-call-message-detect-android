@@ -2,14 +2,17 @@ name: CICD
 
 on:
   push:
+    branches:
+      - master
+      - 'feature/*'
   pull_request:
 env:
   BUILD_FLAVOR: "Debug"
+  DEPLOYGATE_API_TOKEN: "3c096495-8613-444c-8b44-7e8131d06bf4"
 jobs:
-  test:
-    name: Test
+  debug:
+    name: Debug
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -17,10 +20,7 @@ jobs:
         with:
           java-version: "11"
           distribution: "adopt"
-      - uses: gradle/gradle-build-action@v2
-      - name: Build with Gradle
-        run: ./gradlew test${{ env.BUILD_FLAVOR }}
-        status: custom
+          status: custom
           fields: workflow,job,commit,repo,ref,author,took
           custom_payload: |
             {
@@ -28,18 +28,22 @@ jobs:
               icon_emoji: ':android_icon:',
               attachments: [{
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                text: `【Release Information】\n${process.env.AS_WORKFLOW} on ${{ github.ref }}\n"${{ github.event.head_commit.message }}" (${process.env.AS_COMMIT})\nby ${process.env.AS_AUTHOR}`,
               }]
             }
+        if: always()
+      - uses: gradle/gradle-build-action@v2
+      - name: Build with Gradle
+        run: ./gradlew test${{ env.BUILD_FLAVOR }}
       - name: Upload Coverage
         uses: codecov/codecov-action@v1
       - name: deploy-gate
-        uses: jmatsu/dg-upload-app-action@<version>
+        uses: jmatsu/dg-upload-app-action@v0.2
         with:
           app_owner_name: huyhuynh88097
-          api_token: ${{ secrets.DEPLOYGATE_API_TOKEN }}
+          api_token: ${{ env.DEPLOYGATE_API_TOKEN }}
           app_file_path: app/build/outputs/apk/debug/app-debug.apk
   ktlint:
+    name: KtLint Format
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -51,5 +55,27 @@ jobs:
         continue-on-error: true
       - uses: yutailang0119/action-ktlint@v3
         with:
-          report-path: build/*.xml # Support glob patterns by https://www.npmjs.com/package/@actions/glob
-        continue-on-error: false # If annotations contain error of severity, action-ktlint exit 1.
+          report-path: build/*.xml
+        continue-on-error: false
+
+  build:
+    name: Build And Deploy APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: gradle/gradle-build-action@v2
+
+      - name: Build with Gradle
+        run: ./gradlew assembleRelease
+
+      - uses: r0adkll/sign-android-release@v1
+        name: Build app APK
+        id: sign_app
+        with:
+          releaseDirectory: app/build/outputs/apk/develop/release
+
+      - name: Deploy APK
+        uses: jmatsu/dg-upload-app-action@v0.2
+        with:
+          app_owner_name: huyhuynh88097
+          api_token: ${{ env.DEPLOYGATE_API_TOKEN }}
+          app_file_path: app/build/outputs/apk/debug/app-release-unsigned.apk
