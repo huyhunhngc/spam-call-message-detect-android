@@ -2,7 +2,7 @@ package com.dotsdev.idcaller.utils
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
 
 @SuppressLint("SimpleDateFormat")
 fun Long.convertTimestampToHours(): String {

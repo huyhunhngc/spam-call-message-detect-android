@@ -14,7 +14,10 @@ import com.dotsdev.idcaller.presentation.MainActivity
 import com.dotsdev.idcaller.presentation.main.calltab.CallTabFragment
 import com.dotsdev.idcaller.presentation.main.contacttab.ContactTabFragment
 import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabFragment
-import com.dotsdev.idcaller.utils.*
+import com.dotsdev.idcaller.utils.retrieveCallLog
+import com.dotsdev.idcaller.utils.retrieveContact
+import com.dotsdev.idcaller.utils.retrieveInBox
+import com.dotsdev.idcaller.utils.retrieveSent
 import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

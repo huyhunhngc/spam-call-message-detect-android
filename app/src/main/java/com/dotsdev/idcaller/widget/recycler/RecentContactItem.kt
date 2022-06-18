@@ -8,7 +8,7 @@ import com.dotsdev.idcaller.utils.getBackgroundColor
 import com.dotsdev.idcaller.utils.getColorFromName
 import com.dotsdev.idcaller.utils.getPrimaryColor
 import com.xwray.groupie.viewbinding.BindableItem
-import java.util.*
+import java.util.Locale
 
 class RecentContactItem(private val info: ContactMessageInfo) :
     BindableItem<ItemRecentContactBinding>() {

@@ -19,9 +19,14 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.dotsdev.idcaller.data.model.*
+import com.dotsdev.idcaller.data.model.Call
+import com.dotsdev.idcaller.data.model.Contact
+import com.dotsdev.idcaller.data.model.Message
+import com.dotsdev.idcaller.data.model.MessageType
+import com.dotsdev.idcaller.data.model.toCallType
 import com.dotsdev.idcaller.widget.dialog.LoadingDialogFragment
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 fun Fragment.showLoadingDialog() {
     val dialog = childFragmentManager.findFragmentByTag("progress")
