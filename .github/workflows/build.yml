@@ -1,31 +1,11 @@
-# This is a basic workflow to help you get started with Actions
+name: CICD
 
-name: CI
-
-# Controls when the workflow will run
 on:
+  push:
   pull_request:
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 env:
   BUILD_FLAVOR: "Debug"
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: "11"
-          distribution: "adopt"
-      - uses: gradle/gradle-build-action@v2
-      - name: Build with Gradle
-        run: ./gradlew lint${{ env.BUILD_FLAVOR }}
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -40,8 +20,25 @@ jobs:
       - uses: gradle/gradle-build-action@v2
       - name: Build with Gradle
         run: ./gradlew test${{ env.BUILD_FLAVOR }}
+        status: custom
+          fields: workflow,job,commit,repo,ref,author,took
+          custom_payload: |
+            {
+              username: 'id-caller-app',
+              icon_emoji: ':android_icon:',
+              attachments: [{
+                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                text: `【Release Information】\n${process.env.AS_WORKFLOW} on ${{ github.ref }}\n"${{ github.event.head_commit.message }}" (${process.env.AS_COMMIT})\nby ${process.env.AS_AUTHOR}`,
+              }]
+            }
       - name: Upload Coverage
         uses: codecov/codecov-action@v1
+      - name: deploy-gate
+        uses: jmatsu/dg-upload-app-action@<version>
+        with:
+          app_owner_name: huyhuynh88097
+          api_token: ${{ secrets.DEPLOYGATE_API_TOKEN }}
+          app_file_path: app/build/outputs/apk/debug/app-debug.apk
   ktlint:
     runs-on: ubuntu-latest
     steps:
