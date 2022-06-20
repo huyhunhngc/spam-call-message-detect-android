@@ -5,6 +5,7 @@ import com.dotsdev.idcaller.data.memory.contact.ContactMemory
 import com.dotsdev.idcaller.data.model.Contact
 import com.dotsdev.idcaller.data.model.toCallRecentData
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 
 class GetRecentContact(
@@ -12,8 +13,7 @@ class GetRecentContact(
     private val contactMemory: ContactMemory
 ) {
     fun observeRecent(): Flow<List<Contact>> {
-        val contacts = contactMemory.get()
-        return callMemory.observe().map { calls ->
+        return callMemory.observe().combine(contactMemory.observe()) { calls, contacts ->
             calls.map { call ->
                 val contact = contacts.find { call.callerNumber == it.phoneNumber }
                 call.copy(

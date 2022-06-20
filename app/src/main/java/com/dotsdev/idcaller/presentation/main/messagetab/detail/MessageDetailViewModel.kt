@@ -4,20 +4,32 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.dotsdev.idcaller.core.base.BaseViewModel
 import com.dotsdev.idcaller.data.memory.message.MessageMemory
-import com.dotsdev.idcaller.data.model.Contact
 import com.dotsdev.idcaller.data.model.Message
+import com.dotsdev.idcaller.data.model.MessageGroup
 import kotlinx.coroutines.flow.collectLatest
 
-class MessageDetailViewModel(private val messageMemory: MessageMemory) : BaseViewModel() {
+class MessageDetailViewModel(
+    private val messageMemory: MessageMemory,
+    messageGroup: MessageGroup
+) : BaseViewModel() {
     val message = MutableLiveData<List<Message>>()
+    val memoryMessageList = messageGroup.messages
+    val contact = memoryMessageList.lastOrNull()?.from
     val isEmptyMessage = message.map {
         it.isEmpty()
     }
 
-    fun init(contact: Contact) {
+    val messageTitle = MutableLiveData("")
+
+    fun init() {
+        messageTitle.postValue(contact?.callerName?.ifEmpty {
+            contact.phoneNumber
+        })
         viewModelScope.launch {
-            messageMemory.observe(contact).collectLatest {
-                message.postValue(it)
+            contact?.let {
+                messageMemory.observe(it).collectLatest {
+                    message.postValue(it)
+                }
             }
         }
     }

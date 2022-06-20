@@ -12,11 +12,20 @@ import java.util.Locale
 
 class ContactMessageItem(private val info: ContactMessageInfo) :
     BindableItem<ItemContactOrMessageBinding>() {
+    private var onItemOptionClicked: ((info: ContactMessageInfo, position: Int) -> Unit)? =
+        null
+
+    private var onItemClicked: ((info: ContactMessageInfo, position: Int) -> Unit)? =
+        null
+
     override fun bind(viewBinding: ItemContactOrMessageBinding, position: Int) {
         viewBinding.apply {
             info = this@ContactMessageItem.info
             val hash = this@ContactMessageItem.info.peerName.getColorFromName()
             root.apply {
+                setOnClickListener {
+                    onItemClicked?.invoke(this@ContactMessageItem.info, position)
+                }
                 if (!this@ContactMessageItem.info.unknownNumber) {
                     organizationImage.setBackgroundColor(
                         hash.getBackgroundColor()
@@ -41,4 +50,12 @@ class ContactMessageItem(private val info: ContactMessageInfo) :
 
     override fun initializeViewBinding(view: View): ItemContactOrMessageBinding =
         ItemContactOrMessageBinding.bind(view)
+
+    fun setOnItemOptionClicked(onItemOptionClicked: ((info: ContactMessageInfo, position: Int) -> Unit)) {
+        this.onItemOptionClicked = onItemOptionClicked
+    }
+
+    fun setOnItemClicked(onItemClicked: ((info: ContactMessageInfo, position: Int) -> Unit)) {
+        this.onItemClicked = onItemClicked
+    }
 }

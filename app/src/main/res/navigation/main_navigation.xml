@@ -23,13 +23,6 @@
         <action
             android:id="@+id/open_dialpad"
             app:destination="@id/dial_numpad" />
-        <action
-            android:id="@+id/open_detail_message"
-            app:destination="@id/detail_message">
-            <argument
-                android:name="messageGroup"
-                app:argType="com.dotsdev.idcaller.data.model.MessageGroup" />
-        </action>
     </fragment>
 
     <dialog
@@ -37,15 +30,5 @@
         android:name="com.dotsdev.idcaller.presentation.main.calltab.dial.DialNumpadDialog"
         android:label="DialNumpad"
         tools:layout="@layout/dialog_dialpad" />
-
-    <fragment
-        android:id="@+id/detail_message"
-        android:name="com.dotsdev.idcaller.presentation.main.messagetab.detail.MessageDetailFragment"
-        android:label="MessageDetailFragment"
-        tools:layout="@layout/fragment_message_detail">
-        <argument
-            android:name="messageGroup"
-            app:argType="com.dotsdev.idcaller.data.model.MessageGroup" />
-    </fragment>
 
 </navigation>
