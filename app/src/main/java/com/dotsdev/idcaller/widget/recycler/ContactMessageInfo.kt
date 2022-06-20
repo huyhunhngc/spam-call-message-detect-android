@@ -39,7 +39,7 @@ fun Contact.toInfoData(): ContactMessageInfo {
 }
 
 fun MessageGroup.toInfoData(): ContactMessageInfo {
-    val message = this.messages.last()
+    val message = this.messages.first()
     return ContactMessageInfo(
         dataFrom = FromData.FromMessageGroup(this),
         peerName = message.contact.callerName,

@@ -1,6 +1,7 @@
 package com.dotsdev.idcaller.presentation.main.mainflow
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -14,12 +15,13 @@ import com.dotsdev.idcaller.presentation.MainActivity
 import com.dotsdev.idcaller.presentation.main.calltab.CallTabFragment
 import com.dotsdev.idcaller.presentation.main.contacttab.ContactTabFragment
 import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabFragment
-import com.dotsdev.idcaller.utils.retrieveCallLog
-import com.dotsdev.idcaller.utils.retrieveContact
-import com.dotsdev.idcaller.utils.retrieveInBox
-import com.dotsdev.idcaller.utils.retrieveSent
+import com.dotsdev.idcaller.utils.*
 import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.coroutines.EmptyCoroutineContext
 
 class MainFlowFragment :
     BaseFragment<MainFlowViewModel, FragmentMainFlowBinding>(R.layout.fragment_main_flow),
@@ -33,12 +35,13 @@ class MainFlowFragment :
     private val messageTab = MessageTabFragment.newInstance()
     private val callTab = CallTabFragment.newInstance()
 
+    private var fetchFirstFlag: Boolean = true
+
     private fun mainActivity(): MainActivity? = activity as? MainActivity
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        observer()
     }
 
     private fun initViews() {
@@ -53,19 +56,10 @@ class MainFlowFragment :
                 }
             }
             setupDrawer()
+            navView.selectedItemId = PageTabType.NAV_CALL.menuId
+            onCheckFragmentContain(PageTabType.NAV_CALL.menuId)
             navView.setOnItemSelectedListener { item ->
                 return@setOnItemSelectedListener onCheckFragmentContain(item.itemId)
-            }
-
-            navView.selectedItemId
-        }
-    }
-
-    private fun observer() {
-        with(viewModel) {
-            currentTab.observe(viewLifecycleOwner) {
-                binding.navView.selectedItemId = it.menuId
-                onCheckFragmentContain(it.menuId)
             }
         }
     }
@@ -81,9 +75,17 @@ class MainFlowFragment :
 
     override fun onStart() {
         super.onStart()
-        retrieveContact().let(viewModel::setContactMemory)
-        retrieveCallLog().let(viewModel::setCallLogMemory)
-        (retrieveInBox() + retrieveSent()).let(viewModel::setMessageMemory)
+        retrieveData()
+    }
+
+    private fun retrieveData() {
+        CoroutineScope(EmptyCoroutineContext).launch(Dispatchers.IO) {
+            viewModel.loading {
+                retrieveContact().let(viewModel::setContactMemory)
+                retrieveCallLog().let(viewModel::setCallLogMemory)
+                (retrieveInBox() + retrieveSent()).let(viewModel::setMessageMemory)
+            }
+        }
     }
 
     private fun FragmentMainFlowBinding.setupDrawer() {
@@ -113,6 +115,7 @@ class MainFlowFragment :
     private fun loadFragment(fragment: Fragment): Boolean {
         return when {
             fragment == mainActivity()?.activeFragment -> {
+                fragment.backToRootFragment()
                 false
             }
             childFragmentManager.findFragmentByTag(fragment.javaClass.simpleName) != null -> {

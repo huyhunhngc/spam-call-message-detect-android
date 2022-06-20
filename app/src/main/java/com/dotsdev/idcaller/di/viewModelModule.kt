@@ -1,10 +1,13 @@
 package com.dotsdev.idcaller.di
 
 import com.dotsdev.idcaller.presentation.MainViewModel
+import com.dotsdev.idcaller.presentation.main.calltab.CallListViewModel
 import com.dotsdev.idcaller.presentation.main.calltab.CallTabViewModel
+import com.dotsdev.idcaller.presentation.main.contacttab.ContactListViewModel
 import com.dotsdev.idcaller.presentation.main.contacttab.ContactTabViewModel
 import com.dotsdev.idcaller.presentation.main.initial.InitialViewModel
 import com.dotsdev.idcaller.presentation.main.mainflow.MainFlowViewModel
+import com.dotsdev.idcaller.presentation.main.messagetab.MessageListViewModel
 import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabViewModel
 import com.dotsdev.idcaller.presentation.main.messagetab.detail.MessageDetailViewModel
 import com.dotsdev.idcaller.presentation.main.messagetab.tablayout.ImportantMessageViewModel
@@ -14,13 +17,16 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { CallTabViewModel(get(), get()) }
+    viewModel { CallTabViewModel() }
+    viewModel { CallListViewModel(get(), get()) }
     viewModel { MainFlowViewModel(get(), get(), get(), get()) }
     viewModel { MainViewModel() }
-    viewModel { MessageTabViewModel(get()) }
-    viewModel { ContactTabViewModel(get()) }
+    viewModel { MessageTabViewModel() }
+    viewModel { MessageListViewModel(get()) }
+    viewModel { ContactTabViewModel() }
+    viewModel { ContactListViewModel(get()) }
     viewModel { InitialViewModel(get()) }
-    viewModel { MessageDetailViewModel(get()) }
+    viewModel { data -> MessageDetailViewModel(get(), data.get()) }
     viewModel { SpamMessageViewModel(get()) }
     viewModel { InboxMessageViewModel(get()) }
     viewModel { ImportantMessageViewModel(get()) }

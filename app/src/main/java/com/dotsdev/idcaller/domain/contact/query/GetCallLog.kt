@@ -1,10 +1,12 @@
 package com.dotsdev.idcaller.domain.contact.query
 
+import android.util.Log
 import com.dotsdev.idcaller.data.memory.contact.CallMemory
 import com.dotsdev.idcaller.data.memory.contact.ContactMemory
 import com.dotsdev.idcaller.data.model.Call
 import com.dotsdev.idcaller.data.model.Contact
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 
 class GetCallLog(
@@ -12,8 +14,7 @@ class GetCallLog(
     private val contactMemory: ContactMemory
 ) {
     fun observeCall(): Flow<List<Call>> {
-        val contacts = contactMemory.get()
-        return callMemory.observe().map { calls ->
+        return callMemory.observe().combine(contactMemory.observe()) { calls, contacts ->
             calls.map { call ->
                 val contact = contacts.find { call.callerNumber == it.phoneNumber }
                 call.copy(

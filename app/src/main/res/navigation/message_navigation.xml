@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/message_navigation"
+    app:startDestination="@id/message_list">
+    <fragment
+        android:id="@+id/message_list"
+        android:name="com.dotsdev.idcaller.presentation.main.messagetab.MessageListFragment"
+        android:label="message"
+        tools:layout="@layout/fragment_message_list">
+        <action
+            android:id="@+id/open_detail_message"
+            app:destination="@id/nav_detail_message">
+            <argument
+                android:name="navigationGraphInfo"
+                app:argType="com.dotsdev.idcaller.data.model.NavigationGraphInfo" />
+        </action>
+    </fragment>
+
+    <activity
+        android:id="@+id/nav_detail_message"
+        android:name="com.dotsdev.idcaller.presentation.template.NormalAppbarActivity"
+        tools:layout="@layout/activity_common">
+        <argument
+            android:name="navigationGraphInfo"
+            app:argType="com.dotsdev.idcaller.data.model.NavigationGraphInfo" />
+    </activity>
+
+</navigation>

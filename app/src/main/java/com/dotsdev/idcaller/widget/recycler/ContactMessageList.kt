@@ -23,7 +23,7 @@ class ContactMessageList @JvmOverloads constructor(
     private var onItemClicked: ((key: ContactMessageInfo, position: Int) -> Unit)? =
         null
     private lateinit var info: ContactMessageInfo
-    private lateinit var infos: List<ContactMessageInfo>
+    private var infos: List<ContactMessageInfo> = listOf()
 
     init {
         initializeViews()
@@ -61,9 +61,7 @@ class ContactMessageList @JvmOverloads constructor(
         contacts: List<ContactMessageInfo>?
     ) {
         contacts ?: return
-        infos = contacts
-        groupAdapter.clear()
-        contacts.mapIndexed { index, info ->
+        ((infos + contacts).distinct() - infos.toSet()).mapIndexed { index, info ->
             val needSection = kotlin.runCatching {
                 contacts[index - 1].peerName[0] != info.peerName[0]
             }.getOrDefault(true)
@@ -78,6 +76,7 @@ class ContactMessageList @JvmOverloads constructor(
                         ).apply {
                             setOnItemArrowClicked { info, position ->
                                 this@ContactMessageList.info = info
+
                             }
                             setOnItemClicked { info, position ->
                                 onItemClicked?.invoke(info, position)
@@ -87,6 +86,7 @@ class ContactMessageList @JvmOverloads constructor(
                 }
             )
         }
+        infos = contacts
     }
 
     fun setOnItemArrowClicked(onItemOptionClicked: ((info: ContactMessageInfo, position: Int) -> Unit)?) {

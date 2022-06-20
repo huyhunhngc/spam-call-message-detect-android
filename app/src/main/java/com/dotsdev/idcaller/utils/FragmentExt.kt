@@ -24,6 +24,7 @@ import com.dotsdev.idcaller.data.model.Contact
 import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.data.model.MessageType
 import com.dotsdev.idcaller.data.model.toCallType
+import com.dotsdev.idcaller.presentation.main.mainflow.IBottomNavigation
 import com.dotsdev.idcaller.widget.dialog.LoadingDialogFragment
 import java.util.Calendar
 import java.util.Date
@@ -255,4 +256,20 @@ fun Fragment.isAllowLocation(): Boolean {
                 requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
             )
+}
+
+fun Fragment.backToRootFragment() {
+    when (this) {
+        is IBottomNavigation -> {
+            this.backToRoot()
+        }
+    }
+}
+
+fun Fragment.changeTabFragment() {
+    when (this) {
+        is IBottomNavigation -> {
+            this.onChangeTab()
+        }
+    }
 }

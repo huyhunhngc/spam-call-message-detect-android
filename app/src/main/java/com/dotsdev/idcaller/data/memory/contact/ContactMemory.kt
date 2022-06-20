@@ -1,5 +1,6 @@
 package com.dotsdev.idcaller.data.memory.contact
 
+import android.util.Log
 import com.dotsdev.idcaller.data.model.Contact
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,6 +14,7 @@ class ContactMemory {
     }
 
     fun set(info: List<Contact>) {
+        Log.d("///", "set: $info")
         stateFlow.tryEmit(info)
     }
 
