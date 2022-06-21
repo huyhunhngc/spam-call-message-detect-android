@@ -3,6 +3,7 @@ package com.dotsdev.idcaller.di
 import com.dotsdev.idcaller.presentation.MainViewModel
 import com.dotsdev.idcaller.presentation.main.calltab.CallListViewModel
 import com.dotsdev.idcaller.presentation.main.calltab.CallTabViewModel
+import com.dotsdev.idcaller.presentation.main.calltab.dial.DialNumpadViewModel
 import com.dotsdev.idcaller.presentation.main.contacttab.ContactListViewModel
 import com.dotsdev.idcaller.presentation.main.contacttab.ContactTabViewModel
 import com.dotsdev.idcaller.presentation.main.initial.InitialViewModel
@@ -30,4 +31,5 @@ val viewModelModule = module {
     viewModel { SpamMessageViewModel(get()) }
     viewModel { InboxMessageViewModel(get()) }
     viewModel { ImportantMessageViewModel(get()) }
+    viewModel { DialNumpadViewModel() }
 }
