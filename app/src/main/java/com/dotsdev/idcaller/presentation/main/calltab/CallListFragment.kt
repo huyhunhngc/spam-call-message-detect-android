@@ -7,7 +7,6 @@ import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.core.base.BaseFragment
 import com.dotsdev.idcaller.core.base.viewBindings
 import com.dotsdev.idcaller.databinding.FragmentCallListBinding
-import com.dotsdev.idcaller.presentation.main.mainflow.MainFlowFragmentDirections
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CallListFragment :
@@ -25,7 +24,7 @@ class CallListFragment :
         binding.viewModel = viewModel
         with(binding) {
             fab.setOnClickListener {
-                findNavController().navigate(MainFlowFragmentDirections.openDialpad())
+                findNavController().navigate(CallListFragmentDirections.openDialpad())
             }
         }
     }
