@@ -26,10 +26,10 @@ class ContactMessageItem(private val info: ContactMessageInfo) :
                 setOnClickListener {
                     onItemClicked?.invoke(this@ContactMessageItem.info, position)
                 }
+                organizationImage.setBackgroundColor(
+                    hash.getBackgroundColor()
+                )
                 if (!this@ContactMessageItem.info.unknownNumber) {
-                    organizationImage.setBackgroundColor(
-                        hash.getBackgroundColor()
-                    )
                     avatarText.apply {
                         text = this@ContactMessageItem.info.peerName.substring(0, 1)
                             .uppercase(Locale.getDefault())

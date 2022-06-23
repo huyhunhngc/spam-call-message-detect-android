@@ -6,6 +6,7 @@ import com.dotsdev.idcaller.data.model.Contact
 import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.utils.phoneNumberWithoutCountryCode
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 
 class GetMessageLog(
@@ -13,8 +14,7 @@ class GetMessageLog(
     private val contactMemory: ContactMemory
 ) {
     fun observeMessage(): Flow<List<Message>> {
-        val contacts = contactMemory.get()
-        return messageMemory.observe().map { messages ->
+        return messageMemory.observe().combine(contactMemory.observe()) { messages, contacts ->
             messages.map { message ->
                 val number = kotlin.runCatching {
                     message.messageNumber.phoneNumberWithoutCountryCode()

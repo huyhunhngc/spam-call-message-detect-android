@@ -221,14 +221,14 @@ fun Fragment.retrieveMessage(uri: Uri, isInBox: Boolean): List<Message> {
     cursor.moveToFirst()
     val messageList = mutableListOf<Message>()
     while (!cursor.isAfterLast) {
-        val address = cursor.getString(2)
+        val address = cursor.getString(2).phoneNumberWithoutCountryCode()
         val date = cursor.getString(4)
         val dateSent = cursor.getString(5)
         val body = cursor.getString(12)
         messageList.add(
             Message(
                 iat = Date(date.toLong()),
-                from = Contact(address),
+                from = Contact(phoneNumber = address),
                 type = MessageType.SMS,
                 content = body,
                 messageName = address,
