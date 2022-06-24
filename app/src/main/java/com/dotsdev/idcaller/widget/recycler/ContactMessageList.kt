@@ -24,6 +24,7 @@ class ContactMessageList @JvmOverloads constructor(
         null
     private lateinit var info: ContactMessageInfo
     private var infos: List<ContactMessageInfo> = listOf()
+    private var recentInfos: List<ContactMessageInfo> = listOf()
 
     init {
         initializeViews()
@@ -46,6 +47,7 @@ class ContactMessageList @JvmOverloads constructor(
         contacts: List<ContactMessageInfo>?
     ) {
         val data = contacts ?: return
+        recentInfos = data
         groupAdapter.add(0,
             Section().apply {
                 setFooter(
@@ -61,7 +63,8 @@ class ContactMessageList @JvmOverloads constructor(
         contacts: List<ContactMessageInfo>?
     ) {
         contacts ?: return
-        ((infos + contacts).distinct() - infos.toSet()).mapIndexed { index, info ->
+        groupAdapter.clear()
+        contacts.mapIndexed { index, info ->
             val needSection = kotlin.runCatching {
                 contacts[index - 1].peerName[0] != info.peerName[0]
             }.getOrDefault(true)

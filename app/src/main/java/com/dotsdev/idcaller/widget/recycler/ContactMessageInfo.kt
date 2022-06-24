@@ -5,6 +5,7 @@ import com.dotsdev.idcaller.data.model.CallGroup
 import com.dotsdev.idcaller.data.model.Contact
 import com.dotsdev.idcaller.data.model.MessageGroup
 import com.dotsdev.idcaller.utils.convertTimestampToHours
+import com.dotsdev.idcaller.utils.isPhoneNumber
 import java.io.Serializable
 
 data class ContactMessageInfo(
@@ -45,7 +46,8 @@ fun MessageGroup.toInfoData(): ContactMessageInfo {
         peerName = message.contact.callerName,
         primaryLine = message.contact.callerName,
         subLine = message.content,
-        type = ItemType.MESSAGE
+        type = ItemType.MESSAGE,
+        unknownNumber = message.contact.callerName == message.messageNumber
     )
 }
 

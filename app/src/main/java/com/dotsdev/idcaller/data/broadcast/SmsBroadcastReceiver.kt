@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Build
 import android.provider.Telephony.Sms.Intents.SMS_RECEIVED_ACTION
 import android.telephony.SmsMessage
+import android.util.Log
 import com.dotsdev.idcaller.data.memory.message.MessageMemory
 import com.dotsdev.idcaller.data.model.Contact
 import com.dotsdev.idcaller.data.model.Message
@@ -19,6 +20,7 @@ import java.util.Date
 class SmsBroadcastReceiver : BroadcastReceiver() {
     private val smsReceiveRepository: SmsReceiveRepository by lazy { SmsReceiveRepository() }
     override fun onReceive(context: Context?, intent: Intent?) {
+        Log.d("$%^", "onReceive:")
         smsReceiveRepository.onReceive(context, intent)
     }
 }
@@ -31,6 +33,7 @@ class SmsReceiveRepository : KoinComponent {
         val intentExtras = intent?.extras
         if (intentExtras != null) {
             val sms = (intentExtras[SMS_BUNDLE] as Array<*>?)
+            Log.d("$%^", "onReceive: $sms")
             sms?.indices?.mapNotNull {
                 val smsMessage = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     SmsMessage.createFromPdu(sms[it] as ByteArray, SMS_RECEIVED_ACTION)

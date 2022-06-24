@@ -47,11 +47,13 @@
             android:textSize="24sp"
             android:maxLines="1"
             android:gravity="center"
+            android:visibility="gone"
+            android:src="@drawable/ic_baseline_business"
             app:layout_constraintStart_toStartOf="@+id/organization_image"
             app:layout_constraintEnd_toEndOf="@+id/organization_image"
             app:layout_constraintBottom_toBottomOf="@+id/organization_image"
             app:layout_constraintTop_toTopOf="@+id/organization_image"
-            />
+            tools:text="A" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/organization_text"

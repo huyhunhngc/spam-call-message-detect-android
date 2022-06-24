@@ -2,6 +2,12 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="info"
+            type="com.dotsdev.idcaller.data.model.Message" />
+        <import type="com.dotsdev.idcaller.utils.DateTimeExtKt"/>
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -11,9 +17,10 @@
             android:id="@+id/content_message_peer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/message_peer_background"
+            android:background="@{info.isSpam ? @drawable/message_block_bg : @drawable/message_peer_background}"
             android:maxWidth="@dimen/_200sdp"
             android:padding="@dimen/_8sdp"
+            android:text="@{info.content}"
             tools:text="@android:string/httpErrorBadUrl"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +29,10 @@
             android:id="@+id/datetime_message_peer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="4dp"
+            android:textSize="11sp"
+            android:text="@{DateTimeExtKt.convertTimestampToHours(info.iat.time)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/content_message_peer"
             tools:text="10:20 AM" />

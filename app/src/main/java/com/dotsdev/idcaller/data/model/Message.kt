@@ -15,7 +15,7 @@ data class Message(
     @ColumnInfo(name = "iat") val iat: Date,
     @ColumnInfo(name = "messageName") val messageName: String,
     @ColumnInfo(name = "messageNumber") val messageNumber: String,
-    @ColumnInfo(name = "isBlock") var isBlock: Boolean = false,
+    @ColumnInfo(name = "isSpam") var isSpam: Boolean = false,
     @ColumnInfo(name = "contact") val contact: Contact = Contact(),
     @ColumnInfo(name = "sentByMe") var sentByMe: Boolean = false
 ) : Serializable

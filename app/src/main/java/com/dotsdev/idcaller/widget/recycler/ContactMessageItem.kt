@@ -1,5 +1,6 @@
 package com.dotsdev.idcaller.widget.recycler
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.core.view.isVisible
 import com.dotsdev.idcaller.R
@@ -7,8 +8,9 @@ import com.dotsdev.idcaller.databinding.ItemContactOrMessageBinding
 import com.dotsdev.idcaller.utils.getBackgroundColor
 import com.dotsdev.idcaller.utils.getColorFromName
 import com.dotsdev.idcaller.utils.getPrimaryColor
+import com.dotsdev.idcaller.utils.isPhoneNumber
 import com.xwray.groupie.viewbinding.BindableItem
-import java.util.Locale
+import java.util.*
 
 class ContactMessageItem(private val info: ContactMessageInfo) :
     BindableItem<ItemContactOrMessageBinding>() {
@@ -18,6 +20,7 @@ class ContactMessageItem(private val info: ContactMessageInfo) :
     private var onItemClicked: ((info: ContactMessageInfo, position: Int) -> Unit)? =
         null
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun bind(viewBinding: ItemContactOrMessageBinding, position: Int) {
         viewBinding.apply {
             info = this@ContactMessageItem.info
@@ -35,6 +38,27 @@ class ContactMessageItem(private val info: ContactMessageInfo) :
                             .uppercase(Locale.getDefault())
                         setTextColor(hash.getPrimaryColor())
                         isVisible = this@ContactMessageItem.info.peerPhotoUrl.isBlank()
+                    }
+                    avatarIcon.isVisible = false
+                } else {
+                    avatarText.isVisible = false
+                    avatarIcon.isVisible = true
+                    avatarIcon.setColorFilter(hash.getPrimaryColor())
+                    val isOrganization = this@ContactMessageItem.info.peerName.isPhoneNumber().not()
+                    if (isOrganization) {
+                        avatarIcon.setImageDrawable(
+                            resources.getDrawable(
+                                R.drawable.ic_baseline_business,
+                                null
+                            )
+                        )
+                    } else {
+                        avatarIcon.setImageDrawable(
+                            resources.getDrawable(
+                                R.drawable.ic_baseline_perm_identity,
+                                null
+                            )
+                        )
                     }
                 }
                 this@ContactMessageItem.info.subLineStartIcon?.let {

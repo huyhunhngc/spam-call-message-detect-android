@@ -1,8 +1,10 @@
 package com.dotsdev.idcaller.utils
 
 import android.os.Build
+import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.RequiresApi
+import androidx.databinding.BindingAdapter
 import com.dotsdev.idcaller.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -25,4 +27,9 @@ private fun BottomNavigationView.setBadgeCountOfNotificationButton(
             isVisible = true
         }
     }
+}
+
+@BindingAdapter("visible_or_gone")
+fun View.setVisibleOrGone(isVisible: Boolean?) {
+    visibility = if (isVisible == true) View.VISIBLE else View.GONE
 }
