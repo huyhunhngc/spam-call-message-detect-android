@@ -1,5 +1,6 @@
 package com.dotsdev.idcaller.utils
 
+import android.util.Patterns
 import java.util.regex.Pattern
 
 fun String.phoneNumberWithoutCountryCode(): String {
@@ -11,4 +12,8 @@ fun String.phoneNumberWithoutCountryCode(): String {
 
 fun String.formatPhoneNUmber(): String {
     return this.replace(Regex("[.*?\\-]"), "").filterNot { it.isWhitespace() }
+}
+
+fun String.isPhoneNumber(): Boolean {
+    return Patterns.PHONE.matcher(this).matches()
 }

@@ -25,11 +25,22 @@
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="cornerSize">50%</item>
     </style>
+
     <style name="BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+
     <style name="ModalBottomSheetDialog" parent="Widget.Design.BottomSheet.Modal">
 
+    </style>
+
+    <style name="TextInputLayout.EditText.NormalBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">10dp</item>
+        <item name="boxCornerRadiusBottomStart">10dp</item>
+        <item name="boxCornerRadiusTopEnd">10dp</item>
+        <item name="boxCornerRadiusTopStart">10dp</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
     </style>
 </resources>

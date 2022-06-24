@@ -1,11 +1,13 @@
 package com.dotsdev.idcaller.presentation.main.messagetab.detail
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.dotsdev.idcaller.core.base.BaseViewModel
 import com.dotsdev.idcaller.data.memory.message.MessageMemory
 import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.data.model.MessageGroup
+import com.dotsdev.idcaller.utils.isPhoneNumber
 import kotlinx.coroutines.flow.collectLatest
 
 class MessageDetailViewModel(
@@ -18,13 +20,13 @@ class MessageDetailViewModel(
     val isEmptyMessage = message.map {
         it.isEmpty()
     }
+    val isSupportReply = memoryMessageList.first().contact.phoneNumber.isPhoneNumber()
 
     val messageTitle = MutableLiveData("")
 
     fun init() {
-        messageTitle.postValue(contact?.callerName?.ifEmpty {
-            contact.phoneNumber
-        })
+        Log.d("!@#", "init: ${memoryMessageList.first().contact.phoneNumber}")
+        messageTitle.postValue(memoryMessageList.first().contact.callerName)
         viewModelScope.launch {
             contact?.let {
                 messageMemory.observe(it).collectLatest {

@@ -2,13 +2,17 @@ package com.dotsdev.idcaller.utils
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.provider.CallLog
 import android.provider.ContactsContract
+import android.telephony.SmsManager
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -19,15 +23,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.dotsdev.idcaller.data.model.Call
-import com.dotsdev.idcaller.data.model.Contact
-import com.dotsdev.idcaller.data.model.Message
-import com.dotsdev.idcaller.data.model.MessageType
-import com.dotsdev.idcaller.data.model.toCallType
+import com.dotsdev.idcaller.data.model.*
 import com.dotsdev.idcaller.presentation.main.mainflow.IBottomNavigation
+import com.dotsdev.idcaller.presentation.template.NormalAppbarActivity
 import com.dotsdev.idcaller.widget.dialog.LoadingDialogFragment
-import java.util.Calendar
-import java.util.Date
+import java.util.*
 
 fun Fragment.showLoadingDialog() {
     val dialog = childFragmentManager.findFragmentByTag("progress")
@@ -151,6 +151,18 @@ fun Fragment.retrieveContact(): List<Contact> {
     return contactList
 }
 
+fun Fragment.sendTextMessage(address: String, content: String) {
+    val intent = Intent(activity?.applicationContext, NormalAppbarActivity::class.java)
+    val pi = PendingIntent.getActivity(activity?.applicationContext, 0, intent, 0)
+
+    val sms = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        context?.getSystemService(SmsManager::class.java)
+    } else {
+        SmsManager.getDefault()
+    }
+    sms?.sendTextMessage(address, null, content, pi, null)
+}
+
 @SuppressLint("Range")
 fun Fragment.retrieveCallLog(): List<Call> {
     val cursorPhone = activity?.contentResolver?.query(
@@ -163,38 +175,40 @@ fun Fragment.retrieveCallLog(): List<Call> {
     cursorPhone.moveToFirst()
     val callList = mutableListOf<Call>()
     while (!cursorPhone.isAfterLast) {
-        val number = cursorPhone.getString(
-            cursorPhone.getColumnIndex(CallLog.Calls.NUMBER)
-        )
-        val type = cursorPhone.getString(
-            cursorPhone.getColumnIndex(CallLog.Calls.TYPE)
-        )
-        val date = cursorPhone.getString(
-            cursorPhone.getColumnIndex(CallLog.Calls.DATE)
-        )
-        val duration = cursorPhone.getString(
-            cursorPhone.getColumnIndex(CallLog.Calls.DURATION)
-        )
-
-        val cal = Calendar.getInstance()
-
-        val dateFromIatMils = Date(date.toLong())
-        cal.time = dateFromIatMils
-
-        val callId =
-            number.phoneNumberWithoutCountryCode() +
-                    "-$type-" +
-                    "${cal.get(Calendar.DAY_OF_YEAR)}" +
-                    "${cal.get(Calendar.YEAR)}"
-        callList.add(
-            Call(
-                callId = callId,
-                callerNumber = number,
-                duration = duration,
-                callType = type.toInt().toCallType(),
-                iat = dateFromIatMils
+        kotlin.runCatching {
+            val number = cursorPhone.getString(
+                cursorPhone.getColumnIndex(CallLog.Calls.NUMBER)
             )
-        )
+            val type = cursorPhone.getString(
+                cursorPhone.getColumnIndex(CallLog.Calls.TYPE)
+            )
+            val date = cursorPhone.getString(
+                cursorPhone.getColumnIndex(CallLog.Calls.DATE)
+            )
+            val duration = cursorPhone.getString(
+                cursorPhone.getColumnIndex(CallLog.Calls.DURATION)
+            )
+
+            val cal = Calendar.getInstance()
+
+            val dateFromIatMils = Date(date.toLong())
+            cal.time = dateFromIatMils
+
+            val callId =
+                number.phoneNumberWithoutCountryCode() +
+                        "-$type-" +
+                        "${cal.get(Calendar.DAY_OF_YEAR)}" +
+                        "${cal.get(Calendar.YEAR)}"
+            callList.add(
+                Call(
+                    callId = callId,
+                    callerNumber = number,
+                    duration = duration,
+                    callType = type.toInt().toCallType(),
+                    iat = dateFromIatMils
+                )
+            )
+        }
         cursorPhone.moveToNext()
     }
     cursorPhone.close()
@@ -240,6 +254,35 @@ fun Fragment.retrieveMessage(uri: Uri, isInBox: Boolean): List<Message> {
     }
     cursor.close()
     return messageList
+}
+
+@SuppressLint("Range")
+fun Fragment.getSIMInfo(): List<SimInfo> {
+    val simInfoList: MutableList<SimInfo> = mutableListOf()
+
+    val cursor = activity?.contentResolver?.query(
+        Uri.parse("content://telephony/siminfo"),
+        null,
+        null,
+        null,
+        null
+    ) ?: return emptyList()
+    cursor.moveToFirst()
+
+    while (!cursor.isAfterLast) {
+        with(cursor) {
+            kotlin.runCatching {
+                val id = getInt(cursor.getColumnIndex("_id"))
+                val slot = getInt(cursor.getColumnIndex("slot"))
+                val displayName = getString(cursor.getColumnIndex("display_name"))
+                val iccid = getString(cursor.getColumnIndex("icc_id"))
+                simInfoList.add(SimInfo(id, slot, displayName, iccid))
+            }
+        }
+        cursor.moveToNext()
+    }
+    cursor.moveToNext()
+    return simInfoList
 }
 
 fun Fragment.isAllowReadContacts(): Boolean {

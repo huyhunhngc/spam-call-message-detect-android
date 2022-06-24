@@ -24,6 +24,8 @@
     <string name="numpad_9"><font size="20">9</font>\t<font size="10">WXYZ</font></string>
     <string name="numpad_star"><font size="20">*</font>\t</string>
     <string name="numpad_hashtag"><font size="20">#</font>\t</string>
+    <string name="reply_not_supported">Reply is not supported by this sender</string>
+    <string name="aa">Aa</string>
 
 
 </resources>

@@ -1,14 +1,12 @@
 package com.dotsdev.idcaller.presentation.main.mainflow
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.dotsdev.idcaller.core.base.BaseViewModel
 import com.dotsdev.idcaller.data.memory.contact.CallMemory
 import com.dotsdev.idcaller.data.memory.contact.ContactMemory
 import com.dotsdev.idcaller.data.memory.message.MessageMemory
-import com.dotsdev.idcaller.data.model.Call
-import com.dotsdev.idcaller.data.model.Contact
-import com.dotsdev.idcaller.data.model.Message
-import com.dotsdev.idcaller.data.model.User
+import com.dotsdev.idcaller.data.model.*
 import com.dotsdev.idcaller.usecase.UserUsecase
 
 class MainFlowViewModel(
@@ -28,14 +26,27 @@ class MainFlowViewModel(
     }
 
     fun setContactMemory(contacts: List<Contact>) {
-        contactMemory.set(contacts)
+        viewModelScope.launch {
+            contactMemory.set(contacts)
+        }
     }
 
     fun setCallLogMemory(calls: List<Call>) {
-        callMemory.set(calls)
+        viewModelScope.launch {
+            callMemory.set(calls)
+        }
     }
 
     fun setMessageMemory(messages: List<Message>) {
-        messageMemory.set(messages)
+        viewModelScope.launch {
+            messageMemory.set(messages)
+        }
+    }
+
+    fun setSimInfo(sims: List<SimInfo>) = viewModelScope.launch {
+        val simInfo = (userUsecase.getSimInfo() ?: listOf())
+        if (sims != simInfo) {
+            userUsecase.setSimInfo(sims)
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.dotsdev.idcaller.presentation.main.calltab.dial
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.dotsdev.idcaller.core.SingleLiveEvent
@@ -9,17 +8,33 @@ import kotlinx.coroutines.delay
 
 class DialNumpadViewModel : BaseViewModel() {
     val numberField = MutableLiveData("")
-    val cursor = numberField.map {
-        it.length
+    val isVisibleNumberField = numberField.map {
+        it.isNullOrEmpty().not()
     }
+    val cursor = MutableLiveData(0)
     var deleteJob = false
-    val cursorSelect = MutableLiveData<Int>()
 
     val onClickDial = SingleLiveEvent<String>()
+    val triggerAddNumber = SingleLiveEvent<Char>()
 
-    fun addNumberValue(value: Char) {
+    fun addNumberValueTrigger(value: Char) {
+        triggerAddNumber.postValue(value)
+    }
+
+    fun addNumberValue(value: Char, position: Int) {
         val numberValue = numberField.value ?: ""
-        numberField.postValue(numberValue + value)
+        if (numberValue.isEmpty() || position == 0) {
+            numberField.postValue(numberValue + value)
+        } else {
+            val afterValue = kotlin.runCatching {
+                numberValue.substring(position, numberValue.length)
+            }.getOrDefault("")
+            val beforeValue = kotlin.runCatching {
+                numberValue.substring(0, position)
+            }.getOrDefault("")
+            numberField.postValue(beforeValue + value + afterValue)
+        }
+        //cursor.postValue(position)
     }
 
     fun onClickDelete() {

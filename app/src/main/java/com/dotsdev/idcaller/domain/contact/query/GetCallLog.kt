@@ -1,13 +1,11 @@
 package com.dotsdev.idcaller.domain.contact.query
 
-import android.util.Log
 import com.dotsdev.idcaller.data.memory.contact.CallMemory
 import com.dotsdev.idcaller.data.memory.contact.ContactMemory
 import com.dotsdev.idcaller.data.model.Call
 import com.dotsdev.idcaller.data.model.Contact
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 
 class GetCallLog(
     private val callMemory: CallMemory,
@@ -23,8 +21,6 @@ class GetCallLog(
                         callerName = call.callerNumber
                     )
                 )
-            }.also {
-                callMemory.set(it)
             }
         }
     }

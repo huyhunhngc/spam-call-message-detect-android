@@ -12,20 +12,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-
-         <EditText
+        
+        <EditText
             android:id="@+id/tvNumberField"
             android:layout_width="0dp"
-            android:singleLine="true"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:visible_or_gone="@{viewModel.isVisibleNumberField}"
             android:gravity="center"
-            android:layout_marginTop="20dp"
             android:maxLines="1"
-            android:textSize="30sp"
-            android:layout_marginStart="@dimen/_30sdp"
-            android:layout_marginEnd="@dimen/_30sdp"
+            android:singleLine="true"
+            android:background="@null"
             android:text="@={viewModel.numberField}"
+            android:textSize="30sp"
             app:layout_constraintEnd_toStartOf="@+id/btnErase"
             app:layout_constraintStart_toEndOf="@+id/btnAddContact"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,13 +33,14 @@
             android:id="@+id/btnErase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
             android:foreground="?attr/selectableItemBackground"
             android:onClick="@{() -> viewModel.onClickDelete()}"
+            android:padding="20dp"
             android:src="@drawable/ic_outline_backspace_24"
+            app:visible_or_gone="@{viewModel.isVisibleNumberField}"
             app:layout_constraintBottom_toBottomOf="@id/tvNumberField"
-            app:layout_constraintStart_toEndOf="@id/tvNumberField"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvNumberField"
             app:layout_constraintTop_toTopOf="@id/tvNumberField" />
 
         <ImageView
@@ -48,21 +48,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="20dp"
+            app:visible_or_gone="@{viewModel.isVisibleNumberField}"
             android:src="@drawable/ic_outline_person_add_24"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/tvNumberField"
             app:layout_constraintEnd_toStartOf="@id/tvNumberField"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvNumberField" />
 
         <TextView
             android:id="@+id/btnOne"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/rounded_corner"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.addNumberValue('1')}"
+            android:onClick="@{() -> viewModel.addNumberValueTrigger('1')}"
             android:tag="1"
             android:text="@string/numpad_1"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -77,12 +78,12 @@
 
         <TextView
             android:id="@+id/btnTwo"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/rounded_corner"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.addNumberValue('2')}"
+            android:onClick="@{() -> viewModel.addNumberValueTrigger('2')}"
             android:tag="2"
             android:text="@string/numpad_2"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -98,12 +99,12 @@
 
         <TextView
             android:id="@+id/btnThree"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/rounded_corner"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.addNumberValue('3')}"
+            android:onClick="@{() -> viewModel.addNumberValueTrigger('3')}"
             android:tag="3"
             android:text="@string/numpad_3"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -119,13 +120,13 @@
 
         <TextView
             android:id="@+id/btnFour"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/rounded_corner"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.addNumberValue('4')}"
+            android:onClick="@{() -> viewModel.addNumberValueTrigger('4')}"
             android:tag="4"
             android:text="@string/numpad_4"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -140,12 +141,12 @@
 
         <TextView
             android:id="@+id/btnFive"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/rounded_corner"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.addNumberValue('5')}"
+            android:onClick="@{() -> viewModel.addNumberValueTrigger('5')}"
             android:tag="5"
             android:text="@string/numpad_5"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -161,12 +162,12 @@
 
         <TextView
             android:id="@+id/btnSix"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/rounded_corner"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.addNumberValue('6')}"
+            android:onClick="@{() -> viewModel.addNumberValueTrigger('6')}"
             android:tag="6"
             android:text="@string/numpad_6"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -183,13 +184,13 @@
 
         <TextView
             android:id="@+id/btnSeven"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/rounded_corner"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.addNumberValue('7')}"
+            android:onClick="@{() -> viewModel.addNumberValueTrigger('7')}"
             android:text="@string/numpad_7"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#000000"
@@ -203,12 +204,12 @@
 
         <TextView
             android:id="@+id/btnEight"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/rounded_corner"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.addNumberValue('8')}"
+            android:onClick="@{() -> viewModel.addNumberValueTrigger('8')}"
             android:tag="8"
             android:text="@string/numpad_8"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -224,12 +225,12 @@
 
         <TextView
             android:id="@+id/btnNine"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/rounded_corner"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.addNumberValue('9')}"
+            android:onClick="@{() -> viewModel.addNumberValueTrigger('9')}"
             android:tag="9"
             android:text="@string/numpad_9"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -245,13 +246,13 @@
 
         <TextView
             android:id="@+id/btnZero"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/rounded_corner"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.addNumberValue('0')}"
+            android:onClick="@{() -> viewModel.addNumberValueTrigger('0')}"
             android:tag="0"
             android:text="@string/numpad_0"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -264,12 +265,12 @@
 
         <TextView
             android:id="@+id/btnStar"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/rounded_corner"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.addNumberValue('*')}"
+            android:onClick="@{() -> viewModel.addNumberValueTrigger('*')}"
             android:tag="*"
             android:text="@string/numpad_star"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -283,12 +284,12 @@
 
         <TextView
             android:id="@+id/btnHash"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/rounded_corner"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.addNumberValue('#')}"
+            android:onClick="@{() -> viewModel.addNumberValueTrigger('#')}"
             android:tag="#"
             android:text="@string/numpad_hashtag"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -304,19 +305,20 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnCall"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="@dimen/_16sdp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:onClick="@{()->viewModel.onClickDial()}"
             android:src="@drawable/ic_outline_call_24"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#000000"
+            android:backgroundTint="@color/colorPrimary"
             app:cornerRadius="@dimen/_50sdp"
-            app:fabCustomSize="70dp"
-            android:onClick="@{()->viewModel.onClickDial()}"
+            app:fabCustomSize="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/btnZero"
             app:layout_constraintStart_toStartOf="@+id/btnZero"
             app:layout_constraintTop_toBottomOf="@+id/btnZero"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

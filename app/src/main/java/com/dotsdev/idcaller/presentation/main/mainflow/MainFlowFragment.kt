@@ -1,7 +1,6 @@
 package com.dotsdev.idcaller.presentation.main.mainflow
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -34,8 +33,6 @@ class MainFlowFragment :
     private val contactTab = ContactTabFragment.newInstance()
     private val messageTab = MessageTabFragment.newInstance()
     private val callTab = CallTabFragment.newInstance()
-
-    private var fetchFirstFlag: Boolean = true
 
     private fun mainActivity(): MainActivity? = activity as? MainActivity
 
@@ -80,11 +77,10 @@ class MainFlowFragment :
 
     private fun retrieveData() {
         CoroutineScope(EmptyCoroutineContext).launch(Dispatchers.IO) {
-            viewModel.loading {
-                retrieveContact().let(viewModel::setContactMemory)
-                retrieveCallLog().let(viewModel::setCallLogMemory)
-                (retrieveInBox() + retrieveSent()).let(viewModel::setMessageMemory)
-            }
+            retrieveContact().let(viewModel::setContactMemory)
+            retrieveCallLog().let(viewModel::setCallLogMemory)
+            (retrieveInBox() + retrieveSent()).let(viewModel::setMessageMemory)
+            getSIMInfo().let(viewModel::setSimInfo)
         }
     }
 

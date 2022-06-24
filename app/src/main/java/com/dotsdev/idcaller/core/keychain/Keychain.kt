@@ -9,11 +9,7 @@ import androidx.lifecycle.asFlow
 import com.chibatching.kotpref.livedata.asLiveData
 import com.dotsdev.idcaller.data.prefsmodel.KeychainData
 import kotlinx.coroutines.flow.Flow
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
-import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
+import java.io.*
 import java.security.GeneralSecurityException
 import java.security.Key
 import java.security.KeyStore
@@ -27,7 +23,7 @@ import javax.crypto.spec.IvParameterSpec
 internal object Keychain {
     private const val ENCRYPTION_KEY_SIZE = 256
     private const val KEYSTORE_TYPE = "AndroidKeyStore"
-    private const val aliasPrefix = "homehub"
+    private const val aliasPrefix = "idcaller"
     private const val SECURITY_LEVEL = 1
     private const val ENCRYPTION_TRANSFORMATION =
         KeyProperties.KEY_ALGORITHM_AES + "/" + KeyProperties.BLOCK_MODE_CBC + "/" + KeyProperties.ENCRYPTION_PADDING_PKCS7
@@ -40,17 +36,8 @@ internal object Keychain {
         val key: Key = extractGeneratedKey(safeAlias)
         val encryptedValue: String = encryptString(key, value)
         when (keychainItem) {
-            KeychainWrapper.KeychainItem.ACCESS_TOKEN -> {
-                KeychainData.accessToken = encryptedValue
-            }
-            KeychainWrapper.KeychainItem.REFRESH_TOKEN -> {
-                KeychainData.refreshToken = encryptedValue
-            }
             KeychainWrapper.KeychainItem.PERSONA_ID -> {
                 KeychainData.personaId = encryptedValue
-            }
-            KeychainWrapper.KeychainItem.TMP_PASSWORD -> {
-                KeychainData.tmpPassword = encryptedValue
             }
             KeychainWrapper.KeychainItem.NEW_EMAIL -> {
                 KeychainData.newEmail = encryptedValue
@@ -64,17 +51,8 @@ internal object Keychain {
     fun getValue(keychainItem: KeychainWrapper.KeychainItem): String {
         val safeAlias = aliasPrefix + keychainItem.name
         val value = when (keychainItem) {
-            KeychainWrapper.KeychainItem.ACCESS_TOKEN -> {
-                KeychainData.accessToken
-            }
-            KeychainWrapper.KeychainItem.REFRESH_TOKEN -> {
-                KeychainData.refreshToken
-            }
             KeychainWrapper.KeychainItem.PERSONA_ID -> {
                 KeychainData.personaId
-            }
-            KeychainWrapper.KeychainItem.TMP_PASSWORD -> {
-                KeychainData.tmpPassword
             }
             KeychainWrapper.KeychainItem.NEW_EMAIL -> {
                 KeychainData.newEmail
@@ -94,24 +72,9 @@ internal object Keychain {
                 keystore.deleteEntry(safeAlias)
             }
             when (keychainItem) {
-                KeychainWrapper.KeychainItem.ACCESS_TOKEN -> {
-                    KeychainData.remove(
-                        KeychainData::accessToken
-                    )
-                }
-                KeychainWrapper.KeychainItem.REFRESH_TOKEN -> {
-                    KeychainData.remove(
-                        KeychainData::refreshToken
-                    )
-                }
                 KeychainWrapper.KeychainItem.PERSONA_ID -> {
                     KeychainData.remove(
                         KeychainData::personaId
-                    )
-                }
-                KeychainWrapper.KeychainItem.TMP_PASSWORD -> {
-                    KeychainData.remove(
-                        KeychainData::tmpPassword
                     )
                 }
                 KeychainWrapper.KeychainItem.NEW_EMAIL -> {

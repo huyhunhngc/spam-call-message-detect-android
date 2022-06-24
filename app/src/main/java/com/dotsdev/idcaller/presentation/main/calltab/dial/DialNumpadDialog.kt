@@ -60,7 +60,7 @@ class DialNumpadDialog : BottomSheetDialogFragment() {
             onClickDial.observe(this@DialNumpadDialog) {
                 if (ContextCompat.checkSelfPermission(
                         requireActivity(), Manifest.permission.CALL_PHONE
-                    ) == PackageManager.PERMISSION_GRANTED
+                    ) == PackageManager.PERMISSION_DENIED
                 ) {
                     requestPermissionLauncher.launch(
                         Manifest.permission.CALL_PHONE,
@@ -70,9 +70,11 @@ class DialNumpadDialog : BottomSheetDialogFragment() {
                     startActivity(intent)
                 }
             }
+            triggerAddNumber.observe(this@DialNumpadDialog) {
+                viewModel.addNumberValue(it, binding.tvNumberField.selectionEnd)
+            }
             cursor.observe(viewLifecycleOwner) {
-                if (it == 0) return@observe
-                binding.tvNumberField.setSelection(it - 1)
+                binding.tvNumberField.setSelection(it)
             }
         }
     }

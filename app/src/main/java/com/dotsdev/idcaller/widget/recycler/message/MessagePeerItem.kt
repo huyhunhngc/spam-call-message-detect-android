@@ -11,8 +11,7 @@ class MessagePeerItem(private val info: Message) :
     BindableItem<ItemMessagePeerBinding>() {
     override fun bind(viewBinding: ItemMessagePeerBinding, position: Int) {
         viewBinding.apply {
-            contentMessagePeer.text = this@MessagePeerItem.info.content
-            datetimeMessagePeer.text = this@MessagePeerItem.info.iat.time.convertTimestampToHours()
+            info = this@MessagePeerItem.info
         }
     }
 
