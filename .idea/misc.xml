@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/drawable/bg_detail_box.xml" value="0.1345" />
         <entry key="app/src/main/res/drawable/bg_divider_color.xml" value="0.1415" />
         <entry key="app/src/main/res/drawable/bg_translate_rounded.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/custom_call_focused.xml" value="0.136" />
         <entry key="app/src/main/res/drawable/custom_input.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/custom_input_phone_number.xml" value="0.136" />
         <entry key="app/src/main/res/drawable/custom_location_focused.xml" value="0.136" />
