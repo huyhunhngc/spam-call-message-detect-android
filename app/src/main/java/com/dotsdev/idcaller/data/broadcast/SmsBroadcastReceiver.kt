@@ -3,8 +3,6 @@ package com.dotsdev.idcaller.data.broadcast
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import android.provider.Telephony.Sms.Intents.SMS_RECEIVED_ACTION
 import android.telephony.SmsMessage
 import android.util.Log
 import com.dotsdev.idcaller.data.memory.message.MessageMemory
@@ -12,16 +10,21 @@ import com.dotsdev.idcaller.data.model.Contact
 import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.data.model.MessageType
 import com.dotsdev.idcaller.utils.phoneNumberWithoutCountryCode
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.util.Date
+import java.util.*
+import kotlin.coroutines.EmptyCoroutineContext
 
 class SmsBroadcastReceiver : BroadcastReceiver() {
     private val smsReceiveRepository: SmsReceiveRepository by lazy { SmsReceiveRepository() }
     override fun onReceive(context: Context?, intent: Intent?) {
-        Log.d("$%^", "onReceive:")
-        smsReceiveRepository.onReceive(context, intent)
+        CoroutineScope(EmptyCoroutineContext).launch(Dispatchers.IO) {
+            smsReceiveRepository.onReceive(context, intent)
+        }
     }
 }
 
@@ -32,32 +35,34 @@ class SmsReceiveRepository : KoinComponent {
     fun onReceive(context: Context?, intent: Intent?) {
         val intentExtras = intent?.extras
         if (intentExtras != null) {
-            val sms = (intentExtras[SMS_BUNDLE] as Array<*>?)
-            Log.d("$%^", "onReceive: $sms")
-            sms?.indices?.mapNotNull {
-                val smsMessage = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    SmsMessage.createFromPdu(sms[it] as ByteArray, SMS_RECEIVED_ACTION)
-                } else {
-                    SmsMessage.createFromPdu(sms[it] as ByteArray)
+            if (intent.action.equals(SMS_RECEIVED)) {
+                val sms = intentExtras[SMS_BUNDLE] as? Array<*>?
+                sms?.indices?.mapNotNull {
+                    val smsMessage =
+                        SmsMessage.createFromPdu(sms[it] as? ByteArray) ?: return@mapNotNull null
+                    val smsBody = smsMessage.messageBody.toString()
+                    val address =
+                        smsMessage.displayOriginatingAddress.toString()
+                            .phoneNumberWithoutCountryCode()
+                    val time = smsMessage.timestampMillis
+                    Message(
+                        messageId = "${time}-${address}",
+                        from = Contact(phoneNumber = address),
+                        content = smsBody,
+                        iat = Date(time),
+                        type = MessageType.SMS,
+                        messageName = "",
+                        messageNumber = address
+                    )
+                }?.let {
+                    messageMemory.add(it)
                 }
-                val smsBody = smsMessage.messageBody.toString()
-                val address =
-                    smsMessage.originatingAddress.toString().phoneNumberWithoutCountryCode()
-                val time = smsMessage.timestampMillis
-                Message(
-                    messageId = "$address$time",
-                    from = Contact(phoneNumber = address),
-                    content = smsBody,
-                    iat = Date(time),
-                    type = MessageType.SMS,
-                    messageName = "",
-                    messageNumber = ""
-                )
-            }?.let(messageMemory::add)
+            }
         }
     }
 
     companion object {
         const val SMS_BUNDLE = "pdus"
+        const val SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED"
     }
 }

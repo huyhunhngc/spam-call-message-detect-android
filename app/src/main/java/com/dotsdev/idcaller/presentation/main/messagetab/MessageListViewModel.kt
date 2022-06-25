@@ -12,11 +12,11 @@ import kotlinx.coroutines.flow.collectLatest
 open class MessageListViewModel(
     private val getMessageLog: GetMessageLog
 ) : BaseViewModel() {
-    val listMessage = MutableLiveData<List<ContactMessageInfo>>()
+    val listMessage = SingleLiveEvent<List<ContactMessageInfo>>()
     val messageClick = SingleLiveEvent<ContactMessageInfo>()
     val detailClick = SingleLiveEvent<ContactMessageInfo>()
-    override fun onStart() {
-        super.onStart()
+
+    init {
         viewModelScope.launch {
             getMessageLog.observeMessage().collectLatest { messages ->
                 listMessage.postValue(
@@ -29,7 +29,7 @@ open class MessageListViewModel(
     }
 
     val onItemClick: ((info: ContactMessageInfo, position: Int) -> Unit) = { info, _ ->
-        messageClick.postValue(info)
+
     }
     val onToDetailClick: ((info: ContactMessageInfo, position: Int) -> Unit) = { info, _ ->
         detailClick.postValue(info)

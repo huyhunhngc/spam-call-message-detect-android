@@ -25,7 +25,6 @@ class MessageDetailViewModel(
     val messageTitle = MutableLiveData("")
 
     fun init() {
-        Log.d("!@#", "init: ${memoryMessageList.first().contact.phoneNumber}")
         messageTitle.postValue(memoryMessageList.first().contact.callerName)
         viewModelScope.launch {
             contact?.let {

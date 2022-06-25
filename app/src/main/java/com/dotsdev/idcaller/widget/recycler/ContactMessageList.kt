@@ -63,31 +63,71 @@ class ContactMessageList @JvmOverloads constructor(
         contacts: List<ContactMessageInfo>?
     ) {
         contacts ?: return
-        groupAdapter.clear()
-        contacts.mapIndexed { index, info ->
-            val needSection = kotlin.runCatching {
-                contacts[index - 1].peerName[0] != info.peerName[0]
-            }.getOrDefault(true)
-            groupAdapter.add(
-                Section().apply {
-                    if (needSection && info.type == ItemType.CONTACT) {
-                        setHeader(SectionAlphabetItem(info.peerName.substring(0, 1)))
-                    }
-                    setFooter(
-                        ContactMessageItem(
-                            info = info
-                        ).apply {
-                            setOnItemArrowClicked { info, position ->
-                                this@ContactMessageList.info = info
+        if (infos.isEmpty()) {
+            groupAdapter.clear()
+            groupAdapter.addAll(
+                contacts.mapIndexed { index, info ->
+                    val needSection = kotlin.runCatching {
+                        contacts[index - 1].peerName[0] != info.peerName[0]
+                    }.getOrDefault(true)
 
-                            }
-                            setOnItemClicked { info, position ->
-                                onItemClicked?.invoke(info, position)
-                            }
+                    Section().apply {
+                        if (needSection && info.type == ItemType.CONTACT) {
+                            setHeader(SectionAlphabetItem(info.peerName.substring(0, 1)))
                         }
-                    )
+                        setFooter(
+                            ContactMessageItem(
+                                info = info
+                            ).apply {
+                                setOnItemArrowClicked { info, position ->
+                                    this@ContactMessageList.info = info
+
+                                }
+                                setOnItemClicked { info, position ->
+                                    onItemClicked?.invoke(info, position)
+                                }
+                            }
+                        )
+                    }
                 }
             )
+        } else {
+            if (infos == contacts) return
+            val needUpdate = mutableListOf<ContactMessageInfo>()
+            contacts.forEach { item ->
+                infos.find { it.peerName == item.peerName }?.let {
+                    if (it.subLine != item.subLine) {
+                        needUpdate.add(item)
+                    }
+                }
+            }
+            var removeCount = 0
+            infos.forEachIndexed { index, info ->
+                if (needUpdate.map { it.peerName }.contains(info.peerName)) {
+                    kotlin.runCatching {
+                        groupAdapter.removeGroupAtAdapterPosition(index - removeCount)
+                        removeCount += 1
+                    }
+                }
+            }
+            needUpdate.forEach { info ->
+                groupAdapter.add(0,
+                    Section().apply {
+                        setFooter(
+                            ContactMessageItem(
+                                info = info
+                            ).apply {
+                                setOnItemArrowClicked { info, position ->
+                                    this@ContactMessageList.info = info
+                                }
+                                setOnItemClicked { info, position ->
+                                    onItemClicked?.invoke(info, position)
+                                }
+                            }
+                        )
+                    }
+                )
+            }
         }
         infos = contacts
     }

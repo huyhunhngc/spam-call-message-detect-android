@@ -1,5 +1,6 @@
 package com.dotsdev.idcaller.domain.message.query
 
+import androidx.lifecycle.asFlow
 import com.dotsdev.idcaller.data.memory.contact.ContactMemory
 import com.dotsdev.idcaller.data.memory.message.MessageMemory
 import com.dotsdev.idcaller.data.model.Contact
@@ -14,7 +15,7 @@ class GetMessageLog(
     private val contactMemory: ContactMemory
 ) {
     fun observeMessage(): Flow<List<Message>> {
-        return messageMemory.observe().combine(contactMemory.observe()) { messages, contacts ->
+        return messageMemory.obs.asFlow().combine(contactMemory.observe()) { messages, contacts ->
             messages.map { message ->
                 val number = kotlin.runCatching {
                     message.messageNumber.phoneNumberWithoutCountryCode()
@@ -31,7 +32,7 @@ class GetMessageLog(
             }.sortedByDescending {
                 it.iat
             }.also {
-                messageMemory.set(it)
+                messageMemory.save(it)
             }
         }
     }

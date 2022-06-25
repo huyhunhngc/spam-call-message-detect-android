@@ -52,7 +52,7 @@ class MessageDetailList @JvmOverloads constructor(
     }
 
     private fun buildItem(index: Int, info: Message): Group {
-        return if (!info.sentByMe) {
+        return if (info.sentByMe) {
             MessageOwnerItem(
                 info = info
             ).apply {

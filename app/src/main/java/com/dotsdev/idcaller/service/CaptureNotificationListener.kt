@@ -1,4 +1,4 @@
-package com.dotsdev.idcaller.data.broadcast
+package com.dotsdev.idcaller.service
 
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification

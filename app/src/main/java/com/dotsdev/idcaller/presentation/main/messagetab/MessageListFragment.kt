@@ -12,9 +12,13 @@ import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.adapter.MessageViewPagerAdapter
 import com.dotsdev.idcaller.core.base.BaseFragment
 import com.dotsdev.idcaller.core.base.viewBindings
+import com.dotsdev.idcaller.data.model.Contact
+import com.dotsdev.idcaller.data.model.Message
+import com.dotsdev.idcaller.data.model.MessageType
 import com.dotsdev.idcaller.databinding.FragmentMessageListBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class MessageListFragment :
     BaseFragment<MessageListViewModel, FragmentMessageListBinding>(R.layout.fragment_message_list) {

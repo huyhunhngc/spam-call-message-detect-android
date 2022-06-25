@@ -21,6 +21,8 @@
             android:maxWidth="@dimen/_200sdp"
             android:padding="@dimen/_8sdp"
             android:text="@{info.content}"
+            android:textSize="14sp"
+            android:textColor="@color/black"
             tools:text="@android:string/httpErrorBadUrl"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -34,6 +34,7 @@ fun Colors.getBackgroundColor(): Int = Color.rgb(
 )
 
 fun String.getColorFromName(): Colors {
+    if (this.isEmpty()) return Colors.from(0)
     return Colors.from(
         this.toCharArray().sumOf {
             it.code
