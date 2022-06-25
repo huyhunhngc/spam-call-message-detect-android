@@ -19,6 +19,20 @@
         android:id="@+id/mainFlowFragment"
         android:name="com.dotsdev.idcaller.presentation.main.mainflow.MainFlowFragment"
         android:label="MainFlowFragment"
-        tools:layout="@layout/fragment_main_flow" />
+        tools:layout="@layout/fragment_main_flow" >
+        <action
+            android:id="@+id/open_edit_profile"
+            app:destination="@id/nav_edit_profile"/>
+    </fragment>
+
+
+    <activity
+        android:id="@+id/nav_edit_profile"
+        android:name="com.dotsdev.idcaller.presentation.template.NormalAppbarActivity"
+        tools:layout="@layout/activity_common">
+        <argument
+            android:name="navigationGraphInfo"
+            app:argType="com.dotsdev.idcaller.data.model.NavigationGraphInfo" />
+    </activity>
 
 </navigation>

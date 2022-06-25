@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -35,12 +36,6 @@
                 app:circleCrop="@{true}"
                 app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CircleImageView" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/edit_icon"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="bottom|right"
-                android:src="@drawable/ic_camera" />
         </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -65,5 +60,18 @@
             android:text="@{viewModel.user.phoneNumber}"
             app:layout_constraintStart_toStartOf="@+id/user_name_text"
             app:layout_constraintTop_toBottomOf="@+id/user_name_text" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/edit_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom|right"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/bg_corner_solid"
+            android:scaleType="center"
+            android:src="@drawable/ic_outline_mode_edit_outline_24"
+            app:layout_constraintBottom_toBottomOf="@+id/icon_image_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon_image_layout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

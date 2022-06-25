@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_history"
-        android:icon="@android:drawable/ic_menu_recent_history"
+        android:icon="@drawable/ic_outline_notifications_24"
         android:title="@string/notification" />
     <item
         android:id="@+id/action_sos"
-        android:icon="@android:drawable/ic_menu_help"
-        android:title="@string/setting"
+        android:icon="@drawable/ic_outline_settings_24"
+        android:title="@string/setting" />
+    <item
+        android:id="@+id/action_change_theme"
+        android:icon="@drawable/ic_outline_color_lens_24"
+        android:title="Dark theme"
         app:actionViewClass="androidx.appcompat.widget.SwitchCompat" />
+
 </menu>

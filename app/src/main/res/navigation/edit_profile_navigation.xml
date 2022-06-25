@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/edit_profile_navigation">
+    <fragment
+        android:id="@+id/edit_profile_fragment"
+        android:name="com.dotsdev.idcaller.presentation.main.profile.EditProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_edit_profile">
+        <action
+            android:id="@+id/open_edit_number"
+            app:destination="@id/edit_numberphone_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/edit_numberphone_fragment"
+        android:label="Add phone number"
+        android:name="com.dotsdev.idcaller.presentation.main.profile.EditNumberPhoneFragment"
+        tools:layout="@layout/fragment_edit_numberphone">
+
+    </fragment>
+</navigation>

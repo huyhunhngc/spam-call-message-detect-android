@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/icon_user">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/icon_user"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:background="@drawable/ic_camera_input"
+                android:foreground="@drawable/shape_ripple_oval"
+                android:scaleType="centerCrop"
+                app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CircleImageView" />
+
+            <EditText
+                android:id="@+id/ed_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:hint="@string/txt_first_name"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/custom_input"
+                android:paddingStart="@dimen/_12sdp" />
+
+            <EditText
+                android:id="@+id/ed_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/custom_input"
+                android:hint="@string/txt_last_name"
+                android:paddingStart="@dimen/_12sdp" />
+
+            <EditText
+                android:id="@+id/ed_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/custom_input"
+                android:hint="@string/txt_phone_number"
+                android:inputType="phone"
+                android:paddingStart="@dimen/_12sdp" />
+
+            <EditText
+                android:id="@+id/ed_second_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/custom_input"
+                android:hint="@string/txt_second_phone_number"
+                android:inputType="phone"
+                android:focusable="false"
+                android:paddingStart="@dimen/_12sdp" />
+
+            <EditText
+                android:id="@+id/ed_email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/custom_input"
+                android:hint="@string/txt_email"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/_12sdp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:textStyle="bold"
+                android:text="@string/txt_address" />
+
+            <EditText
+                android:id="@+id/ed_address"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/custom_input"
+                android:hint="@string/txt_address"
+                android:paddingStart="@dimen/_12sdp" />
+
+            <EditText
+                android:id="@+id/ed_country"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/custom_input"
+                android:hint="@string/txt_country"
+                android:paddingStart="@dimen/_12sdp" />
+        </LinearLayout>
+    </ScrollView>
+
+</layout>

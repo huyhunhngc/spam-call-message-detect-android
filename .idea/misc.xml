@@ -11,32 +11,60 @@
         <entry key="..\:/Users/huyhu/AndroidStudioProjects/IDCaller/app/src/main/res/layout/dialog_loading.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/huyhu/AndroidStudioProjects/IDCaller/app/src/main/res/layout/fragment_call_tab.xml" value="0.3541666666666667" />
         <entry key="..\:/Users/huyhu/AndroidStudioProjects/IDCaller/app/src/main/res/menu/menu_main_bottom.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable/bg_corner_solid.xml" value="0.1415" />
+        <entry key="app/src/main/res/drawable/bg_detail_box.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable/bg_divider_color.xml" value="0.1415" />
         <entry key="app/src/main/res/drawable/bg_translate_rounded.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/custom_input.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/custom_input_phone_number.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/custom_location_focused.xml" value="0.136" />
         <entry key="app/src/main/res/drawable/ic_baseline_app_blocking_24.xml" value="0.153" />
-        <entry key="app/src/main/res/drawable/ic_baseline_perm_identity.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_call_24.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/ic_baseline_call_24_focused.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/ic_baseline_inbox_24.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/ic_baseline_location_on_24_focused.xml" value="0.136" />
         <entry key="app/src/main/res/drawable/ic_baseline_phone_callback_24.xml" value="0.153" />
+        <entry key="app/src/main/res/drawable/ic_baseline_smartphone_24.xml" value="0.1415" />
+        <entry key="app/src/main/res/drawable/ic_camera.xml" value="0.1415" />
         <entry key="app/src/main/res/drawable/ic_message_add.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_outline_call_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_outline_call_24_black.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable/ic_outline_location_on_24.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable/ic_outline_message_24.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable/ic_outline_message_24_black.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable/ic_outline_mode_edit_outline_24.xml" value="0.1415" />
         <entry key="app/src/main/res/drawable/message_owner_background.xml" value="0.153" />
         <entry key="app/src/main/res/drawable/message_peer_background.xml" value="0.153" />
+        <entry key="app/src/main/res/drawable/rounded_corner.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/shape_ripple_oval.xml" value="0.1415" />
+        <entry key="app/src/main/res/layout/activity_calling.xml" value="0.29577484285457034" />
         <entry key="app/src/main/res/layout/activity_common.xml" value="0.11865942028985507" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
-        <entry key="app/src/main/res/layout/dialog_dialpad.xml" value="0.12537993920972645" />
+        <entry key="app/src/main/res/layout/dialog_dialpad.xml" value="0.3204868154158215" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_call_list.xml" value="0.15020263424518743" />
+        <entry key="app/src/main/res/layout/dialpad.xml" value="0.13632246376811594" />
+        <entry key="app/src/main/res/layout/fragment_call_list.xml" value="0.12537993920972645" />
         <entry key="app/src/main/res/layout/fragment_call_tab.xml" value="0.11865942028985507" />
-        <entry key="app/src/main/res/layout/fragment_contact_list.xml" value="0.15020263424518743" />
+        <entry key="app/src/main/res/layout/fragment_contact_detail.xml" value="0.13280573155477604" />
+        <entry key="app/src/main/res/layout/fragment_contact_list.xml" value="0.12537993920972645" />
         <entry key="app/src/main/res/layout/fragment_contact_tab.xml" value="0.1015625" />
+        <entry key="app/src/main/res/layout/fragment_edit_numberphone.xml" value="0.112286376953125" />
+        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.2819381864944307" />
         <entry key="app/src/main/res/layout/fragment_important_message.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_inbox_message.xml" value="0.12537993920972645" />
         <entry key="app/src/main/res/layout/fragment_initial.xml" value="0.125" />
-        <entry key="app/src/main/res/layout/fragment_main_flow.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_message_detail.xml" value="0.15070921985815602" />
-        <entry key="app/src/main/res/layout/fragment_message_list.xml" value="0.12318840579710146" />
+        <entry key="app/src/main/res/layout/fragment_main_flow.xml" value="0.20307464599609376" />
         <entry key="app/src/main/res/layout/fragment_message_tab.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_spam_message.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_contact_or_message.xml" value="0.33610290527343756" />
-        <entry key="app/src/main/res/layout/item_message_owner.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/item_contact_or_message.xml" value="0.24982147216796877" />
+        <entry key="app/src/main/res/layout/item_header_layout.xml" value="0.13858695652173914" />
+        <entry key="app/src/main/res/layout/item_message_owner.xml" value="0.32011331444759206" />
         <entry key="app/src/main/res/layout/item_message_peer.xml" value="0.1381340579710145" />
+        <entry key="app/src/main/res/layout/item_recent_contact.xml" value="0.12537993920972645" />
+        <entry key="app/src/main/res/layout/layout_header_drawer.xml" value="0.2609102917956067" />
+        <entry key="app/src/main/res/layout/test.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/menu_drawer.xml" value="0.19895833333333332" />
         <entry key="app/src/main/res/menu/menu_main_bottom.xml" value="0.22447916666666667" />
       </map>
     </option>
