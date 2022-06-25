@@ -38,6 +38,8 @@
     <string name="txt_enter_your_phone_number">Enter your phone number</string>
     <string name="txt_continue">CONTINUE</string>
     <string name="txt_second_phone_number">Second Phone Number</string>
+    <string name="txt_call_history">Call History</string>
+    <string name="txt_view_all">VIEW ALL</string>
 
     <string name="reply_label">Reply</string>
 
