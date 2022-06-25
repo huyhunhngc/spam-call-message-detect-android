@@ -10,7 +10,11 @@
         tools:layout="@layout/fragment_edit_profile">
         <action
             android:id="@+id/open_edit_number"
-            app:destination="@id/edit_numberphone_fragment" />
+            app:destination="@id/edit_numberphone_fragment"
+            app:enterAnim="@anim/enter_from_bottom"
+            app:exitAnim="@anim/exit_to_bottom"
+            app:popEnterAnim="@anim/enter_from_bottom"
+            app:popExitAnim="@anim/exit_to_bottom"/>
     </fragment>
     <fragment
         android:id="@+id/edit_numberphone_fragment"

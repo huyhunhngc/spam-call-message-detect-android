@@ -1,6 +1,7 @@
 package com.dotsdev.idcaller.presentation.template
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
@@ -22,7 +23,7 @@ class NormalAppbarActivity : AppCompatActivity() {
 
     private fun setupNavigation(graphInfo: NavigationGraphInfo) {
         (supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment).let { navHost ->
+            .findFragmentById(R.id.nav_fragment) as NavHostFragment).let { navHost ->
             val graph = navHost.navController.navInflater.inflate(graphInfo.graphId)
                 .apply {
                     setStartDestination(graphInfo.startDestinationId)
@@ -32,8 +33,8 @@ class NormalAppbarActivity : AppCompatActivity() {
                 setGraph(graph, bundleOf(DATA_FROM_KEY to graphInfo.dataFrom))
                 setSupportActionBar(toolbar)
                 toolbar.setNavigationOnClickListener {
-                    if (supportFragmentManager.backStackEntryCount > 1) {
-                        findNavController(R.id.nav_host_fragment).navigateUp()
+                    if (navHost.childFragmentManager.backStackEntryCount > 0) {
+                        findNavController(R.id.nav_fragment).popBackStack()
                     } else {
                         finish()
                     }
