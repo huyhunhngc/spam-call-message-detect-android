@@ -80,7 +80,7 @@ class MainFlowFragment :
             retrieveContact().let(viewModel::setContactMemory)
             retrieveCallLog().let(viewModel::setCallLogMemory)
             (retrieveInBox() + retrieveSent()).let(viewModel::setMessageMemory)
-            getSIMInfo().let(viewModel::setSimInfo)
+            //getSIMInfo().let(viewModel::setSimInfo)
         }
     }
 
