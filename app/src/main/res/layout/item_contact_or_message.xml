@@ -13,8 +13,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginVertical="16dp">
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="16dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/organization_image"
@@ -61,13 +62,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@{info.primaryLine}"
-            android:textSize="16sp"
+            android:textSize="18sp"
+            android:textColor="@color/textBlack"
             android:textStyle="bold"
             android:maxLines="1"
             app:layout_constraintStart_toEndOf="@+id/organization_image"
             app:layout_constraintEnd_toStartOf="@+id/ic_arrow"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="21236"/>
+            tools:text="21236" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/organization_sub_text"

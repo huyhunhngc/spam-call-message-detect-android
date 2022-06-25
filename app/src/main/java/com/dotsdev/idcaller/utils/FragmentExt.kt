@@ -216,15 +216,15 @@ fun Fragment.retrieveCallLog(): List<Call> {
 }
 
 fun Fragment.retrieveInBox(): List<Message> {
-    return this.retrieveMessage(Uri.parse("content://sms/inbox"), true)
+    return this.retrieveMessage(Uri.parse("content://sms/inbox"), false)
 }
 
 fun Fragment.retrieveSent(): List<Message> {
-    return this.retrieveMessage(Uri.parse("content://sms/sent"), false)
+    return this.retrieveMessage(Uri.parse("content://sms/sent"), true)
 }
 
 @SuppressLint("Range")
-fun Fragment.retrieveMessage(uri: Uri, isInBox: Boolean): List<Message> {
+fun Fragment.retrieveMessage(uri: Uri, isSent: Boolean): List<Message> {
     val cursor = activity?.contentResolver?.query(
         uri,
         null,
@@ -247,7 +247,7 @@ fun Fragment.retrieveMessage(uri: Uri, isInBox: Boolean): List<Message> {
                 content = body,
                 messageName = address,
                 messageNumber = address,
-                sentByMe = isInBox
+                sentByMe = isSent
             )
         )
         cursor.moveToNext()

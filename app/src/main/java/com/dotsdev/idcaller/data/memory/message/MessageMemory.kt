@@ -1,16 +1,17 @@
 package com.dotsdev.idcaller.data.memory.message
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.dotsdev.idcaller.data.model.Contact
 import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.utils.phoneNumberWithoutCountryCode
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
 class MessageMemory {
     private val stateFlow = MutableStateFlow(listOf<Message>())
     val memoryMessage = mutableListOf<Message>()
+    val obs = MutableLiveData<List<Message>>()
 
     fun observe(): Flow<List<Message>> {
         return stateFlow.asSharedFlow()
@@ -23,13 +24,24 @@ class MessageMemory {
                 it.copy(messageId = "${it.iat.time}-${it.from.phoneNumber.phoneNumberWithoutCountryCode()}")
             }
         )
+        obs.postValue(memoryMessage)
         stateFlow.tryEmit(info)
     }
 
-    fun add(infos: List<Message>) {
-        infos.map { info ->
+    fun save(info: List<Message>) {
+        memoryMessage.clear()
+        memoryMessage.addAll(
+            info.map {
+                it.copy(messageId = "${it.iat.time}-${it.from.phoneNumber.phoneNumberWithoutCountryCode()}")
+            }
+        )
+    }
+
+    fun add(messages: List<Message>) {
+        messages.map { info ->
             info.copy(messageId = "${info.iat.time}-${info.from.phoneNumber.phoneNumberWithoutCountryCode()}")
         }.let(memoryMessage::addAll)
+        obs.postValue(memoryMessage)
         stateFlow.tryEmit(memoryMessage)
     }
 

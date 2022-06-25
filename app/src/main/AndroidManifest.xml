@@ -30,7 +30,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <action android:name="android.intent.action.SENDTO" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
 
@@ -40,6 +39,7 @@
                 <data android:scheme="mmsto" />
             </intent-filter>
         </activity>
+
         <receiver
             android:name=".data.broadcast.SmsBroadcastReceiver"
             android:enabled="true"
@@ -60,20 +60,22 @@
             </intent-filter>
         </receiver>
 
-        <!-- Service that delivers messages from the phone "quick response" -->
-        <service android:name=".data.broadcast.headlessSmsReceiver"
+        <service
+            android:name=".service.HeadlessSmsSendService"
             android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE"
             android:exported="true"
             tools:ignore="Instantiatable">
             <intent-filter>
                 <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:scheme="sms" />
                 <data android:scheme="smsto" />
                 <data android:scheme="mms" />
                 <data android:scheme="mmsto" />
             </intent-filter>
         </service>
+
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true">
@@ -84,18 +86,17 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <action android:name="android.intent.action.SENDTO" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
-
                 <data android:scheme="sms" />
                 <data android:scheme="smsto" />
                 <data android:scheme="mms" />
                 <data android:scheme="mmsto" />
             </intent-filter>
         </activity>
+
         <service
-            android:name="com.dotsdev.idcaller.data.broadcast.CaptureNotificationListener"
+            android:name="com.dotsdev.idcaller.service.CaptureNotificationListener"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
             android:exported="true">
             <intent-filter>

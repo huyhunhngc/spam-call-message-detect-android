@@ -34,8 +34,10 @@ class ContactMessageItem(private val info: ContactMessageInfo) :
                 )
                 if (!this@ContactMessageItem.info.unknownNumber) {
                     avatarText.apply {
-                        text = this@ContactMessageItem.info.peerName.substring(0, 1)
-                            .uppercase(Locale.getDefault())
+                        text = kotlin.runCatching {
+                            this@ContactMessageItem.info.peerName.substring(0, 1)
+                                .uppercase(Locale.getDefault())
+                        }.getOrDefault("")
                         setTextColor(hash.getPrimaryColor())
                         isVisible = this@ContactMessageItem.info.peerPhotoUrl.isBlank()
                     }

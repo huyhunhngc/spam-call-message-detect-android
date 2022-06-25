@@ -16,6 +16,8 @@
             android:maxWidth="@dimen/_200sdp"
             android:padding="@dimen/_8sdp"
             android:text="@string/ok"
+            android:textSize="14sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
