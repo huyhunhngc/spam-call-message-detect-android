@@ -5,9 +5,11 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.core.base.BaseFragment
 import com.dotsdev.idcaller.core.base.viewBindings
+import com.dotsdev.idcaller.data.model.NavigationGraphInfo
 import com.dotsdev.idcaller.databinding.FragmentMainFlowBinding
 import com.dotsdev.idcaller.databinding.LayoutHeaderDrawerBinding
 import com.dotsdev.idcaller.presentation.MainActivity
@@ -105,6 +107,16 @@ class MainFlowFragment :
         navigationDrawer.apply {
             setNavigationItemSelectedListener(this@MainFlowFragment)
             bringToFront()
+        }
+        headerBinding.editIcon.setOnClickListener {
+            findNavController().navigate(
+                MainFlowFragmentDirections.openEditProfile(
+                    NavigationGraphInfo(
+                        graphId = R.navigation.edit_profile_navigation,
+                        startDestinationId = R.id.edit_profile_fragment
+                    )
+                )
+            )
         }
     }
 

@@ -26,6 +26,18 @@
     <string name="numpad_hashtag"><font size="20">#</font>\t</string>
     <string name="reply_not_supported">Reply is not supported by this sender</string>
     <string name="aa">Aa</string>
+    <string name="txt_first_name">First Name</string>
+    <string name="txt_last_name">Last Name</string>
+    <string name="txt_phone_number">Phone Number</string>
+    <string name="txt_add_second_phone_number">Add second phone number</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_address">Address</string>
+    <string name="txt_country">Country</string>
+    <string name="txt_enter_phone_number">Enter your second phone number</string>
+    <string name="txt_your_country">Your Country</string>
+    <string name="txt_enter_your_phone_number">Enter your phone number</string>
+    <string name="txt_continue">CONTINUE</string>
+    <string name="txt_second_phone_number">Second Phone Number</string>
 
 
 </resources>
