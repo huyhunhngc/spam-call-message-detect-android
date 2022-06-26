@@ -40,6 +40,7 @@
     <string name="txt_second_phone_number">Second Phone Number</string>
     <string name="txt_call_history">Call History</string>
     <string name="txt_view_all">VIEW ALL</string>
+    <string name="txt_calling">Calling...</string>
 
     <string name="reply_label">Reply</string>
 

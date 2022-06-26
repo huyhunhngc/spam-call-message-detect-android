@@ -1,6 +1,7 @@
 package com.dotsdev.idcaller.di
 
 import com.dotsdev.idcaller.presentation.MainViewModel
+import com.dotsdev.idcaller.presentation.main.calltab.CallDetailViewModel
 import com.dotsdev.idcaller.presentation.main.calltab.CallListViewModel
 import com.dotsdev.idcaller.presentation.main.calltab.CallTabViewModel
 import com.dotsdev.idcaller.presentation.main.calltab.dial.DialNumpadViewModel
@@ -36,4 +37,5 @@ val viewModelModule = module {
     viewModel { DialNumpadViewModel() }
     viewModel { EditProfileViewModel()}
     viewModel { EditNumberPhoneViewModel() }
+    viewModel { data -> CallDetailViewModel(data.get(), get())}
 }

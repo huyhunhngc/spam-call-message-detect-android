@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:infoList="@{viewModel.listImportant}"
+            app:infoList="@{viewModel.listMessage}"
             app:onItemClicked="@{viewModel.onItemClick}">
         </com.dotsdev.idcaller.widget.recycler.ContactMessageList>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,7 +26,8 @@ enum class CallType(val value: String, @DrawableRes val icon: Int) {
 
 data class CallGroup(
     val callId: String = "",
-    val calls: MutableList<Call> = mutableListOf()
+    val calls: MutableList<Call> = mutableListOf(),
+    val contact: Contact
 ) : Serializable
 
 fun Int.toCallType(): CallType {
@@ -47,7 +48,8 @@ fun List<Call>.toCallGroup(): List<CallGroup> {
             callGroups.add(
                 CallGroup(
                     callId = call.callId,
-                    calls = mutableListOf(call)
+                    calls = mutableListOf(call),
+                    contact = Contact()
                 )
             )
         }
@@ -64,7 +66,8 @@ fun List<Call>.toCallRecentData(): List<CallGroup> {
             callGroups.add(
                 CallGroup(
                     callId = call.callerNumber,
-                    calls = mutableListOf(call)
+                    calls = mutableListOf(call),
+                    contact = Contact()
                 )
             )
         }
