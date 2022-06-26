@@ -39,5 +39,6 @@
     <string name="txt_continue">CONTINUE</string>
     <string name="txt_second_phone_number">Second Phone Number</string>
 
+    <string name="reply_label">Reply</string>
 
 </resources>
