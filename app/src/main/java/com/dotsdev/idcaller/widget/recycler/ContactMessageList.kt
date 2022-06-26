@@ -63,7 +63,7 @@ class ContactMessageList @JvmOverloads constructor(
         contacts: List<ContactMessageInfo>?
     ) {
         contacts ?: return
-        if (infos.isEmpty()) {
+        if (infos.isEmpty() || contacts.firstOrNull()?.dataFrom !is FromData.FromMessageGroup) {
             groupAdapter.clear()
             groupAdapter.addAll(
                 contacts.mapIndexed { index, info ->
@@ -91,7 +91,8 @@ class ContactMessageList @JvmOverloads constructor(
                     }
                 }
             )
-        } else {
+        }
+        if (contacts.firstOrNull()?.dataFrom is FromData.FromMessageGroup) {
             if (infos == contacts) return
             val needUpdate = mutableListOf<ContactMessageInfo>()
             contacts.forEach { item ->
@@ -127,6 +128,7 @@ class ContactMessageList @JvmOverloads constructor(
                         )
                     }
                 )
+                this.smoothScrollToPosition(0)
             }
         }
         infos = contacts

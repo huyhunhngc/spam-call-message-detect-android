@@ -1,6 +1,7 @@
 package com.dotsdev.idcaller.presentation.main.calltab
 
 import androidx.lifecycle.MutableLiveData
+import com.dotsdev.idcaller.core.SingleLiveEvent
 import com.dotsdev.idcaller.core.base.BaseViewModel
 import com.dotsdev.idcaller.data.model.toCallGroup
 import com.dotsdev.idcaller.domain.contact.query.GetCallLog
@@ -13,9 +14,10 @@ class CallListViewModel(
     private val getCallLog: GetCallLog,
     private val getRecentContact: GetRecentContact,
 ) : BaseViewModel() {
-    val callLog = MutableLiveData<List<ContactMessageInfo>>()
-    val recentContact = MutableLiveData<List<ContactMessageInfo>>()
-    override fun onCreate() {
+    val callLog = SingleLiveEvent<List<ContactMessageInfo>>()
+    val recentContact = SingleLiveEvent<List<ContactMessageInfo>>()
+
+    init {
         super.onCreate()
         viewModelScope.launch {
             getCallLog.observeCall().collectLatest { calls ->
