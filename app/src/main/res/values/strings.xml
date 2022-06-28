@@ -43,5 +43,15 @@
     <string name="txt_calling">Calling...</string>
 
     <string name="reply_label">Reply</string>
+    <string name="txt_allow_blocking">Allow blocking</string>
+    <string name="txt_you_need_to_set_idcaller_as_your_default_dialer_for_blocking_to_work">You need to set IdCaller as your default dialer for blocking to work</string>
+    <string name="txt_set_as_default_dialer">SET AS DEFAULT DIALER</string>
+    <string name="txt_block_spam_message">Block spam message</string>
+    <string name="txt_blocking">Blocking</string>
+    <string name="txt_block_a_number">Block a number</string>
+    <string name="txt_number">Number</string>
+    <string name="txt_name">Name</string>
+    <string name="txt_block">Block</string>
+    <string name="txt_block_spam_number">Block spam number</string>
 
 </resources>

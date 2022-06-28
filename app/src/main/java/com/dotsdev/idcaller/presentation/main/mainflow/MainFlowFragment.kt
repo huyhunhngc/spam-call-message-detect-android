@@ -13,6 +13,7 @@ import com.dotsdev.idcaller.data.model.NavigationGraphInfo
 import com.dotsdev.idcaller.databinding.FragmentMainFlowBinding
 import com.dotsdev.idcaller.databinding.LayoutHeaderDrawerBinding
 import com.dotsdev.idcaller.presentation.MainActivity
+import com.dotsdev.idcaller.presentation.main.blockingTab.BlockingTabFragment
 import com.dotsdev.idcaller.presentation.main.calltab.CallTabFragment
 import com.dotsdev.idcaller.presentation.main.contacttab.ContactTabFragment
 import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabFragment
@@ -35,6 +36,7 @@ class MainFlowFragment :
     private val contactTab = ContactTabFragment.newInstance()
     private val messageTab = MessageTabFragment.newInstance()
     private val callTab = CallTabFragment.newInstance()
+    private val blockingTab = BlockingTabFragment.newInstance()
 
     private fun mainActivity(): MainActivity? = activity as? MainActivity
 
@@ -68,6 +70,7 @@ class MainFlowFragment :
             PageTabType.NAV_CALL.menuId -> loadFragment(callTab)
             PageTabType.NAV_CONTACT.menuId -> loadFragment(contactTab)
             PageTabType.NAV_MESSAGE.menuId -> loadFragment(messageTab)
+            PageTabType.NAV_BLOCKING.menuId -> loadFragment(blockingTab)
             else -> false
         }
     }
