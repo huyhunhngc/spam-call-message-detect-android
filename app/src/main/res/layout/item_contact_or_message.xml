@@ -68,6 +68,22 @@
             android:textStyle="bold"
             android:maxLines="1"
             app:layout_constraintStart_toEndOf="@+id/organization_image"
+            app:layout_constraintEnd_toStartOf="@+id/time"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="21236" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:text="@{info.time}"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:gravity="end"
+            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintStart_toEndOf="@+id/organization_text"
             app:layout_constraintEnd_toStartOf="@+id/ic_arrow"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="21236" />
@@ -77,6 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="48dp"
             android:text="@{info.subLine}"
             android:textSize="13sp"
             android:maxLines="1"

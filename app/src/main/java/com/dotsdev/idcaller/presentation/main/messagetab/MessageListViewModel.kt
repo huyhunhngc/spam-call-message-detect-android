@@ -1,8 +1,8 @@
 package com.dotsdev.idcaller.presentation.main.messagetab
 
-import androidx.lifecycle.MutableLiveData
 import com.dotsdev.idcaller.core.SingleLiveEvent
 import com.dotsdev.idcaller.core.base.BaseViewModel
+import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.data.model.toMessageGroup
 import com.dotsdev.idcaller.domain.message.query.GetMessageLog
 import com.dotsdev.idcaller.widget.recycler.ContactMessageInfo
