@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/organization_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:centerCrop="@{true}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CircleImageView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/avatar_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="80sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/organization_image"
+            app:layout_constraintEnd_toEndOf="@+id/organization_image"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintStart_toStartOf="@+id/organization_image"
+            app:layout_constraintTop_toTopOf="@+id/organization_image"
+            app:layout_constraintWidth_percent="0.6"
+            tools:targetApi="o"
+            tools:text="A" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/avatar_icon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:src="@drawable/ic_baseline_business"
+            android:textSize="24sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/organization_image"
+            app:layout_constraintEnd_toEndOf="@+id/organization_image"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintStart_toStartOf="@+id/organization_image"
+            app:layout_constraintTop_toTopOf="@+id/organization_image"
+            app:layout_constraintWidth_percent="0.6" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

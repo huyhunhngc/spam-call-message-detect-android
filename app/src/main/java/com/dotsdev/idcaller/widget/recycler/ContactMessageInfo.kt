@@ -13,6 +13,7 @@ data class ContactMessageInfo(
     val peerPhotoUrl: String = "",
     val peerName: String = "",
     val primaryLine: String = "",
+    val time: String = "",
     val subLine: String = "",
     val type: ItemType = ItemType.CONTACT,
     val unknownNumber: Boolean = false,
@@ -44,6 +45,7 @@ fun MessageGroup.toInfoData(): ContactMessageInfo {
     return ContactMessageInfo(
         dataFrom = FromData.FromMessageGroup(this),
         peerName = message.contact.callerName,
+        time = message.iat.time.convertTimestampToHours(),
         primaryLine = message.contact.callerName,
         subLine = message.content,
         type = ItemType.MESSAGE,
@@ -63,7 +65,8 @@ fun CallGroup.toInfoData(): ContactMessageInfo {
         dataFrom = FromData.FromCallGroup(this),
         peerName = call.contact.callerName,
         primaryLine = primaryLine,
-        subLine = "${call.callType.value} • ${call.iat.time.convertTimestampToHours()}",
+        time = call.iat.time.convertTimestampToHours(),
+        subLine = "${call.callType.value} • ${call.duration}s",
         subLineStartIcon = call.callType.icon,
         type = ItemType.CALL,
         unknownNumber = call.callerNumber == call.contact.callerName

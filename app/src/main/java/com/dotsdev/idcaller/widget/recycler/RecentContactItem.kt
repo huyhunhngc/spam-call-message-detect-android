@@ -15,19 +15,7 @@ class RecentContactItem(private val info: ContactMessageInfo) :
     override fun bind(viewBinding: ItemRecentContactBinding, position: Int) {
         viewBinding.apply {
             info = this@RecentContactItem.info
-            val hash = this@RecentContactItem.info.peerName.getColorFromName()
             root.apply {
-                if (!this@RecentContactItem.info.unknownNumber) {
-                    organizationImage.setBackgroundColor(
-                        hash.getBackgroundColor()
-                    )
-                    avatarText.apply {
-                        text = this@RecentContactItem.info.peerName.substring(0, 1)
-                            .uppercase(Locale.getDefault())
-                        setTextColor(hash.getPrimaryColor())
-                        isVisible = this@RecentContactItem.info.peerPhotoUrl.isBlank()
-                    }
-                }
                 this@RecentContactItem.info.subLineStartIcon?.let {
                     organizationSubText.setCompoundDrawablesWithIntrinsicBounds(
                         it, 0, 0, 0

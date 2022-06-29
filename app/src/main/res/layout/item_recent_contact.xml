@@ -15,31 +15,15 @@
         android:layout_height="wrap_content"
         android:layout_margin="12dp">
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <com.dotsdev.idcaller.widget.customview.ImageProfileView
             android:id="@+id/organization_image"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:background="@drawable/ic_camera_input"
-            app:centerCrop="@{true}"
-            app:imageUrl="@{info.peerPhotoUrl}"
+            app:info="@{info}"
             app:layout_constraintStart_toStartOf="@+id/organization_text"
             app:layout_constraintEnd_toEndOf="@+id/organization_text"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CircleImageView" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/avatar_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:maxLines="1"
-            android:gravity="center"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/organization_image"
-            app:layout_constraintEnd_toEndOf="@+id/organization_image"
-            app:layout_constraintBottom_toBottomOf="@+id/organization_image"
-            app:layout_constraintTop_toTopOf="@+id/organization_image"
-            tools:text="A"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/organization_text"

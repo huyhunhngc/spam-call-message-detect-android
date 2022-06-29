@@ -1,6 +1,9 @@
 package com.dotsdev.idcaller.presentation.main.messagetab.detail
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.core.base.BaseFragment
@@ -28,6 +31,7 @@ class MessageDetailFragment :
     }
 
     private fun initViews() {
+        setHasOptionsMenu(true)
         showActionBar()
         with(binding) {
             viewModel = this@MessageDetailFragment.viewModel.apply {
@@ -41,6 +45,16 @@ class MessageDetailFragment :
             messageTitle.observe(viewLifecycleOwner) {
                 setActionBarTitle(it)
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_message_detail, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
