@@ -22,7 +22,7 @@ class MainFlowViewModel(
             userUsecase.getUser()?.let(user::postValue)
         }
         // TODO: mock
-        user.postValue(User(phoneNumber = "0326708983", name = "Huy hn"))
+        user.postValue(User(phoneNumber = "0352669370", name = "Văn Huy"))
     }
 
     fun setContactMemory(contacts: List<Contact>) {
