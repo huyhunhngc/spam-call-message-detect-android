@@ -1,11 +1,18 @@
 package com.dotsdev.idcaller.domain.vectorizer
 
+import android.util.Log
+import com.google.gson.Gson
 import kotlin.math.log10
 
-class TfidfVectorizer(
-    private val dictWord: HashMap<String, Int>
-) {
-    private val dictWordLength = dictWord.size
+class TfidfVectorizer {
+    private var dictWord: HashMap<String, Int> = hashMapOf()
+    private var dictWordLength = dictWord.size
+
+    fun init(data: String) {
+        dictWord = Gson().fromJson(data, dictWord::class.java)
+        dictWordLength = dictWord.size
+    }
+
     fun transform(document: String): DoubleArray {
         val idfDict = hashMapOf<String, Float>()
         dictWord.forEach { entry ->
@@ -16,14 +23,13 @@ class TfidfVectorizer(
             val frequency = it.value
             idfDict[word] = log10(dictWordLength / frequency.toFloat())
         }
+        // TODO implement vectorizer
         return doubleArrayOf()
     }
 
     companion object {
         fun newInstance(): TfidfVectorizer {
-            // TODO import dict word
-            val dictWord = hashMapOf<String, Int>()
-            return TfidfVectorizer(dictWord)
+            return TfidfVectorizer()
         }
     }
 }

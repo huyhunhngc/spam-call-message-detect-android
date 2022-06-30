@@ -16,7 +16,7 @@ class NotificationService : Service() {
         intent?.let {
             createNotificationChannel()
             val fakeNotification = NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.transparent)
+                .setSmallIcon(R.drawable.ic_app)
                 .setContentTitle("Caller is running")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setOngoing(true)

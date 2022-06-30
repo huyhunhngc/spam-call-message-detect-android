@@ -1,15 +1,27 @@
 package com.dotsdev.idcaller.domain.classifier
 
+import com.dotsdev.idcaller.domain.classifier.model.Models
+import com.google.gson.Gson
 import kotlin.math.exp
 import kotlin.math.max
+
 
 class ClassifierMessage(
     private val hidden: Activation,
     private val output: Activation,
     private val network: Array<DoubleArray?>,
-    private val weights: Array<Array<DoubleArray>>,
-    private val bias: Array<DoubleArray>
 ) {
+    private var weights: Array<Array<DoubleArray>> = arrayOf(
+        arrayOf(doubleArrayOf())
+    )
+    private var bias: Array<DoubleArray> = arrayOf(doubleArrayOf())
+
+    fun init(data: String) {
+        val models = Gson().fromJson(data, Models::class.java)
+        weights = models.weights
+        bias = models.bias
+    }
+
     private fun compute(activation: Activation, v: DoubleArray?): DoubleArray {
         val layer = v?.size ?: return doubleArrayOf()
         when (activation) {
@@ -89,18 +101,10 @@ class ClassifierMessage(
             for (i in 0 until l) {
                 network[i + 1] = DoubleArray(layers[i])
             }
-            // TODO: export weights
-            val weights = arrayOf(
-                arrayOf(doubleArrayOf())
-            )
-            // TODO: export bias
-            val bias = arrayOf(doubleArrayOf())
             return ClassifierMessage(
                 Activation.RELU,
                 Activation.SOFTMAX,
                 network,
-                weights,
-                bias
             )
         }
     }
