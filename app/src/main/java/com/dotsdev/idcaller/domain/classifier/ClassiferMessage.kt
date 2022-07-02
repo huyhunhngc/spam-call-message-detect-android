@@ -1,10 +1,10 @@
 package com.dotsdev.idcaller.domain.classifier
 
+import android.util.Log
 import com.dotsdev.idcaller.domain.classifier.model.Models
 import com.google.gson.Gson
 import kotlin.math.exp
 import kotlin.math.max
-
 
 class ClassifierMessage(
     private val hidden: Activation,
@@ -57,12 +57,13 @@ class ClassifierMessage(
     fun predict(neurons: DoubleArray?): Int {
         network[0] = neurons
         for (i in 0 until network.size - 1) {
-            for (j in 0 until (network[i + 1]?.size ?: 0)) {
-                network[i + 1]?.set(j, bias[i][j])
-                for (l in 0 until (network[i]?.size ?: 0)) {
-                    try {
-                        network[i + 1]?.set(j, network[i]!![l] * weights[i][l][j])
-                    } catch (e: NullPointerException) {
+            for (j in 0 until network[i + 1]!!.size) {
+                kotlin.runCatching {
+                    network[i + 1]!![j] = bias[i][j]
+                }
+                for (l in 0 until network[i]!!.size) {
+                    kotlin.runCatching {
+                        network[i + 1]!![j] += network[i]!![l] * weights[i][l][j]
                     }
                 }
             }
@@ -74,20 +75,16 @@ class ClassifierMessage(
             output,
             network[network.size - 1]
         )
-        return if (network[network.size - 1]?.size == 1) {
-            if ((network[network.size - 1]?.get(0) ?: 0.0) > .5) {
+
+        return if (network[network.size - 1]!!.size == 1) {
+            if (network[network.size - 1]!![0] > .5) {
                 1
-            } else {
-                0
-            }
+            } else 0
         } else {
             var classIdx = 0
-            for (i in 0..(network[network.size - 1]?.size ?: 0)) {
-                classIdx = try {
+            for (i in 0 until network[network.size - 1]!!.size) {
+                classIdx =
                     if (network[network.size - 1]!![i] > network[network.size - 1]!![classIdx]) i else classIdx
-                } catch (e: NullPointerException) {
-                    0
-                }
             }
             classIdx
         }

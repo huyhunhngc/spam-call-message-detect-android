@@ -10,10 +10,9 @@ import com.dotsdev.idcaller.widget.recycler.toInfoData
 import kotlinx.coroutines.flow.collectLatest
 
 open class MessageListViewModel(
-    private val getMessageLog: GetMessageLog
+    private val getMessageLog: GetMessageLog,
 ) : BaseViewModel() {
     val listMessage = SingleLiveEvent<List<ContactMessageInfo>>()
-    val messageClick = SingleLiveEvent<ContactMessageInfo>()
     val detailClick = SingleLiveEvent<ContactMessageInfo>()
 
     init {
