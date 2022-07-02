@@ -7,6 +7,7 @@ import com.dotsdev.idcaller.domain.classifier.ClassifierMessage
 import com.dotsdev.idcaller.domain.contact.query.GetCallLog
 import com.dotsdev.idcaller.domain.contact.query.GetContact
 import com.dotsdev.idcaller.domain.contact.query.GetRecentContact
+import com.dotsdev.idcaller.domain.detectSpam.DetectSpamMessage
 import com.dotsdev.idcaller.domain.message.query.GetMessageLog
 import com.dotsdev.idcaller.domain.vectorizer.TfidfVectorizer
 import org.koin.dsl.module
@@ -21,4 +22,5 @@ val domainModule = module {
     factory { GetRecentContact(get(), get()) }
     factory { GetMessageLog(get(), get()) }
     factory { GetContact(get()) }
+    factory { DetectSpamMessage(get(), get()) }
 }
