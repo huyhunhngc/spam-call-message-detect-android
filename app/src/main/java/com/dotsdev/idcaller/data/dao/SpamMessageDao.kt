@@ -25,5 +25,8 @@ interface SpamMessageDao {
     suspend fun update(vararg Message: Message?)
 
     @Query("SELECT * FROM Message WHERE Message.messageId = :id LIMIT 1")
-    suspend fun getMessageByIdNote(id: Int): Message?
+    suspend fun getMessageById(id: Int): Message?
+
+    @Query("SELECT * FROM Message ORDER BY messageId DESC")
+    suspend fun getMessages(): List<Message?>?
 }

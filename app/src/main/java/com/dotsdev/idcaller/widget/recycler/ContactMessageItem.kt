@@ -5,10 +5,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.databinding.ItemContactOrMessageBinding
-import com.dotsdev.idcaller.utils.getBackgroundColor
-import com.dotsdev.idcaller.utils.getColorFromName
-import com.dotsdev.idcaller.utils.getPrimaryColor
-import com.dotsdev.idcaller.utils.isPhoneNumber
+import com.dotsdev.idcaller.utils.*
 import com.xwray.groupie.viewbinding.BindableItem
 import java.util.*
 
@@ -24,7 +21,14 @@ class ContactMessageItem(private val info: ContactMessageInfo) :
     override fun bind(viewBinding: ItemContactOrMessageBinding, position: Int) {
         viewBinding.apply {
             info = this@ContactMessageItem.info
-            val hash = this@ContactMessageItem.info.peerName.getColorFromName()
+            val isSpam =
+                (this@ContactMessageItem.info.dataFrom as? FromData.FromMessageGroup)?.
+                messageGroup?.messages?.any { it.isSpam } ?: false
+            val hash = if (isSpam) {
+                Colors.RED
+            } else {
+                this@ContactMessageItem.info.peerName.getColorFromName()
+            }
             root.apply {
                 setOnClickListener {
                     onItemClicked?.invoke(this@ContactMessageItem.info, position)

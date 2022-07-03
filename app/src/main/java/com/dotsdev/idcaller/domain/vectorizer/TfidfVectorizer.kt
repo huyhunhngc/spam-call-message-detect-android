@@ -1,43 +1,41 @@
 package com.dotsdev.idcaller.domain.vectorizer
 
-import android.util.Log
 import com.google.gson.Gson
-import kotlin.math.log10
 
 class TfidfVectorizer {
-    private var wordSet: HashMap<String, Int> = hashMapOf()
-    private var wordSetLength = wordSet.size
     private var wordSetIdf: HashMap<String, Double> = hashMapOf()
 
     fun init(data: String) {
-        wordSet = Gson().fromJson(data, wordSet::class.java)
-        wordSetLength = wordSet.size
-        wordSet.map {
-            wordSetIdf[it.key] = log10(wordSetLength.toDouble() / it.value.toDouble())
-        }
+        wordSetIdf = Gson().fromJson(data, wordSetIdf::class.java)
     }
 
-    private fun computeTFIDF(tfDoc: MutableMap<String, Double>): DoubleArray {
-        tfDoc.forEach {
-            tfDoc[it.key] = it.value * (wordSetIdf[it.key] ?: 1.0)
+    fun transform(documents: List<String>): MutableList<DoubleArray> {
+        val tfIdfVectors: MutableList<DoubleArray> = mutableListOf()
+        for (doc in documents) {
+            tfIdfVectors.add(transformDocument(doc))
         }
-        return tfDoc.values.toDoubleArray()
+        return tfIdfVectors
     }
 
-    fun transform(document: String): DoubleArray {
-        val words = document.split(" ")
-        val idfDict = wordSet.keys.associateWith { 0 }.toMutableMap()
-        val idfDictDouble = wordSet.keys.associateWith { 0.0 }.toMutableMap()
-        words.forEach {
-            kotlin.runCatching {
-                idfDict[it] = (idfDict[it] ?: 0).plus(1)
+
+    fun transformDocument(document: String): DoubleArray {
+        val vocabFrequency = hashMapOf<String, Double>()
+        for (key in wordSetIdf.keys) {
+            vocabFrequency[key] = 0.0
+        }
+
+        val documentVocab = document.split(" ").toSet()
+        for (vocab in documentVocab) {
+            if (vocab in wordSetIdf.keys) {
+                vocabFrequency[vocab] = termFrequency(vocab, document)
             }
         }
+        return vocabFrequency.values.toDoubleArray()
+    }
 
-        idfDict.forEach {
-            idfDictDouble[it.key] = it.value.toDouble() / words.size
-        }
-        return computeTFIDF(idfDictDouble)
+    private fun termFrequency(term: String, doc: String): Double {
+        val docSplit = doc.split(" ")
+        return docSplit.count { it == term }.toDouble() / docSplit.size
     }
 
     companion object {

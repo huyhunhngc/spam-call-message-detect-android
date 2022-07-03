@@ -13,10 +13,11 @@ enum class Colors(@ColorInt val color: Int, @ColorInt val bgColor: Int) {
     DUNE(0x5e30f2, 0xb7a3f7),
     GREY(0x838584, 0xeeeeee),
     TEAL(0x38baab, 0xb6f0e1),
-    SEASHELL(0x999999, 0xe6e3e3);
+    SEASHELL(0x999999, 0xe6e3e3),
+    RED(0xFF4B4B, 0xfacaca);
 
     companion object {
-        private val colorList = values().toList()
+        private val colorList = values().toList().dropLast(1)
         fun from(color: Int): Colors = colorList[color]
     }
 }

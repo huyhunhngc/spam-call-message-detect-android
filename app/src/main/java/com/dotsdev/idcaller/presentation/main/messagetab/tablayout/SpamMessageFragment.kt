@@ -28,7 +28,6 @@ class SpamMessageFragment : BaseFragment<SpamMessageViewModel, FragmentSpamMessa
                 it.toDetail()?.let(findNavController()::navigate)
             }
         }
-
     }
 
     companion object {
