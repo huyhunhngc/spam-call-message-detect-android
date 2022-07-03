@@ -12,25 +12,29 @@ class TfidfVectorizer {
     fun transform(documents: List<String>): MutableList<DoubleArray> {
         val tfIdfVectors: MutableList<DoubleArray> = mutableListOf()
         for (doc in documents) {
-            tfIdfVectors.add(transformDocument(doc))
+            tfIdfVectors.add(transformDocument(doc).first)
         }
         return tfIdfVectors
     }
 
 
-    fun transformDocument(document: String): DoubleArray {
+    fun transformDocument(document: String): Pair<DoubleArray, Boolean> {
         val vocabFrequency = hashMapOf<String, Double>()
         for (key in wordSetIdf.keys) {
             vocabFrequency[key] = 0.0
         }
-
         val documentVocab = document.split(" ").toSet()
+        var unknownWord = 0
         for (vocab in documentVocab) {
             if (vocab in wordSetIdf.keys) {
                 vocabFrequency[vocab] = termFrequency(vocab, document)
+            } else {
+                unknownWord += 1
             }
         }
-        return vocabFrequency.values.toDoubleArray()
+
+        return vocabFrequency.values.toDoubleArray() to
+                (unknownWord.toDouble() / documentVocab.size > 0.5)
     }
 
     private fun termFrequency(term: String, doc: String): Double {

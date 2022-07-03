@@ -41,11 +41,6 @@ class BlockNotification(val id: Int, val context: Context, val message: Message?
         notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_app)
             .setContentTitle("Spam message is blocked")
-            .setContentText(message?.content)
-            .setStyle(
-                NotificationCompat.BigTextStyle()
-                    .bigText(message?.content)
-            )
             .setDefaults(NotificationCompat.DEFAULT_SOUND or NotificationCompat.DEFAULT_VIBRATE)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
@@ -69,7 +64,7 @@ class BlockNotification(val id: Int, val context: Context, val message: Message?
     fun showNotification(): Notification {
         val build = notification.build()
         with(NotificationManagerCompat.from(context)) {
-            notify(id, build)
+            notify(10001, build)
         }
         return build
     }
