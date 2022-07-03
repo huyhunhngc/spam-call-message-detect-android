@@ -13,13 +13,14 @@ import com.dotsdev.idcaller.widget.recycler.ContactMessageInfo
 import com.dotsdev.idcaller.widget.recycler.toInfoData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlin.coroutines.EmptyCoroutineContext
 
 class SpamMessageViewModel(
     private val detectSpamMessage: DetectSpamMessage,
     private val roomRepository: RoomRepository,
-    getMessageLog: GetMessageLog,
+    private val getMessageLog: GetMessageLog,
 ) : BaseViewModel() {
     val listMessage = MutableLiveData<List<ContactMessageInfo>>(listOf())
     val detailClick = SingleLiveEvent<ContactMessageInfo>()
@@ -39,7 +40,9 @@ class SpamMessageViewModel(
                             roomRepository.spamMessageDao().insert(it)
                         }
                     }
-                    listMessage.postValue(it.convertToInfoData())
+                    if (listMessage.value.isNullOrEmpty()) {
+                        listMessage.postValue(it.convertToInfoData())
+                    }
                 }
             }
         }
@@ -48,8 +51,8 @@ class SpamMessageViewModel(
     override fun onStart() {
         super.onStart()
         viewModelScope.launch {
-            roomRepository.spamMessageDao().getMessages().let {
-                listMessage.postValue(it?.mapNotNull { it }?.convertToInfoData())
+            getMessageLog.observeSpam().collectLatest {
+                listMessage.postValue(it.convertToInfoData())
             }
         }
     }

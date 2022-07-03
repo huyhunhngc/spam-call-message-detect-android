@@ -24,7 +24,7 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { CallTabViewModel() }
     viewModel { CallListViewModel(get(), get()) }
-    viewModel { MainFlowViewModel(get(), get(), get(), get()) }
+    viewModel { MainFlowViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { MainViewModel() }
     viewModel { MessageTabViewModel() }
     viewModel { MessageListViewModel(get()) }

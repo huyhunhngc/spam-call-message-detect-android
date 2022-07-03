@@ -5,10 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.telephony.SmsMessage
 import com.dotsdev.idcaller.data.memory.message.MessageMemory
+import com.dotsdev.idcaller.data.memory.message.SpamMessageMemory
 import com.dotsdev.idcaller.data.model.Contact
 import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.data.model.MessageType
 import com.dotsdev.idcaller.domain.contact.query.GetContact
+import com.dotsdev.idcaller.domain.detectSpam.DetectSpamMessage
+import com.dotsdev.idcaller.presentation.notification.BlockNotification
 import com.dotsdev.idcaller.presentation.notification.QuickReplyNotification
 import com.dotsdev.idcaller.utils.phoneNumberWithoutCountryCode
 import org.koin.core.component.KoinApiExtension
@@ -25,8 +28,10 @@ class SmsBroadcastReceiver : BroadcastReceiver() {
 
 @OptIn(KoinApiExtension::class)
 class SmsReceiveRepository : KoinComponent {
-    private val messageMemory: MessageMemory by inject()
     private val getContact: GetContact by inject()
+    private val messageMemory: MessageMemory by inject()
+    private val spamMessageMemory: SpamMessageMemory by inject()
+    private val detectSpamMessage: DetectSpamMessage by inject()
 
     fun onReceive(context: Context?, intent: Intent?) {
         val intentExtras = intent?.extras
@@ -50,6 +55,7 @@ class SmsReceiveRepository : KoinComponent {
                         messageName = "",
                         messageNumber = address
                     )
+                    val isSpam = detectSpamMessage(message.content)
                     context?.let {
                         val contact = getContact(message.messageNumber)
                         val notification = QuickReplyNotification.newInstance(
@@ -57,13 +63,24 @@ class SmsReceiveRepository : KoinComponent {
                             message.iat.time.toInt(),
                             message.copy(messageName = contact?.callerName ?: address)
                         )
+                        val blockNotification = BlockNotification.newInstance(
+                            context,
+                            message.iat.time.toInt(),
+                            message.copy(messageName = contact?.callerName ?: address)
+                        )
+
                         kotlin.runCatching {
-                            notification.showNotification()
+                            if (isSpam) {
+                                blockNotification.showNotification()
+                            } else {
+                                notification.showNotification()
+                            }
                         }.getOrNull()
                     }
-                    message
+                    message.copy(isSpam = isSpam)
                 }?.let {
                     messageMemory.add(it)
+                    spamMessageMemory.add(it)
                 }
             }
         }

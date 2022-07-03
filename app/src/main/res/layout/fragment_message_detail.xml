@@ -22,7 +22,7 @@
             app:layout_constraintBottom_toTopOf="@+id/create_message_area"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:messageList="@{viewModel.memoryMessageList}"
+            app:messageList="@{viewModel.message}"
             tools:layout="@layout/item_message_owner">
 
         </com.dotsdev.idcaller.widget.recycler.message.MessageDetailList>
