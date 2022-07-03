@@ -10,165 +10,170 @@
             type="com.dotsdev.idcaller.presentation.main.calltab.CallDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_top_app_bar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
-            android:background="#ffffff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <com.dotsdev.idcaller.widget.customview.ImageProfileView
-                android:id="@+id/image_profile"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="32dp"
-                app:info="@{viewModel.contactInfo}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/avatar_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:gravity="center"
-                android:maxLines="1"
-                android:text="@{viewModel.name}"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_profile"
-                tools:text="AAA" />
-
-            <ImageView
-                android:id="@+id/btn_call_detail_contact"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:background="@drawable/bg_detail_box"
-                android:scaleType="center"
-                android:src="@drawable/ic_outline_call_24"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_message_detail_contact"
-                app:layout_constraintEnd_toStartOf="@id/btn_message_detail_contact"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/btn_message_detail_contact" />
-
-            <ImageView
-                android:id="@+id/btn_message_detail_contact"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/bg_detail_box"
-                android:scaleType="center"
-                android:src="@drawable/ic_outline_message_24"
-                app:layout_constraintEnd_toStartOf="@id/btn_block_detail_contact"
-                app:layout_constraintStart_toEndOf="@id/btn_call_detail_contact"
-                app:layout_constraintTop_toBottomOf="@+id/avatar_text" />
-
-            <ImageView
-                android:id="@+id/btn_block_detail_contact"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:background="@drawable/bg_detail_box"
-                android:scaleType="center"
-                android:src="@drawable/ic_baseline_block_24"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_message_detail_contact"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_message_detail_contact"
-                app:layout_constraintTop_toTopOf="@+id/btn_message_detail_contact" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/white"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_top_app_bar">
-
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_top_app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="#ffffff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp"
-                    android:background="@drawable/bg_detail_box">
+                <com.dotsdev.idcaller.widget.customview.ImageProfileView
+                    android:id="@+id/image_profile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="32dp"
+                    app:info="@{viewModel.contactInfo}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/btn_call_number"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:src="@drawable/ic_outline_call_24_black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/tv_number_contact"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/avatar_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="@{viewModel.name}"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_profile"
+                    tools:text="AAA" />
 
-                    <TextView
-                        android:id="@+id/tv_number_contact"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="@{viewModel.number}"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@id/btn_call_number"
-                        app:layout_constraintStart_toEndOf="@id/btn_call_number"
-                        app:layout_constraintTop_toTopOf="@id/btn_call_number"
-                        tools:text="abc" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:src="@drawable/ic_outline_message_24_black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_200sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
+                <ImageView
+                    android:id="@+id/btn_call_detail_contact"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
                     android:background="@drawable/bg_detail_box"
-                    android:paddingBottom="@dimen/_20sdp">
+                    android:scaleType="center"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:src="@drawable/ic_outline_call_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_message_detail_contact"
+                    app:layout_constraintEnd_toStartOf="@id/btn_message_detail_contact"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/btn_message_detail_contact" />
 
-                    <TextView
-                        android:id="@+id/tv_call_history"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/_10sdp"
-                        android:text="@string/txt_call_history"
-                        android:textColor="@color/light_gray"
-                        android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/btn_message_detail_contact"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="16dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:background="@drawable/bg_detail_box"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_outline_message_24"
+                    app:layout_constraintEnd_toStartOf="@id/btn_block_detail_contact"
+                    app:layout_constraintStart_toEndOf="@id/btn_call_detail_contact"
+                    app:layout_constraintTop_toBottomOf="@+id/avatar_text" />
 
-                    <View
-                        android:id="@+id/divider3"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#E4E5E7"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_call_history" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/btn_block_detail_contact"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/bg_detail_box"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_baseline_block_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_message_detail_contact"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btn_message_detail_contact"
+                    app:layout_constraintTop_toTopOf="@+id/btn_message_detail_contact" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
 
-        </ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/bg_detail_box">
+
+                <ImageView
+                    android:id="@+id/btn_call_number"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:src="@drawable/ic_outline_call_24_black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_number_contact"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_number_contact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="@{viewModel.number}"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_call_number"
+                    app:layout_constraintStart_toEndOf="@id/btn_call_number"
+                    app:layout_constraintTop_toTopOf="@id/btn_call_number"
+                    tools:text="abc" />
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:src="@drawable/ic_outline_message_24_black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_detail_box"
+                android:layout_marginHorizontal="16dp">
+
+                <TextView
+                    android:id="@+id/tv_call_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/txt_call_history"
+                    android:textColor="@color/light_gray"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E4E5E7"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_call_history" />
+
+                <com.dotsdev.idcaller.widget.recycler.callHistory.CallHistoryList
+                    android:id="@+id/list_inbox_message"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:callList="@{viewModel.callList}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider3" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

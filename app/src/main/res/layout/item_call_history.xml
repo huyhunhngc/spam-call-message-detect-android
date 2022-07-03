@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.dotsdev.idcaller.utils.DateTimeExtKt" />
+
+        <variable
+            name="info"
+            type="com.dotsdev.idcaller.data.model.Call" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="16dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/organization_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:maxLines="1"
+            android:text="@{DateTimeExtKt.toTimeAndDatePattern(info.iat)}"
+            android:textColor="@color/textBlack"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="21236" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:gravity="end"
+            android:maxLines="1"
+            android:text="@{info.callType.value}"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/organization_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.2"
+            tools:text="21236" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/organization_sub_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="48dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{info.duration}"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/organization_text"
+            tools:text="asadf" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

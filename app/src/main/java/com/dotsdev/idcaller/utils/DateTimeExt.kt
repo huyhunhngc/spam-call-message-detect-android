@@ -2,7 +2,7 @@ package com.dotsdev.idcaller.utils
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
-import java.util.Calendar
+import java.util.*
 
 @SuppressLint("SimpleDateFormat")
 fun Long.convertTimestampToHours(): String {
@@ -33,4 +33,11 @@ fun Long.convertTimestampToHours(): String {
         return dateFormat.format(calendarMess.time)
     }
     return "${dateFormat.format(calendarMess.time)} $anteOrPost"
+}
+
+fun Date.toTimeAndDatePattern(): String {
+    val pattern = "MMM dd HH:mm"
+    val simpleDateFormat = SimpleDateFormat(pattern)
+
+    return simpleDateFormat.format(this)
 }

@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/call_detail_navigation">
     <fragment
         android:id="@+id/call_detail"
         android:name="com.dotsdev.idcaller.presentation.main.calltab.CallDetailFragment"
         android:label="User"
-        tools:layout="@layout/fragment_call_detail" />
+        tools:layout="@layout/fragment_call_detail">
+        <action
+            android:id="@+id/open_detail_message"
+            app:destination="@id/detail_message_from_call"
+            app:enterAnim="@anim/enter_from_bottom"
+            app:exitAnim="@anim/exit_to_bottom"
+            app:popEnterAnim="@anim/enter_from_bottom"
+            app:popExitAnim="@anim/exit_to_bottom" />
+    </fragment>
+    <fragment
+        android:id="@+id/detail_message_from_call"
+        android:name="com.dotsdev.idcaller.presentation.main.messagetab.detail.MessageDetailFragment"
+        android:label="MessageDetailFragment"
+        tools:layout="@layout/fragment_message_detail">
+        <argument
+            android:name="messageGroup"
+            app:argType="com.dotsdev.idcaller.data.model.MessageGroup" />
+    </fragment>
 </navigation>
