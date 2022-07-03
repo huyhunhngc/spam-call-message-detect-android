@@ -32,7 +32,7 @@ val viewModelModule = module {
     viewModel { ContactListViewModel(get()) }
     viewModel { InitialViewModel(get()) }
     viewModel { data -> MessageDetailViewModel(get(), data.get()) }
-    viewModel { SpamMessageViewModel(get(), get()) }
+    viewModel { SpamMessageViewModel(get(), get(), get()) }
     viewModel { InboxMessageViewModel(get()) }
     viewModel { ImportantMessageViewModel(get()) }
     viewModel { DialNumpadViewModel() }

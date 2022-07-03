@@ -8,7 +8,7 @@ class DetectSpamMessage(
     private val classifierMessage: ClassifierMessage
 ) {
     operator fun invoke(message: String): Boolean {
-        val classId = classifierMessage.predict(tfidfVectorizer.transform(message))
+        val classId = classifierMessage.predict(tfidfVectorizer.transformDocument(message))
         return classId != 0
     }
 }

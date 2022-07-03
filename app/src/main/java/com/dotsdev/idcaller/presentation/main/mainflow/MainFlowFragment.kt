@@ -75,9 +75,17 @@ class MainFlowFragment :
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         retrieveData()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        CoroutineScope(EmptyCoroutineContext).launch(Dispatchers.IO) {
+            retrieveContact().let(viewModel::setContactMemory)
+            retrieveCallLog().let(viewModel::setCallLogMemory)
+        }
     }
 
     private fun retrieveData() {
