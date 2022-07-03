@@ -53,7 +53,7 @@
         <entry key="app/src/main/res/layout/fragment_block.xml" value="0.12487335359675786" />
         <entry key="app/src/main/res/layout/fragment_blocking.xml" value="0.12083333333333333" />
         <entry key="app/src/main/res/layout/fragment_blocking_tab.xml" value="0.13977542891273637" />
-        <entry key="app/src/main/res/layout/fragment_call_detail.xml" value="0.3731023373811141" />
+        <entry key="app/src/main/res/layout/fragment_call_detail.xml" value="0.24074074074074073" />
         <entry key="app/src/main/res/layout/fragment_call_list.xml" value="0.12537993920972645" />
         <entry key="app/src/main/res/layout/fragment_call_tab.xml" value="0.11865942028985507" />
         <entry key="app/src/main/res/layout/fragment_contact_detail.xml" value="0.13280573155477604" />
@@ -68,6 +68,7 @@
         <entry key="app/src/main/res/layout/fragment_message_detail.xml" value="0.10326086956521739" />
         <entry key="app/src/main/res/layout/fragment_message_tab.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_spam_message.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_call_history.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_contact_or_message.xml" value="0.24982147216796877" />
         <entry key="app/src/main/res/layout/item_header_layout.xml" value="0.13858695652173914" />
         <entry key="app/src/main/res/layout/item_message_owner.xml" value="0.10874399071712329" />

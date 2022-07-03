@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_allow_blocking"
-                android:textSize="26sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/iv_allow_blocking"
                 app:layout_constraintTop_toTopOf="parent" />

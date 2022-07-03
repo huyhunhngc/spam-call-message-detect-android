@@ -2,7 +2,6 @@ package com.dotsdev.idcaller.presentation.main.messagetab.detail
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
-import androidx.lifecycle.map
 import com.dotsdev.idcaller.core.base.BaseViewModel
 import com.dotsdev.idcaller.data.memory.message.MessageMemory
 import com.dotsdev.idcaller.data.model.Message
@@ -17,14 +16,20 @@ class MessageDetailViewModel(
 ) : BaseViewModel() {
     private val memoryMessageList = messageGroup.messages
     val contact = memoryMessageList.lastOrNull()?.from
-    val isSupportReply = memoryMessageList.first().contact.phoneNumber.isPhoneNumber()
+    val isSupportReply = memoryMessageList.first().from.phoneNumber.isPhoneNumber()
 
     val message = MutableLiveData<List<Message>>()
     val messageTitle = MutableLiveData("")
 
     fun init() {
         message.postValue(memoryMessageList)
-        messageTitle.postValue(memoryMessageList.first().contact.callerName)
+        messageTitle.postValue(
+            memoryMessageList.first().let {
+                it.from.callerName.ifEmpty {
+                    it.contact.callerName
+                }
+            }
+        )
         viewModelScope.launch {
             contact?.let {
                 messageMemory.obs.asFlow().map {
@@ -32,7 +37,7 @@ class MessageDetailViewModel(
                         peer.from.phoneNumber == contact.phoneNumber
                     }
                 }.collectLatest {
-                    message.postValue(it)
+                    message.postValue(it.sortedByDescending { it.iat })
                 }
             }
         }

@@ -38,6 +38,6 @@ val viewModelModule = module {
     viewModel { DialNumpadViewModel() }
     viewModel { EditProfileViewModel()}
     viewModel { EditNumberPhoneViewModel() }
-    viewModel { data -> CallDetailViewModel(data.get(), get())}
+    viewModel { data -> CallDetailViewModel(data.get(), get(), get())}
     viewModel { BlockingTabViewModel() }
 }
