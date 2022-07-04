@@ -1,14 +1,17 @@
 package com.dotsdev.idcaller.presentation.main.mainflow
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.core.base.BaseFragment
 import com.dotsdev.idcaller.core.base.viewBindings
+import com.dotsdev.idcaller.data.local.CacheDataSource
 import com.dotsdev.idcaller.data.model.NavigationGraphInfo
 import com.dotsdev.idcaller.databinding.FragmentMainFlowBinding
 import com.dotsdev.idcaller.databinding.LayoutHeaderDrawerBinding
@@ -22,6 +25,7 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -32,6 +36,8 @@ class MainFlowFragment :
     override val binding: FragmentMainFlowBinding by viewBindings {
         FragmentMainFlowBinding.bind(it)
     }
+
+    private val cacheDataSource: CacheDataSource by inject()
 
     private val contactTab = ContactTabFragment.newInstance()
     private val messageTab = MessageTabFragment.newInstance()
@@ -80,8 +86,8 @@ class MainFlowFragment :
         retrieveData()
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onResume() {
+        super.onResume()
         CoroutineScope(EmptyCoroutineContext).launch(Dispatchers.IO) {
             retrieveContact().let(viewModel::setContactMemory)
             retrieveCallLog().let(viewModel::setCallLogMemory)
@@ -118,6 +124,12 @@ class MainFlowFragment :
         navigationDrawer.apply {
             setNavigationItemSelectedListener(this@MainFlowFragment)
             bringToFront()
+        }
+        val menuItem = navigationDrawer.menu.findItem(R.id.action_change_theme)
+        val switchId = menuItem.actionView as SwitchCompat
+        switchId.isChecked = cacheDataSource.getNightMode()
+        switchId.setOnCheckedChangeListener { _, isChecked ->
+            this@MainFlowFragment.viewModel.setAppTheme(isChecked)
         }
         headerBinding.editIcon.setOnClickListener {
             findNavController().navigate(
@@ -159,7 +171,6 @@ class MainFlowFragment :
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // TODO
         return true
     }
 }

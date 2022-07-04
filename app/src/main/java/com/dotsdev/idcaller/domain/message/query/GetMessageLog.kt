@@ -9,6 +9,7 @@ import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.utils.phoneNumberWithoutCountryCode
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
 
 class GetMessageLog(
@@ -25,16 +26,16 @@ class GetMessageLog(
                 val contact = contacts.find {
                     number == it.phoneNumber
                 }
-                message.copy(
-                    contact = contact ?: Contact(
-                        phoneNumber = message.messageNumber,
-                        callerName = message.messageName
+                kotlin.runCatching {
+                    message.copy(
+                        contact = contact ?: Contact(
+                            phoneNumber = message.messageNumber,
+                            callerName = message.messageName
+                        )
                     )
-                )
+                }.getOrDefault(message)
             }.sortedByDescending {
                 it.iat
-            }.also {
-                messageMemory.save(it)
             }
         }
     }
@@ -56,10 +57,7 @@ class GetMessageLog(
                 )
             }.sortedByDescending {
                 it.iat
-            }.also {
-                messageMemory.save(it)
             }
         }
     }
-
 }

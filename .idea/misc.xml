@@ -11,7 +11,6 @@
         <entry key="..\:/Users/huyhu/AndroidStudioProjects/IDCaller/app/src/main/res/layout/dialog_loading.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/huyhu/AndroidStudioProjects/IDCaller/app/src/main/res/layout/fragment_call_tab.xml" value="0.3541666666666667" />
         <entry key="..\:/Users/huyhu/AndroidStudioProjects/IDCaller/app/src/main/res/menu/menu_main_bottom.xml" value="0.25" />
-        <entry key="app/src/main/res/drawable-v24/shape_corner_radius_30.xml" value="0.206" />
         <entry key="app/src/main/res/drawable/bg_blue.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_blue_rounded_corner.xml" value="0.1435" />
         <entry key="app/src/main/res/drawable/bg_corner_solid.xml" value="0.1415" />
@@ -32,9 +31,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_phone_callback_24.xml" value="0.153" />
         <entry key="app/src/main/res/drawable/ic_baseline_smartphone_24.xml" value="0.1415" />
         <entry key="app/src/main/res/drawable/ic_camera.xml" value="0.1415" />
-        <entry key="app/src/main/res/drawable/ic_incomming_call.xml" value="0.206" />
         <entry key="app/src/main/res/drawable/ic_message_add.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/ic_outgoing_call.xml" value="0.206" />
         <entry key="app/src/main/res/drawable/ic_outline_call_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_outline_call_24_black.xml" value="0.1345" />
         <entry key="app/src/main/res/drawable/ic_outline_location_on_24.xml" value="0.1345" />
@@ -44,7 +41,6 @@
         <entry key="app/src/main/res/drawable/message_owner_background.xml" value="0.153" />
         <entry key="app/src/main/res/drawable/message_peer_background.xml" value="0.153" />
         <entry key="app/src/main/res/drawable/rounded_corner.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/shape_corner_radius_12.xml" value="0.206" />
         <entry key="app/src/main/res/drawable/shape_ripple_oval.xml" value="0.1415" />
         <entry key="app/src/main/res/drawable/splash.xml" value="0.1405" />
         <entry key="app/src/main/res/layout/activity_block_a_number.xml" value="0.2019231602765512" />
@@ -72,7 +68,6 @@
         <entry key="app/src/main/res/layout/fragment_message_detail.xml" value="0.10326086956521739" />
         <entry key="app/src/main/res/layout/fragment_message_tab.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_spam_message.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_call_history.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/item_contact_or_message.xml" value="0.24982147216796877" />
         <entry key="app/src/main/res/layout/item_header_layout.xml" value="0.13858695652173914" />
         <entry key="app/src/main/res/layout/item_message_owner.xml" value="0.10874399071712329" />
@@ -83,6 +78,7 @@
         <entry key="app/src/main/res/layout/test.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_drawer.xml" value="0.19895833333333332" />
         <entry key="app/src/main/res/menu/menu_main_bottom.xml" value="0.22447916666666667" />
+        <entry key="app/src/main/res/menu/menu_message_detail.xml" value="0.13240740740740742" />
       </map>
     </option>
   </component>

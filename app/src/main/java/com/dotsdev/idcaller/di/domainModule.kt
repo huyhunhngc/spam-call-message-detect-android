@@ -1,5 +1,6 @@
 package com.dotsdev.idcaller.di
 
+import com.dotsdev.idcaller.appSettingState.AppTheme
 import com.dotsdev.idcaller.data.memory.contact.CallMemory
 import com.dotsdev.idcaller.data.memory.contact.ContactMemory
 import com.dotsdev.idcaller.data.memory.message.MessageMemory
@@ -20,6 +21,7 @@ val domainModule = module {
     single { SpamMessageMemory() }
     single { ClassifierMessage.newInstance() }
     single { TfidfVectorizer.newInstance() }
+    single { AppTheme() }
     factory { GetCallLog(get(), get()) }
     factory { GetRecentContact(get(), get()) }
     factory { GetMessageLog(get(), get(), get()) }
