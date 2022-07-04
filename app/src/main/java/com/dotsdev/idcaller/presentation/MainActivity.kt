@@ -4,12 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.dotsdev.idcaller.R
+import com.dotsdev.idcaller.appSettingState.AppTheme
 import com.dotsdev.idcaller.core.base.viewBindings
-import com.dotsdev.idcaller.data.broadcast.SmsReceiveRepository
-import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.databinding.ActivityMainBinding
 import com.dotsdev.idcaller.domain.classifier.ClassifierMessage
 import com.dotsdev.idcaller.domain.vectorizer.TfidfVectorizer
@@ -27,22 +28,36 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModel()
     private val classifierMessage: ClassifierMessage by inject()
     private val tfidfVectorizer: TfidfVectorizer by inject()
+    private val appTheme: AppTheme by inject()
     var activeFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        startSmsService(this)
-        with(binding) {
-            setContentView(root)
-            lifecycleOwner = this@MainActivity
-            viewModel = this@MainActivity.viewModel
+        appTheme.obs.observeForever {
+            val theme = when (it) {
+                false -> AppCompatDelegate.MODE_NIGHT_NO
+                true -> AppCompatDelegate.MODE_NIGHT_YES
+            }
+            AppCompatDelegate.setDefaultNightMode(theme)
+            viewModel.onSaveModeNight(it)
         }
+        startSmsService(this)
         GlobalScope.launch {
             resources.openRawResource(R.raw.models).toStringValue()
                 ?.let { classifierMessage.init(it) }
             resources.openRawResource(R.raw.vectorizer).toStringValue()
                 ?.let { tfidfVectorizer.init(it) }
         }
+        super.onCreate(savedInstanceState)
+        binding.apply {
+            setContentView(root)
+            lifecycleOwner = this@MainActivity
+            viewModel = this@MainActivity.viewModel
+        }
+    }
+
+    override fun recreate() {
+        finish()
+        startActivity(intent)
     }
 
     private fun startSmsService(context: Context) {

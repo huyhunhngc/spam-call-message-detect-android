@@ -80,7 +80,7 @@ class SmsReceiveRepository : KoinComponent {
                     message.copy(isSpam = isSpam)
                 }?.let {
                     messageMemory.add(it)
-                    spamMessageMemory.add(it)
+                    spamMessageMemory.add(it.filter { it.isSpam })
                 }
             }
         }
