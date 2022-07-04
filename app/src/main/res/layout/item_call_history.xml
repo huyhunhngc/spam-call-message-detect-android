@@ -27,7 +27,6 @@
             android:layout_marginStart="8dp"
             android:maxLines="1"
             android:text="@{DateTimeExtKt.toTimeAndDatePattern(info.iat)}"
-            android:textColor="@color/textBlack"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/time"

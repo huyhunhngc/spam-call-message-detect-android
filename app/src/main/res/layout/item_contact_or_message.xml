@@ -64,7 +64,6 @@
             android:layout_marginStart="8dp"
             android:text="@{info.primaryLine}"
             android:textSize="15sp"
-            android:textColor="@color/textBlack"
             android:textStyle="bold"
             android:maxLines="1"
             app:layout_constraintStart_toEndOf="@+id/organization_image"

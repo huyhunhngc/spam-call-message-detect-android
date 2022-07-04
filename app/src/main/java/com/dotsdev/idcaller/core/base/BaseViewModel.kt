@@ -2,6 +2,7 @@ package com.dotsdev.idcaller.core.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dotsdev.idcaller.core.Loading
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Job
@@ -22,7 +23,7 @@ abstract class BaseViewModel :
     WithLifecycleScope {
 
     final override val observer: LifecycleScope by lifecycleScope()
-    val loading: com.dotsdev.idcaller.core.Loading = com.dotsdev.idcaller.core.Loading()
+    val loading: Loading = Loading()
     protected val _error: MutableSharedFlow<Throwable?> = MutableSharedFlow()
     val error: SharedFlow<Throwable?> =
         _error.shareIn(viewModelScope, SharingStarted.WhileSubscribed())
