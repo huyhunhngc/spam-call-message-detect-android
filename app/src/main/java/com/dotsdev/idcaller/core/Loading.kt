@@ -18,7 +18,7 @@ interface LoadingInterface {
     fun off()
 }
 
-class Loading : com.dotsdev.idcaller.core.LoadingInterface, StateFlow<Boolean> {
+class Loading : LoadingInterface, StateFlow<Boolean> {
 
     private val impl: MutableStateFlow<Boolean> = MutableStateFlow(false)
     private var count: Int = 0
@@ -58,13 +58,13 @@ class Loading : com.dotsdev.idcaller.core.LoadingInterface, StateFlow<Boolean> {
         impl.collect(collector)
     }
 
-    fun justOnceOff(): com.dotsdev.idcaller.core.OneTimeOffLoadingWrapper =
-        com.dotsdev.idcaller.core.OneTimeOffLoadingWrapper(this)
+    fun justOnceOff(): OneTimeOffLoadingWrapper =
+        OneTimeOffLoadingWrapper(this)
 }
 
 class OneTimeOffLoadingWrapper(
-    private val loading: com.dotsdev.idcaller.core.LoadingInterface
-) : com.dotsdev.idcaller.core.LoadingInterface {
+    private val loading: LoadingInterface
+) : LoadingInterface {
 
     private var beforeTurnedOn: Boolean = true
     private var beforeTurnedOff: Boolean = true

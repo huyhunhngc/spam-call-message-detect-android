@@ -15,3 +15,7 @@ object CachePreference : KotprefModel() {
     var isHasGrantPermission by booleanPref(false)
     var isCompleteInfo by booleanPref(false)
 }
+
+object AppPreference : KotprefModel() {
+    var isNightMode by booleanPref(false)
+}

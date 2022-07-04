@@ -14,6 +14,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavDeepLinkBuilder
 import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.data.model.Message
+import com.dotsdev.idcaller.data.model.toMessageGroup
 import com.dotsdev.idcaller.presentation.template.NormalAppbarActivity.Companion.DATA_FROM_KEY
 
 class QuickReplyNotification(val id: Int, val context: Context, val message: Message?) {
@@ -44,7 +45,7 @@ class QuickReplyNotification(val id: Int, val context: Context, val message: Mes
         val pendingIntent = NavDeepLinkBuilder(context)
             .setGraph(R.navigation.main_navigation)
             .setDestination(R.id.mainFlowFragment)
-            .setArguments(bundleOf(DATA_FROM_KEY to message))
+            .setArguments(bundleOf(DATA_FROM_KEY to listOf(message).mapNotNull { it }.toMessageGroup()))
             .createPendingIntent()
 
         val action: NotificationCompat.Action =
