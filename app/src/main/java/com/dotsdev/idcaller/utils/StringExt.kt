@@ -17,3 +17,11 @@ fun String.formatPhoneNUmber(): String {
 fun String.isPhoneNumber(): Boolean {
     return Patterns.PHONE.matcher(this).matches()
 }
+
+fun String.toVietnamese(): List<String> {
+    val regex = Regex("[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+")
+
+    return regex.findAll(this).map {
+        it.value
+    }.toList()
+}

@@ -18,8 +18,6 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.EmptyCoroutineContext
 
 class SpamMessageViewModel(
-    private val detectSpamMessage: DetectSpamMessage,
-    private val roomRepository: RoomRepository,
     private val getMessageLog: GetMessageLog,
 ) : BaseViewModel() {
     val listMessage = MutableLiveData<List<ContactMessageInfo>>(listOf())
@@ -27,25 +25,6 @@ class SpamMessageViewModel(
 
     val isListEmpty = listMessage.map {
         it.isEmpty()
-    }
-
-    init {
-        CoroutineScope(EmptyCoroutineContext).launch(Dispatchers.IO) {
-            getMessageLog.observeMessage().collect { messages ->
-                messages.map {
-                    it.copy(isSpam = detectSpamMessage(it.content) && it.sentByMe.not())
-                }.let {
-                    it.forEach {
-                        kotlin.runCatching {
-                            roomRepository.spamMessageDao().insert(it)
-                        }
-                    }
-                    if (listMessage.value.isNullOrEmpty()) {
-                        listMessage.postValue(it.convertToInfoData())
-                    }
-                }
-            }
-        }
     }
 
     override fun onStart() {
@@ -62,9 +41,6 @@ class SpamMessageViewModel(
             .map { it.toInfoData() }
     }
 
-    val onItemClick: ((info: ContactMessageInfo, position: Int) -> Unit) = { info, _ ->
-
-    }
     val onToDetailClick: ((info: ContactMessageInfo, position: Int) -> Unit) = { info, _ ->
         detailClick.postValue(info)
     }

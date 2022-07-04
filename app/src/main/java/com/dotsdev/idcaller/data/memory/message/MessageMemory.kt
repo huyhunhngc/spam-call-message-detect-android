@@ -23,7 +23,7 @@ open class MessageMemory {
         memoryMessage.addAll(
             info.map {
                 it.copy(messageId = "${it.iat.time}-${it.from.phoneNumber.phoneNumberWithoutCountryCode()}")
-            }
+            }.distinctBy { it.messageId }
         )
         obs.postValue(memoryMessage)
         stateFlow.tryEmit(info)

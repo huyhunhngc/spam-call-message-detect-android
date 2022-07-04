@@ -1,5 +1,6 @@
 package com.dotsdev.idcaller.domain.vectorizer
 
+import com.dotsdev.idcaller.utils.toVietnamese
 import com.google.gson.Gson
 
 class TfidfVectorizer {
@@ -24,21 +25,21 @@ class TfidfVectorizer {
             vocabFrequency[key] = 0.0
         }
         val documentVocab = document.split(" ").toSet()
-        var unknownWord = 0
+        var unknownWord = 0.0
         for (vocab in documentVocab) {
             if (vocab in wordSetIdf.keys) {
                 vocabFrequency[vocab] = termFrequency(vocab, document)
             } else {
-                unknownWord += 1
+                unknownWord += 1.0
             }
         }
 
         return vocabFrequency.values.toDoubleArray() to
-                (unknownWord.toDouble() / documentVocab.size > 0.5)
+                (unknownWord / documentVocab.size > 0.5)
     }
 
     private fun termFrequency(term: String, doc: String): Double {
-        val docSplit = doc.split(" ")
+        val docSplit = doc.toVietnamese()
         return docSplit.count { it == term }.toDouble() / docSplit.size
     }
 
