@@ -17,7 +17,8 @@ data class Message(
     @ColumnInfo(name = "messageNumber") val messageNumber: String = "",
     @ColumnInfo(name = "isSpam") var isSpam: Boolean = false,
     @ColumnInfo(name = "contact") val contact: Contact = Contact(),
-    @ColumnInfo(name = "sentByMe") var sentByMe: Boolean = false
+    @ColumnInfo(name = "sentByMe") var sentByMe: Boolean = false,
+    @ColumnInfo(name = "originalAddress") var originalAddress: String = ""
 ) : Serializable
 
 enum class MessageType(val value: String) {

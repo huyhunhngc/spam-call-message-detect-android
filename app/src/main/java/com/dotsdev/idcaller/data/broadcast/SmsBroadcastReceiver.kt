@@ -14,6 +14,7 @@ import com.dotsdev.idcaller.domain.detectSpam.DetectSpamMessage
 import com.dotsdev.idcaller.presentation.notification.BlockNotification
 import com.dotsdev.idcaller.presentation.notification.QuickReplyNotification
 import com.dotsdev.idcaller.utils.phoneNumberWithoutCountryCode
+import com.dotsdev.idcaller.utils.saveReceivedSms
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -53,6 +54,7 @@ class SmsReceiveRepository : KoinComponent {
                         iat = Date(time),
                         type = MessageType.SMS,
                         messageName = "",
+                        originalAddress = smsMessage.originatingAddress.toString(),
                         messageNumber = address
                     )
                     val isSpam = detectSpamMessage(message.content)
@@ -81,6 +83,9 @@ class SmsReceiveRepository : KoinComponent {
                 }?.let {
                     messageMemory.add(it)
                     spamMessageMemory.add(it.filter { it.isSpam })
+                    it.forEach {
+                        context?.saveReceivedSms(it.originalAddress, it.content)
+                    }
                 }
             }
         }
