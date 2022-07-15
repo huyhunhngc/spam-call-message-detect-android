@@ -20,8 +20,7 @@ fun String.isPhoneNumber(): Boolean {
 
 fun String.toVietnamese(): List<String> {
     val regex = Regex("[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+")
-
-    return regex.findAll(this).map {
+    return regex.findAll(this.lowercase()).map {
         it.value
     }.toList()
 }

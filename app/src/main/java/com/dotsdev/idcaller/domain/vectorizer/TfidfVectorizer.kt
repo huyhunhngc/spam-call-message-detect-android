@@ -24,17 +24,26 @@ class TfidfVectorizer {
         for (key in wordSetIdf.keys) {
             vocabFrequency[key] = 0.0
         }
-        val documentVocab = document.toVietnamese().toSet()
+        var newDocument = document.toVietnamese()
+        val documentVocab = newDocument.toSet()
+        val newDocumentStr = newDocument.joinToString(separator = " ")
+
         var unknownWord = 0.0
         for (vocab in documentVocab) {
             if (vocab in wordSetIdf.keys) {
-                vocabFrequency[vocab] = termFrequency(vocab, document)
+                vocabFrequency[vocab] = wordSetIdf[vocab]!! * termFrequency(vocab, newDocumentStr)
             } else {
                 unknownWord += 1.0
             }
         }
 
-        return vocabFrequency.values.toDoubleArray() to
+        val vocabFrequencyList: MutableList<Pair<String, Double>> = mutableListOf()
+        vocabFrequency.forEach {
+            vocabFrequencyList.add(Pair(it.key, it.value))
+        }
+        vocabFrequencyList.sortBy { it.first }
+
+        return vocabFrequencyList.map{ it.second }.toDoubleArray() to
                 (unknownWord / documentVocab.size > 0.5)
     }
 

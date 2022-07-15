@@ -39,12 +39,14 @@ class MainFlowViewModel(
 
     override fun onCreate() {
         super.onCreate()
-        GlobalScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             getMessageLog.observeMessage().collect { messages ->
                 messages.map {
                     it.copy(isSpam = detectSpamMessage(it.content) && it.sentByMe.not())
                 }.let {
-                    it.filter { it.isSpam }.forEach {
+                    it.filter { it.isSpam }.also {
+                        spamMessageMemory.add(it)
+                    }.forEach {
                         kotlin.runCatching {
                             roomRepository.spamMessageDao().insert(it)
                         }
