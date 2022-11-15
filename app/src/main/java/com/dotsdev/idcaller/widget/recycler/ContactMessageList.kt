@@ -2,11 +2,13 @@ package com.dotsdev.idcaller.widget.recycler
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.GroupieViewHolder
-import com.xwray.groupie.Section
+import com.dotsdev.idcaller.adapter.BaseListAdapter
+import com.dotsdev.idcaller.databinding.ItemContactOrMessageBinding
 
 class ContactMessageList @JvmOverloads constructor(
     context: Context,
@@ -14,17 +16,10 @@ class ContactMessageList @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : RecyclerView(context, attrs, defStyleAttr) {
 
-    private val groupAdapter = GroupAdapter<GroupieViewHolder>()
+    private val groupAdapter = ContactMessageListAdapter()
     private var isOptionVisible = false
     private var isArrowVisible = true
-    private var onItemOptionClicked: ((key: ContactMessageInfo, position: Int) -> Unit)? =
-        null
-
-    private var onItemClicked: ((key: ContactMessageInfo, position: Int) -> Unit)? =
-        null
-    private lateinit var info: ContactMessageInfo
-    private var infos: List<ContactMessageInfo> = listOf()
-    private var recentInfos: List<ContactMessageInfo> = listOf()
+    private var recentInfo: List<ContactMessageInfo> = listOf()
 
     init {
         initializeViews()
@@ -47,98 +42,89 @@ class ContactMessageList @JvmOverloads constructor(
         contacts: List<ContactMessageInfo>?
     ) {
         val data = contacts ?: return
-        recentInfos = data
-        groupAdapter.add(0,
-            Section().apply {
-                setFooter(
-                    RecentContactListItem(
-                        info = ListContactMessageInfo(data)
-                    )
-                )
-            }
-        )
+        recentInfo = data
+//        groupAdapter.add(0,
+//            Section().apply {
+//                setFooter(
+//                    RecentContactListItem(
+//                        info = ListContactMessageInfo(data)
+//                    )
+//                )
+//            }
+//        )
     }
 
     fun setInfoList(
         contacts: List<ContactMessageInfo>?
     ) {
-        contacts ?: return
-        if (infos.isEmpty() || contacts.firstOrNull()?.dataFrom !is FromData.FromMessageGroup) {
-            groupAdapter.clear()
-            groupAdapter.addAll(
-                contacts.mapIndexed { index, info ->
-                    val needSection = kotlin.runCatching {
-                        contacts[index - 1].peerName[0] != info.peerName[0]
-                    }.getOrDefault(true)
-
-                    Section().apply {
-                        if (needSection && info.type == ItemType.CONTACT) {
-                            setHeader(SectionAlphabetItem(info.peerName.substring(0, 1)))
-                        }
-                        setFooter(
-                            ContactMessageItem(
-                                info = info
-                            ).apply {
-                                setOnItemArrowClicked { info, position ->
-                                    this@ContactMessageList.info = info
-
-                                }
-                                setOnItemClicked { info, position ->
-                                    onItemClicked?.invoke(info, position)
-                                }
-                            }
-                        )
-                    }
-                }
-            )
-        }
-        if (contacts.firstOrNull()?.dataFrom is FromData.FromMessageGroup) {
-            if (infos == contacts) return
-            val needUpdate = mutableListOf<ContactMessageInfo>()
-            contacts.forEach { item ->
-                infos.find { it.peerName == item.peerName }?.let {
-                    if (it.subLine != item.subLine) {
-                        needUpdate.add(item)
-                    }
-                }
-            }
-            var removeCount = 0
-            infos.forEachIndexed { index, info ->
-                if (needUpdate.map { it.peerName }.contains(info.peerName)) {
-                    kotlin.runCatching {
-                        groupAdapter.removeGroupAtAdapterPosition(index - removeCount)
-                        removeCount += 1
-                    }
-                }
-            }
-            needUpdate.forEach { info ->
-                groupAdapter.add(0,
-                    Section().apply {
-                        setFooter(
-                            ContactMessageItem(
-                                info = info
-                            ).apply {
-                                setOnItemArrowClicked { info, position ->
-                                    this@ContactMessageList.info = info
-                                }
-                                setOnItemClicked { info, position ->
-                                    onItemClicked?.invoke(info, position)
-                                }
-                            }
-                        )
-                    }
-                )
-                this.smoothScrollToPosition(0)
-            }
-        }
-        infos = contacts
+        val contactInfo = contacts?.mapIndexed { index, info ->
+            val needSection = runCatching {
+                contacts[index - 1].peerName[0] != info.peerName[0] && info.type == ItemType.CONTACT
+            }.getOrDefault(false)
+            info.copy(showAlphabetSection = needSection)
+        }.orEmpty()
+        groupAdapter.submitList(contactInfo)
     }
 
     fun setOnItemArrowClicked(onItemOptionClicked: ((info: ContactMessageInfo, position: Int) -> Unit)?) {
-        this.onItemOptionClicked = onItemOptionClicked
+        //this.onItemOptionClicked = onItemOptionClicked
     }
 
     fun setOnItemClicked(onItemClicked: ((info: ContactMessageInfo, position: Int) -> Unit)?) {
+        onItemClicked?.let { groupAdapter.setOnItemClicked(it) }
+    }
+}
+
+class ContactMessageListAdapter :
+    BaseListAdapter<ContactMessageInfo, ItemContactOrMessageBinding>() {
+    private var onItemOptionClicked: ((info: ContactMessageInfo, position: Int) -> Unit)? = null
+
+    private var onItemClicked: ((info: ContactMessageInfo, position: Int) -> Unit)? = null
+
+    override fun createBinding(parent: ViewGroup): ItemContactOrMessageBinding {
+        return ItemContactOrMessageBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+    }
+
+    override fun onBind(
+        binding: ItemContactOrMessageBinding,
+        data: ContactMessageInfo,
+        position: Int
+    ) {
+        binding.apply {
+            info = data
+            organizationImage.setBackgroundColor(data.getColorBackground())
+            headerText.isVisible = data.showAlphabetSection
+            headerText.text = data.firstCharacterOfName
+
+            data.unknownNumberIcon?.let {
+                avatarText.isVisible = false
+                avatarIcon.isVisible = true
+                avatarIcon.setColorFilter(data.getPrimaryColor())
+                avatarIcon.setImageDrawable(root.resources.getDrawable(it, null))
+            } ?: kotlin.run {
+                avatarText.text = data.firstCharacterOfName
+                avatarText.setTextColor(data.getPrimaryColor())
+                avatarText.isVisible = data.peerPhotoUrl.isBlank()
+                avatarIcon.isVisible = false
+            }
+            data.subLineStartIcon?.let {
+                organizationSubText.setCompoundDrawablesWithIntrinsicBounds(
+                    it, 0, 0, 0
+                )
+            }
+            root.setOnClickListener { onItemClicked?.invoke(data, position) }
+        }
+    }
+
+    fun setOnItemOptionClicked(onItemOptionClicked: ((info: ContactMessageInfo, position: Int) -> Unit)) {
+        this.onItemOptionClicked = onItemOptionClicked
+    }
+
+    fun setOnItemClicked(onItemClicked: ((info: ContactMessageInfo, position: Int) -> Unit)) {
         this.onItemClicked = onItemClicked
     }
 }

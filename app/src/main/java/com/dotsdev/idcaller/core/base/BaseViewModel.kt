@@ -24,7 +24,7 @@ abstract class BaseViewModel :
 
     final override val observer: LifecycleScope by lifecycleScope()
     val loading: Loading = Loading()
-    protected val _error: MutableSharedFlow<Throwable?> = MutableSharedFlow()
+    private val _error: MutableSharedFlow<Throwable?> = MutableSharedFlow()
     val error: SharedFlow<Throwable?> =
         _error.shareIn(viewModelScope, SharingStarted.WhileSubscribed())
 

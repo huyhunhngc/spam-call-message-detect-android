@@ -1,12 +1,14 @@
 package com.dotsdev.idcaller.widget.recycler
 
 import androidx.annotation.DrawableRes
+import com.dotsdev.idcaller.R
+import com.dotsdev.idcaller.adapter.Identifiable
 import com.dotsdev.idcaller.data.model.CallGroup
 import com.dotsdev.idcaller.data.model.Contact
 import com.dotsdev.idcaller.data.model.MessageGroup
-import com.dotsdev.idcaller.utils.convertTimestampToHours
-import com.dotsdev.idcaller.utils.isPhoneNumber
+import com.dotsdev.idcaller.utils.*
 import java.io.Serializable
+import java.util.*
 
 data class ContactMessageInfo(
     val dataFrom: FromData,
@@ -17,8 +19,44 @@ data class ContactMessageInfo(
     val subLine: String = "",
     val type: ItemType = ItemType.CONTACT,
     val unknownNumber: Boolean = false,
+    val showAlphabetSection: Boolean = false,
     @DrawableRes val subLineStartIcon: Int? = null
-) : Serializable
+) : Serializable, Identifiable {
+
+    override val id: String
+        get() = when (dataFrom) {
+            is FromData.FromContact -> dataFrom.contact.phoneNumber
+            is FromData.FromMessageGroup -> dataFrom.messageGroup.groupId
+            is FromData.FromCallGroup -> dataFrom.callGroup.callId
+        }
+
+    private val isOrganization: Boolean get() = !peerName.isPhoneNumber()
+
+    val unknownNumberIcon: Int?
+        get() = when {
+            isOrganization && unknownNumber -> R.drawable.ic_baseline_business
+            !isOrganization && unknownNumber -> R.drawable.ic_baseline_perm_identity
+            else -> null
+        }
+
+    val firstCharacterOfName: String
+        get() = peerName.firstOrNull()?.toString()?.uppercase(Locale.getDefault()).orEmpty()
+
+    val isSpamMessage: Boolean
+        get() = (dataFrom as? FromData.FromMessageGroup)?.messageGroup?.messages?.any { it.isSpam }
+            ?: false
+
+    private val fieldColor
+        get() = if (isSpamMessage) Colors.RED else peerName.getColorFromName()
+
+    fun getColorBackground(): Int {
+        return fieldColor.getBackgroundColor()
+    }
+
+    fun getPrimaryColor(): Int {
+        return fieldColor.getPrimaryColor()
+    }
+}
 
 data class ListContactMessageInfo(
     val contactMessageInfos: List<ContactMessageInfo> = listOf()

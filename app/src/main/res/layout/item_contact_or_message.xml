@@ -14,9 +14,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
         android:paddingHorizontal="8dp"
-        android:paddingVertical="16dp">
+        android:paddingVertical="12dp"
+        android:foreground="?attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/header_text"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:textSize="32sp"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="H" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/organization_image"
@@ -26,7 +38,7 @@
             app:imageUrl="@{info.peerPhotoUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_text"
             app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CircleImageView" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -68,7 +80,7 @@
             android:maxLines="1"
             app:layout_constraintStart_toEndOf="@+id/organization_image"
             app:layout_constraintEnd_toStartOf="@+id/time"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_text"
             tools:text="21236" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -76,6 +88,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
+            android:layout_marginEnd="16dp"
             android:text="@{info.time}"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -84,7 +97,7 @@
             app:layout_constraintWidth_percent="0.2"
             app:layout_constraintStart_toEndOf="@+id/organization_text"
             app:layout_constraintEnd_toStartOf="@+id/ic_arrow"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/organization_text"
             tools:text="21236" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -95,19 +108,17 @@
             android:layout_marginEnd="48dp"
             android:text="@{info.subLine}"
             android:textSize="13sp"
-            android:maxLines="1"
+            android:maxLines="2"
             android:ellipsize="end"
             app:layout_constraintTop_toBottomOf="@+id/organization_text"
             app:layout_constraintStart_toEndOf="@+id/organization_image"
-            app:layout_constraintEnd_toStartOf="@+id/ic_arrow"
-            app:layout_constraintBottom_toBottomOf="@+id/organization_image"
-            tools:text="asadf" />
+            app:layout_constraintEnd_toStartOf="@+id/ic_arrow" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ic_arrow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingStart="8dp"
+            android:layout_marginStart="8dp"
             android:src="@drawable/ic_right_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

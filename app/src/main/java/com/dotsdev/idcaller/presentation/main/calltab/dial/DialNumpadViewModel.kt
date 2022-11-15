@@ -48,10 +48,7 @@ class DialNumpadViewModel : BaseViewModel() {
         viewModelScope.launch {
             while (numberValue.isNotEmpty()) {
                 if (deleteJob) {
-                    numberValue = numberValue.substring(
-                        0,
-                        numberValue.length - 1
-                    )
+                    numberValue = numberValue.substring(0, numberValue.length - 1)
                 } else {
                     return@launch
                 }
