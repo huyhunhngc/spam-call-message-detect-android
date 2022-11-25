@@ -1,6 +1,5 @@
 package com.dotsdev.idcaller.domain.classifier
 
-import android.util.Log
 import com.dotsdev.idcaller.domain.classifier.model.Models
 import com.google.gson.Gson
 import kotlin.math.exp

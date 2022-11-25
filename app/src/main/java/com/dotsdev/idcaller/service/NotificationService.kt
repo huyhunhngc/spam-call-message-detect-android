@@ -8,20 +8,19 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import com.dotsdev.idcaller.R
 
 class NotificationService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.let {
             createNotificationChannel()
-            val fakeNotification = NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_app)
-                .setContentTitle("Caller is running")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setOngoing(true)
-                .build()
-            startForeground(100, fakeNotification)
+            startForeground(
+                SERVICE_ID,
+                NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setOngoing(true)
+                    .build()
+            )
         }
         return START_STICKY
     }
@@ -42,5 +41,6 @@ class NotificationService : Service() {
 
     companion object {
         private const val CHANNEL_ID = "on_foreground"
+        private const val SERVICE_ID = 1234
     }
 }

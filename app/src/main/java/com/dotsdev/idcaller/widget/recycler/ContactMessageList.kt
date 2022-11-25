@@ -43,15 +43,6 @@ class ContactMessageList @JvmOverloads constructor(
     ) {
         val data = contacts ?: return
         recentInfo = data
-//        groupAdapter.add(0,
-//            Section().apply {
-//                setFooter(
-//                    RecentContactListItem(
-//                        info = ListContactMessageInfo(data)
-//                    )
-//                )
-//            }
-//        )
     }
 
     fun setInfoList(

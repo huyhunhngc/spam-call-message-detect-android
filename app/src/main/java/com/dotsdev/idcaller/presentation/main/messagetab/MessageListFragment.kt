@@ -1,24 +1,14 @@
 package com.dotsdev.idcaller.presentation.main.messagetab
 
-import android.annotation.SuppressLint
-import android.app.role.RoleManager
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.provider.Telephony
 import android.view.View
-import androidx.core.content.ContextCompat.getSystemService
 import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.adapter.MessageViewPagerAdapter
 import com.dotsdev.idcaller.core.base.BaseFragment
 import com.dotsdev.idcaller.core.base.viewBindings
-import com.dotsdev.idcaller.data.model.Contact
-import com.dotsdev.idcaller.data.model.Message
-import com.dotsdev.idcaller.data.model.MessageType
 import com.dotsdev.idcaller.databinding.FragmentMessageListBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class MessageListFragment :
     BaseFragment<MessageListViewModel, FragmentMessageListBinding>(R.layout.fragment_message_list) {
@@ -38,7 +28,6 @@ class MessageListFragment :
         initViews()
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     private fun initViews() {
         with(binding) {
             viewPager.adapter =

@@ -17,6 +17,8 @@ import com.dotsdev.idcaller.domain.classifier.ClassifierMessage
 import com.dotsdev.idcaller.domain.vectorizer.TfidfVectorizer
 import com.dotsdev.idcaller.service.NotificationService
 import com.dotsdev.idcaller.utils.toStringValue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -42,18 +44,17 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(theme)
             viewModel.onSaveModeNight(it)
         }
+        super.onCreate(savedInstanceState)
         startSmsService(this)
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             resources.openRawResource(R.raw.models).toStringValue()
                 ?.let { classifierMessage.init(it) }
             resources.openRawResource(R.raw.vectorizer).toStringValue()
                 ?.let { tfidfVectorizer.init(it) }
         }
-        super.onCreate(null)
         binding.apply {
             setContentView(root)
             lifecycleOwner = this@MainActivity
-            viewModel = this@MainActivity.viewModel
         }
     }
 
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun startSmsService(context: Context) {
         val intentService = Intent(context, NotificationService::class.java)
-        if (isMyServiceRunning(NotificationService::class.java).not()) {
+        if (!isMyServiceRunning(NotificationService::class.java)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 context.startForegroundService(intentService)
             } else {

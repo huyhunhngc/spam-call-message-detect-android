@@ -54,7 +54,6 @@ class MainFlowFragment :
     private fun initViews() {
         setHasOptionsMenu(true)
         with(binding) {
-            viewModel = this@MainFlowFragment.viewModel
             mainActivity()?.apply {
                 setSupportActionBar(toolbar)
                 supportActionBar?.apply {
