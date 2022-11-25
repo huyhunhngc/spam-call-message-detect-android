@@ -1,5 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/nav_message"
+        android:icon="@drawable/ic_baseline_message_24"
+        android:title="@string/message" />
+    <item
         android:id="@+id/nav_call"
         android:icon="@drawable/ic_baseline_phone_callback_24"
         android:title="@string/call" />
@@ -7,10 +11,6 @@
         android:id="@+id/nav_contact"
         android:icon="@drawable/ic_contact"
         android:title="@string/contact" />
-    <item
-        android:id="@+id/nav_message"
-        android:icon="@drawable/ic_baseline_message_24"
-        android:title="@string/message" />
     <item
         android:id="@+id/nav_blocking"
         android:icon="@drawable/ic_baseline_app_blocking"

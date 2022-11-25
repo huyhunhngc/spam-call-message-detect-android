@@ -13,7 +13,6 @@ import com.dotsdev.idcaller.presentation.main.mainflow.MainFlowViewModel
 import com.dotsdev.idcaller.presentation.main.messagetab.MessageListViewModel
 import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabViewModel
 import com.dotsdev.idcaller.presentation.main.messagetab.detail.MessageDetailViewModel
-import com.dotsdev.idcaller.presentation.main.messagetab.tablayout.ImportantMessageViewModel
 import com.dotsdev.idcaller.presentation.main.messagetab.tablayout.InboxMessageViewModel
 import com.dotsdev.idcaller.presentation.main.messagetab.tablayout.SpamMessageViewModel
 import com.dotsdev.idcaller.presentation.main.profile.EditNumberPhoneViewModel
@@ -34,7 +33,6 @@ val viewModelModule = module {
     viewModel { data -> MessageDetailViewModel(get(), get(), data.get()) }
     viewModel { SpamMessageViewModel(get()) }
     viewModel { InboxMessageViewModel(get()) }
-    viewModel { ImportantMessageViewModel(get()) }
     viewModel { DialNumpadViewModel() }
     viewModel { EditProfileViewModel()}
     viewModel { EditNumberPhoneViewModel() }

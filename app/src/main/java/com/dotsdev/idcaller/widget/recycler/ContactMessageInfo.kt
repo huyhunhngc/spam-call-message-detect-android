@@ -42,7 +42,7 @@ data class ContactMessageInfo(
     val firstCharacterOfName: String
         get() = peerName.firstOrNull()?.toString()?.uppercase(Locale.getDefault()).orEmpty()
 
-    val isSpamMessage: Boolean
+    private val isSpamMessage: Boolean
         get() = (dataFrom as? FromData.FromMessageGroup)?.messageGroup?.messages?.any { it.isSpam }
             ?: false
 

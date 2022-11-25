@@ -18,7 +18,6 @@ class MessageListFragment :
     }
     private val tabTitle = listOf(
         Pair("Inbox", R.drawable.ic_baseline_inbox_24),
-        Pair("Important", R.drawable.ic_baseline_star_24),
         Pair("Spam", R.drawable.ic_baseline_app_blocking_24)
     )
     private var mediator: TabLayoutMediator? = null

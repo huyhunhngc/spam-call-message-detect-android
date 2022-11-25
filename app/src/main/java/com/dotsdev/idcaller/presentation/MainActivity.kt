@@ -9,18 +9,10 @@ import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.appSettingState.AppTheme
 import com.dotsdev.idcaller.core.base.viewBindings
 import com.dotsdev.idcaller.databinding.ActivityMainBinding
-import com.dotsdev.idcaller.domain.classifier.ClassifierMessage
-import com.dotsdev.idcaller.domain.vectorizer.TfidfVectorizer
 import com.dotsdev.idcaller.service.NotificationService
-import com.dotsdev.idcaller.utils.toStringValue
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,8 +22,6 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(it)
     }
     private val viewModel: MainViewModel by viewModel()
-    private val classifierMessage: ClassifierMessage by inject()
-    private val tfidfVectorizer: TfidfVectorizer by inject()
     private val appTheme: AppTheme by inject()
     var activeFragment: Fragment? = null
 
@@ -46,12 +36,6 @@ class MainActivity : AppCompatActivity() {
         }
         super.onCreate(savedInstanceState)
         startSmsService(this)
-        CoroutineScope(Dispatchers.IO).launch {
-            resources.openRawResource(R.raw.models).toStringValue()
-                ?.let { classifierMessage.init(it) }
-            resources.openRawResource(R.raw.vectorizer).toStringValue()
-                ?.let { tfidfVectorizer.init(it) }
-        }
         binding.apply {
             setContentView(root)
             lifecycleOwner = this@MainActivity
@@ -75,12 +59,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isMyServiceRunning(serviceClass: Class<*>): Boolean {
-        val manager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
-        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
-            if (serviceClass.name == service.service.className) {
-                return true
-            }
-        }
-        return false
+        return (getSystemService(ACTIVITY_SERVICE) as ActivityManager)
+            .getRunningServices(Int.MAX_VALUE)
+            .any { serviceClass.name == it.service.className }
     }
 }

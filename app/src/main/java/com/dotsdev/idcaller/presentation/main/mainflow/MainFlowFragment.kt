@@ -62,8 +62,8 @@ class MainFlowFragment :
                 }
             }
             setupDrawer()
-            navView.selectedItemId = PageTabType.NAV_CALL.menuId
-            onCheckFragmentContain(PageTabType.NAV_CALL.menuId)
+            navView.selectedItemId = PageTabType.NAV_MESSAGE.menuId
+            onCheckFragmentContain(PageTabType.NAV_MESSAGE.menuId)
             navView.setOnItemSelectedListener { item ->
                 return@setOnItemSelectedListener onCheckFragmentContain(item.itemId)
             }
