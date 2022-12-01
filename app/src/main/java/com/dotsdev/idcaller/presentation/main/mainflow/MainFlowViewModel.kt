@@ -12,10 +12,10 @@ import com.dotsdev.idcaller.data.model.*
 import com.dotsdev.idcaller.domain.detectSpam.DetectSpamMessage
 import com.dotsdev.idcaller.domain.message.query.GetMessageLog
 import com.dotsdev.idcaller.usecase.UserUsecase
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.launch
 
+@OptIn(DelicateCoroutinesApi::class)
 class MainFlowViewModel(
     private val contactMemory: ContactMemory,
     private val callMemory: CallMemory,
@@ -28,34 +28,49 @@ class MainFlowViewModel(
     private val userUsecase: UserUsecase
 ) : BaseViewModel() {
     val user = MutableLiveData<User>()
+
     override fun onStart() {
         viewModelScope.launch {
             userUsecase.getUser()?.let(user::postValue)
         }
-        // TODO: mock
-        user.postValue(User(phoneNumber = "0352669370", name = "Văn Huy"))
+        user.postValue(User(phoneNumber = "0352669370", name = ""))
     }
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
-            getMessageLog.observeMessage().distinctUntilChanged().collect { messages ->
-                messages.map {
-                    it.copy(isSpam = detectSpamMessage(it.content) && !it.sentByMe)
-                }.filter { it.isSpam }.forEach {
-                    kotlin.runCatching {
-                        roomRepository.spamMessageDao().insert(it)
-                    }
+        GlobalScope.launch(Dispatchers.Default) {
+            val detectedMessageSpam = getSpamMessage().map { it.messageId }
+            getMessageLog.observeMessage()
+                .distinctUntilChanged()
+                .collect { messages ->
+                    messages
+                        .map {
+                            val isSpam = if (detectedMessageSpam.contains(it.messageId)) {
+                                true
+                            } else {
+                                detectSpamMessage(it.content)
+                            }
+                            it.copy(isSpam = isSpam)
+                        }
+                        .filter { it.isSpam }
+                        .also(spamMessageMemory::set)
+                        .forEach { insertMessageDao(it) }
                 }
-            }
         }
-        getSpamMessage()
     }
 
-    private fun getSpamMessage() {
-        viewModelScope.launch {
-            roomRepository.spamMessageDao().getMessages()?.filterNotNull()
-                ?.let(spamMessageMemory::set)
+    private fun insertMessageDao(message: Message) {
+        viewModelScope.launch(Dispatchers.IO) {
+            kotlin.runCatching {
+                roomRepository.spamMessageDao().insert(message)
+            }
         }
+    }
+
+    private suspend fun getSpamMessage(): List<Message> = withContext(Dispatchers.IO) {
+        roomRepository.spamMessageDao()
+            .getMessages()
+            ?.filterNotNull()
+            .orEmpty()
     }
 
     fun setContactMemory(contacts: List<Contact>) {

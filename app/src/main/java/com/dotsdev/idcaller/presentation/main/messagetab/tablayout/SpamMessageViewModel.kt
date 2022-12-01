@@ -21,8 +21,7 @@ class SpamMessageViewModel(
         it.isEmpty()
     }
 
-    override fun onStart() {
-        super.onStart()
+    init {
         viewModelScope.launch {
             getMessageLog.observeSpam().collect {
                 listMessage.postValue(it.convertToInfoData())

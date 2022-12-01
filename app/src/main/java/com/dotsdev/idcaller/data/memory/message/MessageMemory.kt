@@ -1,17 +1,17 @@
 package com.dotsdev.idcaller.data.memory.message
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asFlow
-import androidx.lifecycle.asLiveData
 import com.dotsdev.idcaller.data.model.Contact
 import com.dotsdev.idcaller.data.model.Message
 import com.dotsdev.idcaller.utils.phoneNumberWithoutCountryCode
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.map
 
 open class MessageMemory {
     private val stateFlow = MutableStateFlow(listOf<Message>())
-    val memoryMessage = mutableListOf<Message>()
+    private val memoryMessage = mutableListOf<Message>()
     val obs = MutableLiveData<List<Message>>()
 
     fun observe(): Flow<List<Message>> {
