@@ -27,9 +27,6 @@ open class MessageListViewModel(
         }
     }
 
-    val onItemClick: ((info: ContactMessageInfo, position: Int) -> Unit) = { info, _ ->
-
-    }
     val onToDetailClick: ((info: ContactMessageInfo, position: Int) -> Unit) = { info, _ ->
         detailClick.postValue(info)
     }

@@ -7,9 +7,11 @@ import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.core.base.BaseFragment
+import com.dotsdev.idcaller.core.base.lifecycleScope
 import com.dotsdev.idcaller.core.base.viewBindings
 import com.dotsdev.idcaller.data.local.CacheDataSource
 import com.dotsdev.idcaller.data.model.NavigationGraphInfo
@@ -28,6 +30,10 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.coroutines.EmptyCoroutineContext
+
+object TabState {
+    var tabType = PageTabType.NAV_MESSAGE
+}
 
 class MainFlowFragment :
     BaseFragment<MainFlowViewModel, FragmentMainFlowBinding>(R.layout.fragment_main_flow),
@@ -62,8 +68,8 @@ class MainFlowFragment :
                 }
             }
             setupDrawer()
-            navView.selectedItemId = PageTabType.NAV_MESSAGE.menuId
-            onCheckFragmentContain(PageTabType.NAV_MESSAGE.menuId)
+            navView.selectedItemId = TabState.tabType.menuId
+            onCheckFragmentContain(TabState.tabType.menuId)
             navView.setOnItemSelectedListener { item ->
                 return@setOnItemSelectedListener onCheckFragmentContain(item.itemId)
             }
@@ -72,10 +78,10 @@ class MainFlowFragment :
 
     private fun onCheckFragmentContain(menu: Int): Boolean {
         return when (menu) {
-            PageTabType.NAV_CALL.menuId -> loadFragment(callTab)
-            PageTabType.NAV_CONTACT.menuId -> loadFragment(contactTab)
-            PageTabType.NAV_MESSAGE.menuId -> loadFragment(messageTab)
-            PageTabType.NAV_BLOCKING.menuId -> loadFragment(blockingTab)
+            PageTabType.NAV_CALL.menuId -> loadFragment(callTab, PageTabType.NAV_CALL)
+            PageTabType.NAV_CONTACT.menuId -> loadFragment(contactTab, PageTabType.NAV_CONTACT)
+            PageTabType.NAV_MESSAGE.menuId -> loadFragment(messageTab, PageTabType.NAV_MESSAGE)
+            PageTabType.NAV_BLOCKING.menuId -> loadFragment(blockingTab, PageTabType.NAV_BLOCKING)
             else -> false
         }
     }
@@ -87,14 +93,14 @@ class MainFlowFragment :
 
     override fun onResume() {
         super.onResume()
-        CoroutineScope(EmptyCoroutineContext).launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.IO) {
             retrieveContact().let(viewModel::setContactMemory)
             retrieveCallLog().let(viewModel::setCallLogMemory)
         }
     }
 
     private fun retrieveData() {
-        CoroutineScope(EmptyCoroutineContext).launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.IO) {
             retrieveContact().let(viewModel::setContactMemory)
             retrieveCallLog().let(viewModel::setCallLogMemory)
             (retrieveInBox() + retrieveSent()).let(viewModel::setMessageMemory)
@@ -142,19 +148,21 @@ class MainFlowFragment :
         }
     }
 
-    private fun loadFragment(fragment: Fragment): Boolean {
+    private fun loadFragment(fragment: Fragment, tabType: PageTabType): Boolean {
         return when {
-            fragment == mainActivity()?.activeFragment -> {
-                fragment.backToRootFragment()
+            tabType == TabState.tabType -> {
                 false
             }
             childFragmentManager.findFragmentByTag(fragment.javaClass.simpleName) != null -> {
                 childFragmentManager.beginTransaction().apply {
-                    show(fragment)
-                    mainActivity()?.activeFragment?.let { hide(it) }
+                    mainActivity()?.activeFragment?.let {
+                        show(fragment)
+                        hide(it)
+                    } ?: replace(R.id.home_container, fragment, fragment.javaClass.simpleName)
                     commit()
                 }
                 mainActivity()?.activeFragment = fragment
+                TabState.tabType = tabType
                 true
             }
             else -> {
@@ -164,6 +172,7 @@ class MainFlowFragment :
                     commit()
                 }
                 mainActivity()?.activeFragment = fragment
+                TabState.tabType = tabType
                 true
             }
         }

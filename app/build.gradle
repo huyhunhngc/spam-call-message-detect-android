@@ -127,10 +127,4 @@ dependencies {
     def groupie_version = '2.8.0'
     implementation "com.github.lisawray.groupie:groupie:$groupie_version"
     implementation "com.github.lisawray.groupie:groupie-viewbinding:$groupie_version"
-
-    def kotpref_version = '2.11.0'
-    implementation "com.chibatching.kotpref:kotpref:$kotpref_version"
-    implementation "com.chibatching.kotpref:initializer:$kotpref_version"
-    implementation "com.chibatching.kotpref:gson-support:$kotpref_version"
-    implementation "com.chibatching.kotpref:livedata-support:$kotpref_version"
 }

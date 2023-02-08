@@ -29,9 +29,9 @@ val domainModule = module {
             initRawResource()
         }
     }
-    factory { GetCallLog(get(), get()) }
-    factory { GetRecentContact(get(), get()) }
-    factory { GetMessageLog(get(), get(), get()) }
+    single { GetCallLog(get(), get()) }
+    single { GetRecentContact(get(), get()) }
+    single { GetMessageLog(get(), get(), get()) }
     factory { GetContact(get()) }
     factory { DetectSpamMessage(get(), get()) }
 }

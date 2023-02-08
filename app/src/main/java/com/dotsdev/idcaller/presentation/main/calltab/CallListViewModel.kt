@@ -1,6 +1,5 @@
 package com.dotsdev.idcaller.presentation.main.calltab
 
-import androidx.lifecycle.MutableLiveData
 import com.dotsdev.idcaller.core.SingleLiveEvent
 import com.dotsdev.idcaller.core.base.BaseViewModel
 import com.dotsdev.idcaller.data.model.toCallGroup
@@ -17,8 +16,8 @@ class CallListViewModel(
     val callLog = SingleLiveEvent<List<ContactMessageInfo>>()
     val recentContact = SingleLiveEvent<List<ContactMessageInfo>>()
     val callClick = SingleLiveEvent<ContactMessageInfo>()
+
     init {
-        super.onCreate()
         viewModelScope.launch {
             getCallLog.observeCall().collectLatest { calls ->
                 callLog.postValue(calls.toCallGroup().map { it.toInfoData() })
@@ -30,6 +29,7 @@ class CallListViewModel(
             }
         }
     }
+
     val onToDetailClick: ((info: ContactMessageInfo, position: Int) -> Unit) = { info, _ ->
         callClick.postValue(info)
     }
