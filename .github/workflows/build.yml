@@ -4,10 +4,9 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 env:
   BUILD_FLAVOR: "Debug"
-  DEPLOYGATE_OWNER: "huyhuynh88097"
-  DEPLOYGATE_API_TOKEN: "3c096495-8613-444c-8b44-7e8131d06bf4"
 jobs:
   setup:
     name: Build And Deploy APK
@@ -32,7 +31,7 @@ jobs:
       - name: Deploy APK
         uses: jmatsu/dg-upload-app-action@v0.2
         with:
-          app_owner_name: ${{ env.DEPLOYGATE_OWNER }}
-          api_token: ${{ env.DEPLOYGATE_API_TOKEN }}
+          app_owner_name: ${{ secrets.DEPLOYGATE_OWNER }}
+          api_token: ${{ secrets.DEPLOYGATE_API_TOKEN }}
           app_file_path: app/build/outputs/apk/debug/app-debug.apk
 
