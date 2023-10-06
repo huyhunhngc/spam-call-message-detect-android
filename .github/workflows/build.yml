@@ -71,7 +71,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p distribution/whatsnew
-          git log --pretty="%s" --abbrev-commit > distribution/whatsnew/changelog.txt
+          git log --pretty="%s" --abbrev-commit --no-merges > distribution/whatsnew/changelog.txt
 
       - uses: wzieba/Firebase-Distribution-Github-Action@v1
         name: upload artifact to Firebase App Distribution
