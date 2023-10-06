@@ -24,10 +24,6 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/develop' }}
 
-      - name: Set tag name to environment
-        run: echo "TAG_NAME=${{ inputs.tag }}" >> $GITHUB_ENV
-
-
       - name: reviewdog
         uses: reviewdog/action-suggester@v1
         with:
@@ -43,6 +39,8 @@ jobs:
       - uses: gradle/gradle-build-action@v2
         with:
           cache-read-only: true
+      - name: Set tag name to environment
+        run: echo "TAG_NAME=${{ inputs.tag }}" >> $GITHUB_ENV
       - name: Generate Release APK
         run: ./gradlew assembleRelease
       - uses: r0adkll/sign-android-release@v1
