@@ -67,8 +67,6 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
 
       - name: Get release note
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p distribution/whatsnew
           git log --pretty="%s" --abbrev-commit --no-merges > distribution/whatsnew/changelog.txt
