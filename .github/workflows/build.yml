@@ -3,16 +3,6 @@ name: Deploy
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'Environment'
-        type: environment
-        required: true
-      tag:
-        description: 'Tag for release'
-        required: true
-        type: string
-  workflow_call:
-    inputs:
       tag:
         description: 'Tag for release'
         required: true
