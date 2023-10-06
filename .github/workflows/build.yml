@@ -69,6 +69,8 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
 
       - name: Get release note
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p distribution/whatsnew
           gh release view --json body -q '.body'  > distribution/whatsnew/changelog.txt
