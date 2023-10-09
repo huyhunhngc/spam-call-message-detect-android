@@ -1,5 +1,6 @@
 package com.dotsdev.idcaller.core.base
 
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dotsdev.idcaller.core.Loading
@@ -18,11 +19,9 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
-abstract class BaseViewModel :
-    ViewModel(),
-    WithLifecycleScope {
+abstract class BaseViewModel : ViewModel(), DefaultLifecycleObserver {
 
-    final override val observer: LifecycleScope by lifecycleScope()
+
     val loading: Loading = Loading()
     private val _error: MutableSharedFlow<Throwable?> = MutableSharedFlow()
     val error: SharedFlow<Throwable?> =

@@ -27,7 +27,7 @@ abstract class BaseFragment<VM : BaseViewModel, VDB : ViewDataBinding>(@LayoutRe
                 lifecycleOwner = viewLifecycleOwner
             }
         }
-        lifecycle.addObserver(viewModel.observer)
+        lifecycle.addObserver(viewModel)
         viewModel.error.onEach { throwable ->
             throwable?.let { onError(it) }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
