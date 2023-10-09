@@ -67,9 +67,13 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
 
       - name: Get release note
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p distribution/whatsnew
-          git log --pretty="%s" --abbrev-commit --no-merges > distribution/whatsnew/changelog.txt
+          RELEASE_NOTES=`gh release view --json body -q '.body'`
+          RELEASE_NOTES_FORMATTED=`echo "$1" | sed -E "s/ by @[^ ]*//g; s| in https://[^ ]*||g"`
+          echo "${RELEASE_NOTES_FORMATTED:0:500}" > distribution/whatsnew/changelog.txt
 
       - uses: wzieba/Firebase-Distribution-Github-Action@v1
         name: upload artifact to Firebase App Distribution
