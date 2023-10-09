@@ -72,7 +72,7 @@ jobs:
         run: |
           mkdir -p distribution/whatsnew
           RELEASE_NOTES=`gh release view --json body -q '.body'`
-          RELEASE_NOTES_FORMATTED=`echo "$1" | sed -E "s/ by @[^ ]*//g; s| in https://[^ ]*||g"`
+          RELEASE_NOTES_FORMATTED=`echo "$RELEASE_NOTES" | sed -E "s/ by @[^ ]*//g; s| in https://[^ ]*||g"`
           echo "${RELEASE_NOTES_FORMATTED:0:500}" > distribution/whatsnew/changelog.txt
 
       - uses: wzieba/Firebase-Distribution-Github-Action@v1
