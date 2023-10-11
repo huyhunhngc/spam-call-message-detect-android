@@ -1,7 +1,6 @@
 package com.dotsdev.idcaller.presentation.main.mainflow
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -11,25 +10,25 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.dotsdev.idcaller.R
 import com.dotsdev.idcaller.core.base.BaseFragment
-import com.dotsdev.idcaller.core.base.lifecycleScope
 import com.dotsdev.idcaller.core.base.viewBindings
 import com.dotsdev.idcaller.data.local.CacheDataSource
 import com.dotsdev.idcaller.data.model.NavigationGraphInfo
 import com.dotsdev.idcaller.databinding.FragmentMainFlowBinding
 import com.dotsdev.idcaller.databinding.LayoutHeaderDrawerBinding
 import com.dotsdev.idcaller.presentation.MainActivity
-import com.dotsdev.idcaller.presentation.main.blockingTab.BlockingTabFragment
+import com.dotsdev.idcaller.presentation.main.blockingtab.BlockingTabFragment
 import com.dotsdev.idcaller.presentation.main.calltab.CallTabFragment
 import com.dotsdev.idcaller.presentation.main.contacttab.ContactTabFragment
 import com.dotsdev.idcaller.presentation.main.messagetab.MessageTabFragment
-import com.dotsdev.idcaller.utils.*
+import com.dotsdev.idcaller.utils.retrieveCallLog
+import com.dotsdev.idcaller.utils.retrieveContact
+import com.dotsdev.idcaller.utils.retrieveInBox
+import com.dotsdev.idcaller.utils.retrieveSent
 import com.google.android.material.navigation.NavigationView
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.coroutines.EmptyCoroutineContext
 
 object TabState {
     var tabType = PageTabType.NAV_MESSAGE
@@ -153,6 +152,7 @@ class MainFlowFragment :
             tabType == TabState.tabType -> {
                 false
             }
+
             childFragmentManager.findFragmentByTag(fragment.javaClass.simpleName) != null -> {
                 childFragmentManager.beginTransaction().apply {
                     mainActivity()?.activeFragment?.let {
@@ -165,6 +165,7 @@ class MainFlowFragment :
                 TabState.tabType = tabType
                 true
             }
+
             else -> {
                 childFragmentManager.beginTransaction().apply {
                     add(R.id.home_container, fragment, fragment.javaClass.simpleName)

@@ -1,5 +1,6 @@
 package com.dotsdev.idcaller.presentation.main.calltab
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.dotsdev.idcaller.core.base.BaseViewModel
 import com.dotsdev.idcaller.data.memory.contact.ContactMemory
@@ -34,8 +35,8 @@ class CallDetailViewModel(
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onStart(owner: LifecycleOwner) {
+        super.onStart(owner)
         viewModelScope.launch {
             getCallLog.observeCall().collectLatest {
                 callList.postValue(

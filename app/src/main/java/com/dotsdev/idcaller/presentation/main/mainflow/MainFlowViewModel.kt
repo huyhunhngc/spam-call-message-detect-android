@@ -1,5 +1,6 @@
 package com.dotsdev.idcaller.presentation.main.mainflow
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.dotsdev.idcaller.appSettingState.AppTheme
 import com.dotsdev.idcaller.core.base.BaseViewModel
@@ -15,7 +16,6 @@ import com.dotsdev.idcaller.usecase.UserUsecase
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.distinctUntilChanged
 
-@OptIn(DelicateCoroutinesApi::class)
 class MainFlowViewModel(
     private val contactMemory: ContactMemory,
     private val callMemory: CallMemory,
@@ -29,7 +29,7 @@ class MainFlowViewModel(
 ) : BaseViewModel() {
     val user = MutableLiveData<User>()
 
-    override fun onStart() {
+    override fun onStart(owner: LifecycleOwner) {
         viewModelScope.launch {
             userUsecase.getUser()?.let(user::postValue)
         }
@@ -37,7 +37,7 @@ class MainFlowViewModel(
     }
 
     init {
-        GlobalScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             val detectedMessageSpam = getSpamMessage().map { it.messageId }
             getMessageLog.observeMessage()
                 .distinctUntilChanged()

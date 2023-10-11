@@ -31,17 +31,17 @@ class InitialFragment :
     private fun initAnimation() {
         binding.animationView.apply {
             addAnimatorListener(object : Animator.AnimatorListener {
-                override fun onAnimationRepeat(animation: Animator?) {
+                override fun onAnimationStart(animation: Animator) {
                 }
 
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     onGrantPermissionNeeded()
                 }
 
-                override fun onAnimationCancel(animation: Animator?) {
+                override fun onAnimationCancel(animation: Animator) {
                 }
 
-                override fun onAnimationStart(animation: Animator?) {
+                override fun onAnimationRepeat(animation: Animator) {
                 }
             })
         }

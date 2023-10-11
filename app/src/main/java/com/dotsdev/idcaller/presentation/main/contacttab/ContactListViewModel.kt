@@ -1,5 +1,6 @@
 package com.dotsdev.idcaller.presentation.main.contacttab
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.dotsdev.idcaller.core.SingleLiveEvent
 import com.dotsdev.idcaller.core.base.BaseViewModel
@@ -12,8 +13,8 @@ class ContactListViewModel(private val contactMemory: ContactMemory) : BaseViewM
     val listContact = MutableLiveData<List<ContactMessageInfo>>()
     val callClick = SingleLiveEvent<ContactMessageInfo>()
     val detailClick = SingleLiveEvent<ContactMessageInfo>()
-    override fun onStart() {
-        super.onStart()
+    override fun onStart(owner: LifecycleOwner) {
+        super.onStart(owner)
         viewModelScope.launch {
             contactMemory.observe().collectLatest {
                 listContact.postValue(

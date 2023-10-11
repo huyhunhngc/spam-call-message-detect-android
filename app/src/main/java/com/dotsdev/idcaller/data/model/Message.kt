@@ -8,15 +8,15 @@ import java.util.Date
 
 @Entity(tableName = "message")
 data class Message(
-    @PrimaryKey val messageId: String = "",
-    @ColumnInfo(name = "from") val from: Contact = Contact(),
-    @ColumnInfo(name = "type") val type: MessageType = MessageType.SMS,
-    @ColumnInfo(name = "content") val content: String = "",
-    @ColumnInfo(name = "iat") val iat: Date = Date(),
-    @ColumnInfo(name = "messageName") val messageName: String = "",
-    @ColumnInfo(name = "messageNumber") val messageNumber: String = "",
+    @PrimaryKey var messageId: String = "",
+    @ColumnInfo(name = "from") var from: Contact = Contact(),
+    @ColumnInfo(name = "type") var type: MessageType = MessageType.SMS,
+    @ColumnInfo(name = "content") var content: String = "",
+    @ColumnInfo(name = "iat") var iat: Date = Date(),
+    @ColumnInfo(name = "messageName") var messageName: String = "",
+    @ColumnInfo(name = "messageNumber") var messageNumber: String = "",
     @ColumnInfo(name = "isSpam") var isSpam: Boolean = false,
-    @ColumnInfo(name = "contact") val contact: Contact = Contact(),
+    @ColumnInfo(name = "contact") var contact: Contact = Contact(),
     @ColumnInfo(name = "sentByMe") var sentByMe: Boolean = false,
     @ColumnInfo(name = "originalAddress") var originalAddress: String = ""
 ) : Serializable
